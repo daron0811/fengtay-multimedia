@@ -1,0 +1,156 @@
+[
+	{
+	"id": "0",
+	"name": "斗六市",
+	"locate": "斗六市",
+	"food": "文旦",
+	"season": "3"
+	},
+	{
+	"id": "1",
+	"name": "斗南鎮",
+	"locate": "斗南鎮",
+	"food": "馬鈴薯",
+	"season": "14"
+	},
+	{
+	"id": "2",
+	"name": "林內鄉",
+	"locate": "林內鄉",
+	"food": "木瓜",
+	"season": "23"
+	},
+	{
+	"id": "3",
+	"name": "古坑鄉",
+	"locate": "古坑鄉",
+	"food": "咖啡",
+	"season": "34"
+	},
+	{
+	"id": "4",
+	"name": "大埤鄉",
+	"locate": "大埤鄉",
+	"food": "酸菜",
+	"season": "4"
+	},
+	{
+	"id": "5",
+	"name": "莿桐鄉",
+	"locate": "莿桐鄉",
+	"food": "蒜頭",
+	"season": "1"
+	},
+	{
+	"id": "6",
+	"name": "虎尾鎮",
+	"locate": "虎尾鎮",
+	"food": "甘蔗",
+	"season": "134"
+	},
+	{
+	"id": "7",
+	"name": "西螺鎮",
+	"locate": "西螺鎮",
+	"food": "米",
+	"season": "23"
+	},
+	{
+	"id": "8",
+	"name": "土庫鎮",
+	"locate": "土庫鎮",
+	"food": "蜂蜜",
+	"season": "1"
+	},
+	{
+	"id": "9",
+	"name": "褒忠鄉",
+	"locate": "褒忠鄉",
+	"food": "玉米",
+	"season": "1234"
+	},
+	{
+	"id": "10",
+	"name": "二崙鄉",
+	"locate": "二崙鄉",
+	"food": "西瓜",
+	"season": "1"
+	},
+	{
+	"id": "11",
+	"name": "崙背鄉",
+	"locate": "崙背鄉",
+	"food": "鮮乳",
+	"season": "4"
+	},
+	{
+	"id": "12",
+	"name": "麥寮鄉",
+	"locate": "麥寮鄉",
+	"food": "豬",
+	"season": "1234"
+	},
+	{
+	"id": "13",
+	"name": "臺西鄉",
+	"locate": "臺西鄉",
+	"food": "文蛤",
+	"season": "2"
+	},
+	{
+	"id": "14",
+	"name": "東勢鄉",
+	"locate": "東勢鄉",
+	"food": "五彩胡蘿蔔",
+	"season": "1"
+	},
+	{
+	"id": "15",
+	"name": "北港鎮",
+	"locate": "北港鎮",
+	"food": "麻油",
+	"season": "4"
+	},
+	{
+	"id": "16",
+	"name": "元長鄉",
+	"locate": "元長鄉",
+	"food": "花生",
+	"season": "23"
+	},
+	{
+	"id": "17",
+	"name": "四湖鄉",
+	"locate": "四湖鄉",
+	"food": "小番茄",
+	"season": "14"
+	},
+	{
+	"id": "18",
+	"name": "口湖鄉",
+	"locate": "口湖鄉",
+	"food": "台灣鯛",
+	"season": "23"
+	},
+	{
+	"id": "19",
+	"name": "水林鄉",
+	"locate": "水林鄉",
+	"food": "番薯",
+	"season": "134"
+	},
+	{
+	"id": "20",
+	"name": "共用",
+	"locate": "共用",
+	"food": "沙拉油",
+	"season": "0"
+	},
+	{
+	"id": "21",
+	"name": "共用",
+	"locate": "共用",
+	"food": "鹽",
+	"season": "0"
+	}
+	]
