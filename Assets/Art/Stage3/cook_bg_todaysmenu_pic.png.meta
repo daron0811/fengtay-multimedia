@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cook_bg_todaysmenu_pic_0: 1464548304862160043
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

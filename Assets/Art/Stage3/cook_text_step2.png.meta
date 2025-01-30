@@ -247,7 +247,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cook_text_step2_0: 3097810641362760283
+      cook_text_step2_1: 1378903401891921127
+      cook_text_step2_2: 704826906551865465
+      cook_text_step2_3: -7338569692293102081
+      cook_text_step2_4: 5386529945387948167
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

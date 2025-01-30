@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "taste_text_\u751F\u7522\u6EAF\u6E90_0": 5889364827067420183
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

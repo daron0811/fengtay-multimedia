@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taste_pic_redscanline_0: -8785906861301323134
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

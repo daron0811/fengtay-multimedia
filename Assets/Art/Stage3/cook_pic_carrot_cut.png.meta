@@ -372,7 +372,17 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cook_pic_carrot_cut_0: 1110705565362900773
+      cook_pic_carrot_cut_1: 3253884451022635292
+      cook_pic_carrot_cut_2: -3308949257406864720
+      cook_pic_carrot_cut_3: -7031874461589568046
+      cook_pic_carrot_cut_4: -38072515970430361
+      cook_pic_carrot_cut_5: -887663416065901427
+      cook_pic_carrot_cut_6: 1616504866468080192
+      cook_pic_carrot_cut_7: 6174227271903858763
+      cook_pic_carrot_cut_8: -5801143732268675186
+      cook_pic_carrot_cut_9: -1026785793208049410
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

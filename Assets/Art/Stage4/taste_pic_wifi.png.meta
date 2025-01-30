@@ -197,7 +197,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taste_pic_wifi_0: 3523047755522873529
+      taste_pic_wifi_1: -5264569355248233835
+      taste_pic_wifi_2: -1383577659582507679
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

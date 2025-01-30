@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cook_pic_pan_0: 641901872376481000
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

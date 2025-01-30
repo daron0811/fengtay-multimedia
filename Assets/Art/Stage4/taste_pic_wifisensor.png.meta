@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taste_pic_wifisensor_0: -5923195377990918401
+      taste_pic_wifisensor_1: 6523819331919608391
+      taste_pic_wifisensor_2: -1498501449791675200
+      taste_pic_wifisensor_3: 4855493497630127044
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

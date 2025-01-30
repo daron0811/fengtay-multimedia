@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taste_pic_O_green_0: 6257906582815339377
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

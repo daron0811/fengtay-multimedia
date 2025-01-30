@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cook_pic_carrot_uncut_0: -807263437094900251
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

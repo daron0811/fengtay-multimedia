@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cook_bg_cook_guide01_1920x1080_0: 1157970971748051977
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

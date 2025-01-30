@@ -247,7 +247,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taste_pic_score_star1_0: 2778740670083406193
+      taste_pic_score_star1_1: -2081610543576634773
+      taste_pic_score_star1_2: 2331593463759908744
+      taste_pic_score_star1_3: 1674673846645550126
+      taste_pic_score_star1_4: -5520033159696774158
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "cook_text_\u6599\u7406\u6642\u9593\u6A19\u6E96\u5B57_0": -4617865188161595108
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

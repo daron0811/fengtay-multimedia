@@ -1,7 +1,11 @@
+using UnityCommunity.UnitySingleton;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoSingleton<UIManager>
 {
     public GameObject introOBJ;
     public GameObject stage1_OBJ;
@@ -11,18 +15,19 @@ public class UIManager : MonoBehaviour
 
     public enum UIState
     {
-        Intro,
-        MainMenu,
-        Game,
-        Pause,
-        GameOver
+        Stage_1,
+        Stage_2,
+        Stage_3,
+        Stage_4,
+        Stage_5
     }
 
     private UIState currentState;
 
     void Start()
     {
-        SetState(UIState.Intro);
+        SetState(UIState.Stage_1);
+        LoadSpriteFromPath();
     }
 
     public void SetState(UIState newState)
@@ -33,35 +38,69 @@ public class UIManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        introOBJ.SetActive(currentState == UIState.Intro);
-        stage1_OBJ.SetActive(currentState == UIState.MainMenu);
-        stage2_OBJ.SetActive(currentState == UIState.Game);
-        stage3_OBJ.SetActive(currentState == UIState.Pause);
-        stage4_OBJ.SetActive(currentState == UIState.GameOver);
+        introOBJ.SetActive(currentState == UIState.Stage_1);
+        stage1_OBJ.SetActive(currentState == UIState.Stage_2);
+        stage2_OBJ.SetActive(currentState == UIState.Stage_3);
+        stage3_OBJ.SetActive(currentState == UIState.Stage_4);
+        stage4_OBJ.SetActive(currentState == UIState.Stage_5);
     }
 
     public void OnIntroComplete()
     {
-        SetState(UIState.MainMenu);
+        SetState(UIState.Stage_2);
     }
 
     public void OnStartGame()
     {
-        SetState(UIState.Game);
+        SetState(UIState.Stage_3);
     }
 
     public void OnPauseGame()
     {
-        SetState(UIState.Pause);
+        SetState(UIState.Stage_4);
     }
 
     public void OnResumeGame()
     {
-        SetState(UIState.Game);
+        SetState(UIState.Stage_3);
     }
 
     public void OnGameOver()
     {
-        SetState(UIState.GameOver);
+        SetState(UIState.Stage_5);
+    }
+
+    public List<Sprite> sprites ;
+
+
+    public Sprite GetFoodSpri
+
+    public void LoadSpriteFromPath()
+    {
+        sprites = new List<Sprite>();
+        sprites = Resources.LoadAll<Sprite>("Icon/Food").ToList();
+        foreach (var sprite in sprites)
+        {
+            Debug.Log(sprite.name);
+        }
+        // string path = Application.dataPath+"/Resources/Textures";
+        // DirectoryInfo dir = new DirectoryInfo(path);
+        // FileInfo[] info = dir.GetFiles("*.png");
+        // foreach (FileInfo f in info)
+        // {
+        //     byte[] fileData = File.ReadAllBytes(f.FullName);
+        //     Texture2D tex = new Texture2D(2, 2);
+        //     tex.LoadImage(fileData);
+        //     Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0, 0));
+        //     sprites.Add(sprite);
+        // }
+
+
+        // // string path = Application.dataPath + "/Resources/Textures/food_01.png";
+        // string path = Application.streamingAssetsPath+"/icon/food_01.png";
+        // byte[] fileData = File.ReadAllBytes(path);
+        // Texture2D tex = new Texture2D(2, 2);
+        // tex.LoadImage(fileData);
+        // sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0, 0));
     }
 }

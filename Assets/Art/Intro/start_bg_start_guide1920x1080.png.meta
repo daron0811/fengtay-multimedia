@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      start_bg_start_guide1920x1080_0: -4675829642987384726
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

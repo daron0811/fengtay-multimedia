@@ -247,7 +247,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taste_pic_guidetransfor_0: 9131716959154999024
+      taste_pic_guidetransfor_1: 363938699863859955
+      taste_pic_guidetransfor_2: -2889981548742909935
+      taste_pic_guidetransfor_3: 4646947675963754031
+      taste_pic_guidetransfor_4: -5046668998296834471
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

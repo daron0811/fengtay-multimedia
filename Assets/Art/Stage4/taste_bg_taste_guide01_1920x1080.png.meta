@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taste_bg_taste_guide01_1920x1080_0: 6610498820528498240
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

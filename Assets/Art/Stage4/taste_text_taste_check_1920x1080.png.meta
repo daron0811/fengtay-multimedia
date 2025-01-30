@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taste_text_taste_check_1920x1080_0: 5503947871949107830
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

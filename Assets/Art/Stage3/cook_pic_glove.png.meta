@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cook_pic_glove_0: -6394999978353929325
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
