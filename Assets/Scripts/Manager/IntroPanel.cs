@@ -79,12 +79,14 @@ public class IntroPanel : MonoBehaviour
         {
             descPanel.SetActive(false);
             resultPanel.SetActive(readyStartGame);
+            SenserStatus();
         }
-
     }
 
-    void Update()
+    //TODO : 感應器狀態要從這邊設定
+    void SenserStatus()
     {
-
+        GameManager.Instance.CurrentCookBookIndex = 0; // 目前預設是西瓜
     }
+
 }

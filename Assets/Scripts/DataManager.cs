@@ -2,6 +2,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityCommunity.UnitySingleton;
+using System;
 
 public class DataManager : MonoSingleton<DataManager>
 {
@@ -74,6 +75,39 @@ public class DataManager : MonoSingleton<DataManager>
         return cookBookInfos[index];
     }
 
+    /// <summary>
+    /// 取得這個食譜的食材
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public List<string> GetFoodbyCookbook(int index)
+    {
+        List<string> foods = new List<string>();
+        CookBookInfo cookBookInfo = GetCookBookInfo(index);
+        if (cookBookInfo == null)
+        {
+            return foods;
+        }
+        if (!string.IsNullOrEmpty(cookBookInfo.food1))
+        {
+            foods.Add(cookBookInfo.food1);
+        }
+        if (!string.IsNullOrEmpty(cookBookInfo.food2))
+        {
+            foods.Add(cookBookInfo.food2);
+        }
+        if (!string.IsNullOrEmpty(cookBookInfo.food3))
+        {
+            foods.Add(cookBookInfo.food3);
+        }
+        if (!string.IsNullOrEmpty(cookBookInfo.food4))
+        {
+            foods.Add(cookBookInfo.food4);
+        }
+        return foods;
+    }
+
+    //驗證是不是有這個食材
     public bool haveFoodbyCookbook(int index, string food,out int foodIndex)
     {
         foodIndex = -1;
@@ -103,6 +137,11 @@ public class DataManager : MonoSingleton<DataManager>
             return true;
         }
         return false;
+    }
+
+    public FoodInfo GetFoodInfo(string name)
+    {
+        return foodInfos.Find(x => x.food == name);
     }
 }
 

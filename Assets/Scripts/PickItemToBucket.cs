@@ -45,7 +45,9 @@ public class PickItemToBucket : MonoBehaviour, IPointerDownHandler, IBeginDragHa
 
         if (RectTransformUtility.RectangleContainsScreenPoint(bucket, eventData.position, eventData.pressEventCamera))
         {
-            Debug.Log("Image A dropped on Image B");
+            Debug.LogWarning(_rectTransform.name + " dropped on bucket");
+            string fruitName = _rectTransform.name.Split('-')[1];
+            Stage2Panel.Instance.OnTriggerFoodItem(fruitName);
         }
         _rectTransform.position = _originalPosition;
         //_rectTransform = null;

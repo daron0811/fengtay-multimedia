@@ -34,7 +34,6 @@ public class UISelectMap : MonoBehaviour
         Toggle activeToggle = toggleGroup.ActiveToggles().FirstOrDefault();
         if (activeToggle != null)
         {
-            Debug.Log("Active Toggle: " + activeToggle.name);
             int index = 0;
             if (int.TryParse(activeToggle.name, out index))
             {
@@ -56,18 +55,11 @@ public class UISelectMap : MonoBehaviour
     {
         List<FoodInfo> foodInfos = dataManager.GetFoodBySeason(currentSeason+1);
         
-        foreach (var foodInfo in foodInfos)
-        {
-            Debug.LogWarning(foodInfo.locate);
-        }
         foreach (KeyValuePair<string, GameObject> entry in foodImage)
         {
-            //Debug.Log("Key: " + entry.Key + " Value: " + entry.Value);
-            
             entry.Value.gameObject.SetActive(false);
             if (foodInfos.Find(x => x.name == entry.Key) != null)
             {
-                Debug.Log(entry.Value.name);
                 entry.Value.gameObject.SetActive(true);
             }
         }

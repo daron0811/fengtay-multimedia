@@ -1,20 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityCommunity.UnitySingleton;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Stage2Panel : MonoBehaviour
+public class Stage2Panel : MonoSingleton<Stage2Panel>
 {
     public GameObject descObj;
     public List<GameObject> descItem;
-
     public Button nextDescBtn;
+    public List<FoodItem> foodItems;
+    public CountdownTimer countdownTimer;
 
     void Start()
     {
         Init();
     }
+
     public void Init()
     {
         descObj.SetActive(true);
@@ -24,6 +27,37 @@ public class Stage2Panel : MonoBehaviour
         }
         descItem.First().SetActive(true);
         nextDescBtn.onClick.AddListener(ShowNextDesc);
+        foodItems = transform.Find("PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
+        SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
+
+        countdownTimer.onEnd += () =>
+        {
+            UIManager.Instance.SetState(UIManager.UIState.Stage_3);
+        };
+    }
+
+    public void SetFoodItems(int cookbookIndex)
+    {
+        List<string> foods = DataManager.Instance.GetFoodbyCookbook(cookbookIndex);
+        if (foods == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < foodItems.Count; i++)
+        {
+            if (i < foods.Count)
+            {
+                Sprite sprite = UIManager.Instance.GetFoodSprite(foods[i]);
+                Debug.LogError(sprite.name + foods[i]);
+                foodItems[i].SetFoodItem(sprite, foods[i]);
+                foodItems[i].Show();
+            }
+            else
+            {
+                foodItems[i].Hide();
+            }
+        }
     }
 
     private void ShowNextDesc()
@@ -38,15 +72,16 @@ public class Stage2Panel : MonoBehaviour
         else
         {
             descObj.SetActive(false);
+            countdownTimer.StartTimer(30.0f);
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
-
-    // Update is called once per frame
-    void Update()
+    public void OnTriggerFoodItem(string foodName)
     {
-        
+        int foodIndex = -1;
+        if (DataManager.Instance.haveFoodbyCookbook(GameManager.Instance.CurrentCookBookIndex, foodName, out foodIndex))
+        {
+            foodItems[foodIndex - 1].Checked(foodName);
+        }
     }
 }

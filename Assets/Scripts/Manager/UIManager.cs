@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class UIManager : MonoSingleton<UIManager>
 {
@@ -70,10 +71,13 @@ public class UIManager : MonoSingleton<UIManager>
         SetState(UIState.Stage_5);
     }
 
-    public List<Sprite> sprites ;
+    public List<Sprite> sprites;
 
-
-    public Sprite GetFoodSpri
+    public Sprite GetFoodSprite(string name)
+    {
+        // string resetName = name.Split("-")[1];
+        return sprites.FirstOrDefault(x => x.name == name);
+    }
 
     public void LoadSpriteFromPath()
     {
@@ -81,7 +85,12 @@ public class UIManager : MonoSingleton<UIManager>
         sprites = Resources.LoadAll<Sprite>("Icon/Food").ToList();
         foreach (var sprite in sprites)
         {
-            Debug.Log(sprite.name);
+            string resetName = sprite.name;
+            if (sprite.name.Split("-").Length > 1)
+            {
+                resetName = sprite.name.Split("-")[1]; // 因為有共用的材料
+            }
+            sprite.name = resetName;
         }
         // string path = Application.dataPath+"/Resources/Textures";
         // DirectoryInfo dir = new DirectoryInfo(path);
