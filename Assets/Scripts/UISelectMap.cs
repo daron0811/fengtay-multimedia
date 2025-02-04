@@ -22,7 +22,7 @@ public class UISelectMap : MonoBehaviour
         foodImage = new Dictionary<string, GameObject>();
         foreach (Transform child in foodGroup.transform)
         {
-            string locateName = child.name.Split('-')[0];
+            string locateName = child.name.Split('-')[0]; // 儲存地點
             foodImage[locateName] = child.gameObject;
         }
         SetImage(0);
@@ -41,7 +41,6 @@ public class UISelectMap : MonoBehaviour
                 {
                     currentSeason = index;
                     SetImage(index);
-
                 }
                 if (index >= 0 && index < images.Count)
                 {
@@ -53,12 +52,13 @@ public class UISelectMap : MonoBehaviour
 
     void SetImage(int index)
     {
-        List<FoodInfo> foodInfos = dataManager.GetFoodBySeason(currentSeason+1);
-        
+        List<FoodInfo> foodInfos = dataManager.GetFoodBySeason(currentSeason + 1);
+
         foreach (KeyValuePair<string, GameObject> entry in foodImage)
         {
+            Debug.LogError(entry.Key);
             entry.Value.gameObject.SetActive(false);
-            if (foodInfos.Find(x => x.name == entry.Key) != null)
+            if (foodInfos.Find(x => x.locate == entry.Key) != null) // 用地點去查詢食物
             {
                 entry.Value.gameObject.SetActive(true);
             }

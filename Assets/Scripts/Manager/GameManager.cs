@@ -4,7 +4,23 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public int CurrentCookBookIndex = -1;
+    public int currentCookBookIndex = -1;
+    public int CurrentCookBookIndex
+    {
+        get
+        {
+            return currentCookBookIndex;
+        }
+        set
+        {
+            currentCookBookIndex = value;
+            if (currentCookBookIndex >= 0)
+            {
+                CurrentCookBookInfo = DataManager.Instance.cookBookInfos[currentCookBookIndex];
+            }
+        }
+
+    }
     public CookBookInfo CurrentCookBookInfo = null;
     private List<bool> pickedFoods = new List<bool>();
     private void Awake()

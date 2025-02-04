@@ -5,6 +5,7 @@ public class FoodItem : MonoBehaviour
 {
     public Image foodSprite;
     public TextMeshProUGUI foodNameText;
+    public TextMeshProUGUI foodLocalText;
     public Toggle toggle;
 
     private FoodInfo foodInfo;
@@ -19,7 +20,7 @@ public class FoodItem : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SetFoodItem(Sprite sprite, string name = "")
+    public void SetFoodItem(Sprite sprite, string name = "", string local = "")
     {
         if (foodSprite != null)
         {
@@ -30,6 +31,10 @@ public class FoodItem : MonoBehaviour
             foodNameText.text = name;
             foodInfo = DataManager.Instance.GetFoodInfo(name);
         }
+        if (foodLocalText != null)
+        {
+            foodLocalText.text = local;
+        }
         if (toggle != null)
         {
             toggle.isOn = false;
@@ -38,11 +43,11 @@ public class FoodItem : MonoBehaviour
 
     public void Checked(string foodName)
     {
-        if(toggle.isOn)
+        if (toggle.isOn)
         {
             return;
         }
-        if (foodInfo.food == foodName)
+        if (foodInfo.name == foodName)
         {
             toggle.isOn = true;
         }

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityCommunity.UnitySingleton;
 using System;
+using UnityEngine.InputSystem;
 
 public class DataManager : MonoSingleton<DataManager>
 {
@@ -47,15 +48,26 @@ public class DataManager : MonoSingleton<DataManager>
             }
         }
 
-        if(cookBookAsset!=null)
+        if (cookBookAsset != null)
         {
             cookBookInfos = JsonConvert.DeserializeObject<List<CookBookInfo>>(cookBookAsset.text);
+
+            foreach (var cookBookInfo in cookBookInfos)
+            {
+                if (string.IsNullOrEmpty(cookBookInfo.step))
+                {
+                    Debug.LogWarning("CookBookInfo step is empty");
+                    continue;
+                }
+                cookBookInfo.steps = new List<string>();
+                cookBookInfo.steps.AddRange(cookBookInfo.step.Split('\n'));
+            }
         }
     }
 
     public List<FoodInfo> GetFoodBySeason(int season)
     {
-        if(foodBySeason==null)
+        if (foodBySeason == null)
         {
             return null;
         }
@@ -72,6 +84,15 @@ public class DataManager : MonoSingleton<DataManager>
         {
             return null;
         }
+        if (cookBookInfos[index] == null)
+        {
+            return null;
+        }
+        // if (cookBookInfos[index].steps == null)
+        // {
+        //     cookBookInfos[index].steps = new List<string>();
+        //     cookBookInfos[index].steps.AddRange(cookBookInfos[index].step.Split('\n'));
+        // }
         return cookBookInfos[index];
     }
 
@@ -108,7 +129,7 @@ public class DataManager : MonoSingleton<DataManager>
     }
 
     //驗證是不是有這個食材
-    public bool haveFoodbyCookbook(int index, string food,out int foodIndex)
+    public bool haveFoodbyCookbook(int index, string food, out int foodIndex)
     {
         foodIndex = -1;
         CookBookInfo cookBookInfo = GetCookBookInfo(index);
@@ -141,7 +162,7 @@ public class DataManager : MonoSingleton<DataManager>
 
     public FoodInfo GetFoodInfo(string name)
     {
-        return foodInfos.Find(x => x.food == name);
+        return foodInfos.Find(x => x.name == name);
     }
 }
 
@@ -151,7 +172,6 @@ public class FoodInfo
     public int id;// { get; set; }
     public string name;// { get; set; }
     public string locate; //{ get; set; }
-    public string food; //{ get; set; }
     public string season; //{ get; set; }
 }
 
@@ -165,4 +185,7 @@ public class CookBookInfo
     public string food2; //{ get; set; }
     public string food3; //{ get; set; }
     public string food4; //{ get; set; }
+    public string step;
+
+    public List<string> steps;
 }
