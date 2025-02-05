@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityCommunity.UnitySingleton;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
     public Button nextDescBtn;
     public List<FoodItem> foodItems;
     public CountdownTimer countdownTimer;
+
+    public TextMeshProUGUI foodNameText;
 
     void Start()
     {
@@ -28,7 +31,9 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         descItem.First().SetActive(true);
         nextDescBtn.onClick.AddListener(ShowNextDesc);
         foodItems = transform.Find("PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
+
         SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
+        foodNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
 
         countdownTimer.onEnd += () =>
         {
