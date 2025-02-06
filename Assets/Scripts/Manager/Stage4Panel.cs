@@ -11,12 +11,19 @@ public class Stage4Panel : MonoBehaviour
     public List<GameObject> descItem;
     public Button nextDescBtn;
 
-    [Header("成績表")]
+    [Header("詳細表")]
     public GameObject detailPanel;
     private List<FoodItem> foodItems; //從子物件下取得
     private List<FoodItem> otherFoodItems; //從子物件下取得
-
     public TextMeshProUGUI cookbookNameText;
+    public CountdownTimer detailPanelTimer;
+
+    [Header("最後結算")]
+    public GameObject resultPanel;
+    public GameObject scorePanel;
+    public GameObject FinalPanel;
+
+
     void Start()
     {
         Init();
@@ -38,6 +45,9 @@ public class Stage4Panel : MonoBehaviour
         otherFoodItems = detailPanel.transform.Find("OtherFoods").GetComponentsInChildren<FoodItem>().ToList();
 
         SetCookBookInfo();
+
+        scorePanel.SetActive(true);
+        FinalPanel.SetActive(false);
     }
 
     private void ShowNextDesc()
@@ -85,6 +95,16 @@ public class Stage4Panel : MonoBehaviour
                 foodItems[i].Hide();
             }
         }
+    }
+
+    void SetDetialPanel()
+    {
+        detailPanelTimer.StartTimer(30.0f);
+        detailPanelTimer.onEnd += () =>
+        {
+            detailPanel.SetActive(false);
+            descObj.SetActive(true);
+        };
     }
 
 }
