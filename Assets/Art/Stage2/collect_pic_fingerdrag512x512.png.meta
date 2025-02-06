@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      collect_pic_fingerdrag512x512_0: 8782268469776818033
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

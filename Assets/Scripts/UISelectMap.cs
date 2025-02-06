@@ -56,7 +56,7 @@ public class UISelectMap : MonoBehaviour
 
         foreach (KeyValuePair<string, GameObject> entry in foodImage)
         {
-            Debug.LogError(entry.Key);
+            // Debug.LogError(entry.Key);
             entry.Value.gameObject.SetActive(false);
             if (foodInfos.Find(x => x.locate == entry.Key) != null) // 用地點去查詢食物
             {

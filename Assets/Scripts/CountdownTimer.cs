@@ -19,6 +19,7 @@ public class CountdownTimer : MonoBehaviour
 
     private float timeLeft;
     private bool isRunning = false;
+    public bool IsRunning { get { return isRunning; } }
 
     public void StartTimer(float durationTime = 10.0f)
     {

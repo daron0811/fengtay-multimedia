@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +25,15 @@ public class IntroPanel : MonoBehaviour
     public Button repickBtn;
     public Button startGameBtn;
 
+    [Header("食物偵測")]
+    public TextMeshProUGUI cookBookNameText;
+    public TextMeshProUGUI cookbookNameText_2;
+    public Image cookbookIcon;
+
+    public Image cookbookSeasonImage;
+
+    public List<Sprite> seasonBackSprite;
+
     void Start()
     {
         Init();
@@ -37,7 +48,7 @@ public class IntroPanel : MonoBehaviour
         nextDescTex.onClick.AddListener(ShowNextDesc);
         startBtn.onClick.AddListener(() =>
         {
-            ShowDesc(true,true);
+            ShowDesc(true, true);
         });
         descBtn.onClick.AddListener(() =>
         {
@@ -46,9 +57,9 @@ public class IntroPanel : MonoBehaviour
         repickBtn.onClick.AddListener(() =>
         {
             resultPanel.SetActive(false);
-            ShowDesc(true,true);
+            ShowDesc(true, true);
         });
-        startGameBtn.onClick.AddListener(()=>
+        startGameBtn.onClick.AddListener(() =>
         {
             UIManager.Instance.SetState(UIManager.UIState.Stage_2);
         });
@@ -87,6 +98,15 @@ public class IntroPanel : MonoBehaviour
     void SenserStatus()
     {
         GameManager.Instance.CurrentCookBookIndex = 0; // 目前預設是西瓜
+        SetCookBookInfo();
+    }
+
+    public void SetCookBookInfo()
+    {
+        cookBookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
+        cookbookNameText_2.text = GameManager.Instance.CurrentCookBookInfo.name;
+        cookbookSeasonImage.sprite = seasonBackSprite[GameManager.Instance.CurrentCookBookInfo.season - 1];
+        // cookbookIcon.sprite = UIManager.Instance.GetFoodSprite(GameManager.Instance.CurrentCookBookInfo.food1);
     }
 
 }

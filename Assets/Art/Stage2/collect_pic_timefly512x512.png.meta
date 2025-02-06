@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      collect_pic_timefly512x512_0: -820402411427698867
+      collect_pic_timefly512x512_1: 6112978312556217073
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

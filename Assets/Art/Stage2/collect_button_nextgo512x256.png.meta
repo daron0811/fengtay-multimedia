@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      collect_button_nextgo512x256_0: 1402415808994598569
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

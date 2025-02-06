@@ -162,6 +162,12 @@ public class DataManager : MonoSingleton<DataManager>
 
     public FoodInfo GetFoodInfo(string name)
     {
+        var item = foodInfos.Find(x => x.name == name);
+        if (item == null)
+        {
+            Debug.LogError("Not Find Food Info " + name);
+            return null;
+        }
         return foodInfos.Find(x => x.name == name);
     }
 }
@@ -180,7 +186,8 @@ public class CookBookInfo
 {
     public int id;// { get; set; }
     public string name;// { get; set; }
-    public string Season; //{ get; set; }
+    public int season; //{ get; set; }
+    public string icon;
     public string food1; //{ get; set; }
     public string food2; //{ get; set; }
     public string food3; //{ get; set; }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -5,14 +6,16 @@ using UnityEngine.UI;
 
 public class PickItemToBucket : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
+    public Image foodImage;
     private RectTransform _rectTransform;
     private Vector2 _originalPosition;
-
     public RectTransform bucket;
+
+    public event Action onDragItem;
 
     private void Awake()
     {
+        foodImage = GetComponent<Image>();
         _rectTransform = GetComponent<RectTransform>();
         _originalPosition = _rectTransform.position;
     }
@@ -45,9 +48,10 @@ public class PickItemToBucket : MonoBehaviour, IPointerDownHandler, IBeginDragHa
 
         if (RectTransformUtility.RectangleContainsScreenPoint(bucket, eventData.position, eventData.pressEventCamera))
         {
-            Debug.LogWarning(_rectTransform.name + " dropped on bucket");
-            string fruitName = _rectTransform.name.Split('-')[1];
-            Stage2Panel.Instance.OnTriggerFoodItem(fruitName);
+            onDragItem?.Invoke();
+            // Debug.LogWarning(_rectTransform.name + " dropped on bucket");
+            // string fruitName = _rectTransform.name.Split('-')[1];
+            // Stage2Panel.Instance.OnTriggerFoodItem(fruitName);
         }
         _rectTransform.position = _originalPosition;
         //_rectTransform = null;

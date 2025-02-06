@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      collect_bg_collect_review1920x1080_0: 9127861556785031912
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

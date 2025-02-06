@@ -8,11 +8,11 @@ using Unity.VisualScripting;
 
 public class UIManager : MonoSingleton<UIManager>
 {
-    public GameObject introOBJ;
     public GameObject stage1_OBJ;
     public GameObject stage2_OBJ;
     public GameObject stage3_OBJ;
     public GameObject stage4_OBJ;
+    public GameObject stage5_OBJ;
 
     public enum UIState
     {
@@ -33,17 +33,18 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void SetState(UIState newState)
     {
+        Debug.LogError("SetState: " + newState);
         currentState = newState;
         UpdateUI();
     }
 
     private void UpdateUI()
     {
-        introOBJ.SetActive(currentState == UIState.Stage_1);
-        stage1_OBJ.SetActive(currentState == UIState.Stage_2);
-        stage2_OBJ.SetActive(currentState == UIState.Stage_3);
-        stage3_OBJ.SetActive(currentState == UIState.Stage_4);
-        stage4_OBJ.SetActive(currentState == UIState.Stage_5);
+        stage1_OBJ.SetActive(currentState == UIState.Stage_1);
+        stage2_OBJ.SetActive(currentState == UIState.Stage_2);
+        stage3_OBJ.SetActive(currentState == UIState.Stage_3);
+        stage4_OBJ.SetActive(currentState == UIState.Stage_4);
+        stage5_OBJ.SetActive(currentState == UIState.Stage_5);
     }
 
     public void OnIntroComplete()

@@ -11,10 +11,13 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
     public GameObject descObj;
     public List<GameObject> descItem;
     public Button nextDescBtn;
-    public List<FoodItem> foodItems;
+    private List<FoodItem> foodItems; //從子物件下取得
     public CountdownTimer countdownTimer;
+    public TextMeshProUGUI cookbookNameText; //食譜名稱
 
-    public TextMeshProUGUI foodNameText;
+    public List<PickItemToBucket> dragFoodsOnMap;
+
+
 
     void Start()
     {
@@ -32,13 +35,38 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         nextDescBtn.onClick.AddListener(ShowNextDesc);
         foodItems = transform.Find("PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
 
-        SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
-        foodNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
+        dragFoodsOnMap = transform.Find("FoodGroup").GetComponentsInChildren<PickItemToBucket>().ToList();
+        PickItemToBucket();
 
+        SetCookBookInfo();
         countdownTimer.onEnd += () =>
         {
             UIManager.Instance.SetState(UIManager.UIState.Stage_3);
         };
+    }
+
+    void PickItemToBucket()
+    {
+        if (dragFoodsOnMap == null || dragFoodsOnMap.Count == 0)
+        {
+            return;
+        }
+
+        foreach (PickItemToBucket item in dragFoodsOnMap)
+        {
+            item.onDragItem += () =>
+            {
+                Debug.LogWarning(item.name + " dropped on bucket");
+                string fruitName = item.name.Split('-')[1];
+                OnTriggerFoodItem(fruitName);
+            };
+        }
+    }
+
+    public void SetCookBookInfo()
+    {
+        SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
+        cookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
     }
 
     public void SetFoodItems(int cookbookIndex)

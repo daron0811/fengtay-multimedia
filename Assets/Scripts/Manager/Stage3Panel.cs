@@ -12,7 +12,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public GameObject gameObj;
     public Button nextDescBtn;
     public CountdownTimer countdownTimer;
-    public List<FoodItem> foodItems;
+    private List<FoodItem> foodItems; // 從子物件下取得
 
     public TextMeshProUGUI cookbookNameText;
     public TextMeshProUGUI cookbookStepText;
@@ -23,6 +23,9 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public Image stepTitleImage;
     public List<Sprite> stepTitleSprites;
 
+    [Header("拖曳物件")]
+    public List<PickItemToBucket> foodSprites;
+    public RectTransform dragTarget;
     void Start()
     {
         Init();
@@ -34,6 +37,28 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         descObj.SetActive(true);
         gameObj.SetActive(false);
         foodItems = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
+        foodSprites = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<PickItemToBucket>().ToList();
+        PickItemToBucket();
+
+    }
+
+    public void PickItemToBucket()
+    {
+        if (foodSprites == null || foodSprites.Count == 0)
+        {
+            return;
+        }
+
+        foreach (PickItemToBucket item in foodSprites)
+        {
+            item.bucket = dragTarget;
+            item.onDragItem += () =>
+            {
+                Debug.LogWarning(item.foodImage.sprite.name + " dropped on bucket");
+                // string fruitName = item.name.Split('-')[1];
+                OnTriggerFoodItem(item.foodImage.sprite.name);
+            };
+        }
     }
 
     public void StartGame()
@@ -59,6 +84,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     public void ShowNextStep()
     {
+        if (countdownTimer.IsRunning)
+        {
+            countdownTimer.StopTimer();
+        }
         currentStep++;
 
         if (currentStep >= steps.Count) // 結束步驟
@@ -98,6 +127,16 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             {
                 foodItems[i].Hide();
             }
+        }
+    }
+
+    public void OnTriggerFoodItem(string foodName)
+    {
+        Debug.LogWarning(foodName);
+        if (steps[currentStep].Contains(foodName) == true)
+        {
+            Debug.LogWarning("Step Contains Food :" + foodName);
+            ShowNextStep();
         }
     }
 }
