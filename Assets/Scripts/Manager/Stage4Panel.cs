@@ -3,6 +3,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Stage4Panel : MonoBehaviour
 {
@@ -18,10 +19,30 @@ public class Stage4Panel : MonoBehaviour
     public TextMeshProUGUI cookbookNameText;
     public CountdownTimer detailPanelTimer;
 
+    public TextMeshProUGUI localText;
+    public TextMeshProUGUI foodText;
+    public TextMeshProUGUI seasonText;
+    public TextMeshProUGUI nutritionTips;
+    public Image detailPanelFood;
+
     [Header("最後結算")]
     public GameObject resultPanel;
-    public GameObject scorePanel;
-    public GameObject FinalPanel;
+    public CanvasGroup scorePanel;
+    public CanvasGroup finalPanel;
+    public Button gotoEndBtn;
+
+    public Image rateImage;
+    public List<Sprite> rateSprites;
+
+    public Image seasonImage;
+    public List<Sprite> seasonSprites;
+
+    public Image cookbookImage; //圖示
+
+    public Transform cookbookItem;
+
+    public Vector3 originPos = new Vector3(-379.0f, -47.0f, 0.0f);
+    public Vector3 resultPos = new Vector3(-379.0f, 55.0f, 0.0f);
 
 
     void Start()
@@ -40,14 +61,46 @@ public class Stage4Panel : MonoBehaviour
         nextDescBtn.onClick.AddListener(ShowNextDesc);
 
         detailPanel.SetActive(false);
+        resultPanel.SetActive(false);
 
-        foodItems = detailPanel.transform.Find("PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
-        otherFoodItems = detailPanel.transform.Find("OtherFoods").GetComponentsInChildren<FoodItem>().ToList();
+        foodItems = detailPanel.transform.Find("Content/PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
+        otherFoodItems = detailPanel.transform.Find("Content/OtherFoods").GetComponentsInChildren<FoodItem>().ToList();
 
         SetCookBookInfo();
 
-        scorePanel.SetActive(true);
-        FinalPanel.SetActive(false);
+        scorePanel.gameObject.SetActive(true);
+        finalPanel.gameObject.SetActive(false);
+
+        gotoEndBtn.onClick.AddListener(() =>
+        {
+            cookbookItem.DOLocalMove(resultPos, 1.0f).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                finalPanel.gameObject.SetActive(true);
+                scorePanel.DOFade(0.0f, 1.0f);
+                finalPanel.DOFade(1.0f, 1.0f);
+            });
+        });
+
+        localText.text = "";
+        foodText.text = "";
+        seasonText.text = "";
+        nutritionTips.text = "";
+
+        detailPanelFood.gameObject.SetActive(false);
+        foreach (var item in foodItems)
+        {
+            item.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                detailPanelFood.gameObject.SetActive(true);
+                detailPanelFood.sprite = item.foodSprite.sprite;
+                SetDetialPanelInfo(item.foodSprite.sprite.name);
+            });
+        }
+
+        foreach (var item in otherFoodItems)
+        {
+            item.Hide();
+        }
     }
 
     private void ShowNextDesc()
@@ -63,10 +116,11 @@ public class Stage4Panel : MonoBehaviour
         {
             descObj.SetActive(false);
             detailPanel.SetActive(true);
-            // countdownTimer.StartTimer(30.0f);
+            SetDetialPanel();
         }
     }
 
+    #region 設定詳細頁面
     public void SetCookBookInfo()
     {
         SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
@@ -75,6 +129,10 @@ public class Stage4Panel : MonoBehaviour
 
     public void SetFoodItems(int cookbookIndex)
     {
+        if (cookbookIndex == -1)
+        {
+            return;
+        }
         List<string> foods = DataManager.Instance.GetFoodbyCookbook(cookbookIndex);
         if (foods == null)
         {
@@ -97,14 +155,51 @@ public class Stage4Panel : MonoBehaviour
         }
     }
 
+    //設定詳細頁面
     void SetDetialPanel()
     {
         detailPanelTimer.StartTimer(30.0f);
         detailPanelTimer.onEnd += () =>
         {
-            detailPanel.SetActive(false);
-            descObj.SetActive(true);
+            SetFinalPanel();
         };
     }
 
+    void SetDetialPanelInfo(string foodName)
+    {
+        FoodInfo foodInfo = DataManager.Instance.GetFoodInfo(foodName);
+        if (foodInfo == null)
+        {
+            return;
+        }
+        localText.text = foodInfo.locate;
+        foodText.text = foodInfo.name;
+        seasonText.text = foodInfo.season_text;
+        nutritionTips.text = foodInfo.nutritionTips;
+    }
+    #endregion
+
+    #region 結算
+    public void SetFinalPanel()
+    {
+        //TODO: 還要設定季節,QRCODE,使用的在地食材
+        cookbookItem.localPosition = originPos;
+        scorePanel.alpha = 1.0f;
+        finalPanel.alpha = 0.0f;
+        scorePanel.gameObject.SetActive(true);
+        finalPanel.gameObject.SetActive(false);
+        detailPanel.SetActive(false);
+        resultPanel.SetActive(true);
+
+        int score = 0;//= GameManager.Instance.GetScore();
+        int rate = 0;//GameManager.Instance.GetRate();
+        int season = 0;//GameManager.Instance.GetSeason();
+
+        rateImage.sprite = rateSprites[rate];
+        seasonImage.sprite = seasonSprites[season];
+        // cookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookIndex);
+    }
+
+
+    #endregion
 }

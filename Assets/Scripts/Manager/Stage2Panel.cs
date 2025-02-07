@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class Stage2Panel : MonoSingleton<Stage2Panel>
 {
+
     public GameObject descObj;
     public List<GameObject> descItem;
     public Button nextDescBtn;
@@ -17,7 +18,9 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
 
     public List<PickItemToBucket> dragFoodsOnMap;
 
-
+    public Image btnImage;
+    public Sprite normalSprite;
+    public Sprite goSprite;
 
     void Start()
     {
@@ -43,6 +46,8 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         {
             UIManager.Instance.SetState(UIManager.UIState.Stage_3);
         };
+
+        btnImage.sprite = normalSprite;
     }
 
     void PickItemToBucket()
@@ -100,7 +105,16 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         currentActive.SetActive(false);
         if (currentIndex + 1 < descItem.Count)
         {
+            Debug.LogError(currentIndex + 1);
             descItem[currentIndex + 1].SetActive(true);
+            if (currentIndex + 1 == descItem.Count - 1)
+            {
+                btnImage.sprite = goSprite;
+            }
+            else
+            {
+                btnImage.sprite = normalSprite;
+            }
         }
         else
         {

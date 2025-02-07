@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityCommunity.UnitySingleton;
 using System;
 using UnityEngine.InputSystem;
+using System.Drawing;
 
 public class DataManager : MonoSingleton<DataManager>
 {
@@ -179,6 +180,8 @@ public class FoodInfo
     public string name;// { get; set; }
     public string locate; //{ get; set; }
     public string season; //{ get; set; }
+    public string season_text; //{ get; set; }
+    public string nutritionTips; //{ get; set; }
 }
 
 [System.Serializable]

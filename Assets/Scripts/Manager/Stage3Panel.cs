@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class Stage3Panel : MonoSingleton<Stage3Panel>
 {
     public GameObject descObj;
+    public List<GameObject> descItem;
     public GameObject gameObj;
     public Button nextDescBtn;
     public CountdownTimer countdownTimer;
@@ -23,9 +24,18 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public Image stepTitleImage;
     public List<Sprite> stepTitleSprites;
 
+
+    public Image btnImage;
+    public Sprite normalSprite;
+    public Sprite goSprite;
+
+
     [Header("拖曳物件")]
     public List<PickItemToBucket> foodSprites;
     public RectTransform dragTarget;
+
+    [Header("食物演出")]
+    public List<GameObject> foodSpriteList;
     void Start()
     {
         Init();
@@ -33,13 +43,50 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     public void Init()
     {
-        nextDescBtn.onClick.AddListener(StartGame);
+        // nextDescBtn.onClick.AddListener(StartGame);
         descObj.SetActive(true);
+        foreach (var item in descItem)
+        {
+            item.SetActive(false);
+        }
+        descItem.First().SetActive(true);
+        nextDescBtn.onClick.AddListener(ShowNextDesc);
+
         gameObj.SetActive(false);
         foodItems = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
         foodSprites = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<PickItemToBucket>().ToList();
         PickItemToBucket();
 
+        btnImage.sprite = normalSprite;
+
+        foreach (var item in foodSpriteList)
+        {
+            item.SetActive(false);
+        }
+    }
+
+    private void ShowNextDesc()
+    {
+        var currentActive = descItem.FirstOrDefault(x => x.activeSelf);
+        var currentIndex = descItem.IndexOf(currentActive);
+        currentActive.SetActive(false);
+        if (currentIndex + 1 < descItem.Count)
+        {
+            Debug.LogError(currentIndex + 1);
+            descItem[currentIndex + 1].SetActive(true);
+            if (currentIndex + 1 == descItem.Count - 1)
+            {
+                btnImage.sprite = goSprite;
+            }
+            else
+            {
+                btnImage.sprite = normalSprite;
+            }
+        }
+        else
+        {
+            StartGame();
+        }
     }
 
     public void PickItemToBucket()
@@ -88,6 +135,9 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         {
             countdownTimer.StopTimer();
         }
+
+        foodSpriteList[currentStep].SetActive(true);
+
         currentStep++;
 
         if (currentStep >= steps.Count) // 結束步驟

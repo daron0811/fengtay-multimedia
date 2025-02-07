@@ -3,132 +3,176 @@
 		"id": "0",
 		"name": "文旦",
 		"locate": "斗六市",
-		"season": "3"
+		"season": "3",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "1",
 		"name": "馬鈴薯",
 		"locate": "斗南鎮",
-		"season": "14"
+		"season": "14",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "2",
 		"name": "木瓜",
 		"locate": "林內鄉",
-		"season": "23"
+		"season": "23",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "3",
 		"name": "咖啡",
 		"locate": "古坑鄉",
-		"season": "34"
+		"season": "34",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "4",
 		"name": "酸菜",
 		"locate": "大埤鄉",
-		"season": "4"
+		"season": "4",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "5",
 		"name": "蒜頭",
 		"locate": "莿桐鄉",
-		"season": "1"
+		"season": "1",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "6",
 		"name": "甘蔗",
 		"locate": "虎尾鎮",
-		"season": "134"
+		"season": "134",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "7",
 		"name": "米",
 		"locate": "西螺鎮",
-		"season": "23"
+		"season": "23",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "8",
 		"name": "蜂蜜",
 		"locate": "土庫鎮",
-		"season": "1"
+		"season": "1",
+		"season_text": "4月",
+		"nutritionTips": "蜂蜜主要成分是果糖和葡萄糖，並有少量維生素B群、C、E等。果糖、葡萄糖屬於單醣類，人類易於吸收，可以快速補充能量"
 	},
 	{
 		"id": "9",
 		"name": "玉米",
 		"locate": "褒忠鄉",
-		"season": "1234"
+		"season": "1234",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "10",
 		"name": "西瓜",
 		"locate": "二崙鄉",
-		"season": "1"
+		"season": "1",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "11",
 		"name": "鮮乳",
 		"locate": "崙背鄉",
-		"season": "4"
+		"season": "4",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "12",
 		"name": "豬",
 		"locate": "麥寮鄉",
-		"season": "1234"
+		"season": "1234",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "13",
 		"name": "文蛤",
 		"locate": "臺西鄉",
-		"season": "2"
+		"season": "2",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "14",
 		"name": "五彩胡蘿蔔",
 		"locate": "東勢鄉",
-		"season": "1"
+		"season": "1",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "15",
 		"name": "麻油",
 		"locate": "北港鎮",
-		"season": "4"
+		"season": "4",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "16",
 		"name": "花生",
 		"locate": "元長鄉",
-		"season": "23"
+		"season": "23",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "17",
 		"name": "小番茄",
 		"locate": "四湖鄉",
-		"season": "14"
+		"season": "14",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "18",
 		"name": "台灣鯛",
 		"locate": "口湖鄉",
-		"season": "23"
+		"season": "23",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "19",
 		"name": "番薯",
 		"locate": "水林鄉",
-		"season": "134"
+		"season": "134",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "20",
 		"name": "沙拉油",
 		"locate": "共用",
-		"season": "0"
+		"season": "0",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	},
 	{
 		"id": "21",
 		"name": "鹽",
 		"locate": "共用",
-		"season": "0"
+		"season": "0",
+		"season_text": "這邊填盛產季節",
+		"nutritionTips": "填你想填的 :D"
 	}
 ]
