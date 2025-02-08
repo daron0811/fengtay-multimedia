@@ -14,6 +14,9 @@ public class DataManager : MonoSingleton<DataManager>
     public TextAsset cookBookAsset;
     public List<CookBookInfo> cookBookInfos;
 
+    public TextAsset configAsset;
+    public Dictionary<string, object> configDatas;
+
     // void Awake(){
     //     string path = Application.streamingAssetsPath + "/food.json";
     //     if (System.IO.File.Exists(path))
@@ -27,6 +30,7 @@ public class DataManager : MonoSingleton<DataManager>
     //     }
     // }
 
+    #region 載入資料
     // public GameObject 
     void Start()
     {
@@ -64,8 +68,50 @@ public class DataManager : MonoSingleton<DataManager>
                 cookBookInfo.steps.AddRange(cookBookInfo.step.Split('\n'));
             }
         }
+
+        //設定檔
+        if (configAsset != null)
+        {
+            configDatas = JsonConvert.DeserializeObject<Dictionary<string, object>>(configAsset.text);
+            Debug.LogWarning(configDatas.Count);
+        }
     }
 
+    #endregion
+
+    #region 設定檔
+    public void GetConfigData<T>(string key, out T value)
+    {
+        value = default(T);
+        if (configDatas == null)
+        {
+            return;
+        }
+        if (configDatas.ContainsKey(key))
+        {
+            try
+            {
+                value = (T)Convert.ChangeType(configDatas[key], typeof(T));
+            }
+            catch (InvalidCastException)
+            {
+                Debug.LogError($"Failed to cast config data for key: {key} to type: {typeof(T)}");
+            }
+        }
+    }
+
+    // Example usage:
+    // int someIntValue;
+    // GetConfigData<int>("someIntKey", out someIntValue);
+    // Debug.Log("Config value for 'someIntKey': " + someIntValue);
+
+    // string someStringValue;
+    // GetConfigData<string>("someStringKey", out someStringValue);
+    // Debug.Log("Config value for 'someStringKey': " + someStringValue);
+
+    #endregion
+
+    #region 食材資料
     public List<FoodInfo> GetFoodBySeason(int season)
     {
         if (foodBySeason == null)
@@ -79,6 +125,19 @@ public class DataManager : MonoSingleton<DataManager>
         return null;
     }
 
+    public FoodInfo GetFoodInfo(string name)
+    {
+        var item = foodInfos.Find(x => x.name == name);
+        if (item == null)
+        {
+            Debug.LogError("Not Find Food Info " + name);
+            return null;
+        }
+        return foodInfos.Find(x => x.name == name);
+    }
+    #endregion
+
+    #region 食譜資料
     public CookBookInfo GetCookBookInfo(int index)
     {
         if (cookBookInfos == null)
@@ -160,17 +219,7 @@ public class DataManager : MonoSingleton<DataManager>
         }
         return false;
     }
-
-    public FoodInfo GetFoodInfo(string name)
-    {
-        var item = foodInfos.Find(x => x.name == name);
-        if (item == null)
-        {
-            Debug.LogError("Not Find Food Info " + name);
-            return null;
-        }
-        return foodInfos.Find(x => x.name == name);
-    }
+    #endregion
 }
 
 [System.Serializable]
