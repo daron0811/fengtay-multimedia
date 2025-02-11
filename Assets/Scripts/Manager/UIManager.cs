@@ -23,7 +23,7 @@ public class UIManager : MonoSingleton<UIManager>
         Stage_5
     }
 
-    private UIState currentState;
+    private UIState currentState = UIState.Stage_1;
 
     void Start()
     {
@@ -73,11 +73,17 @@ public class UIManager : MonoSingleton<UIManager>
     }
 
     public List<Sprite> sprites;
+    public List<Sprite> cookbookSprite;
 
     public Sprite GetFoodSprite(string name)
     {
         // string resetName = name.Split("-")[1];
         return sprites.FirstOrDefault(x => x.name == name);
+    }
+
+    public Sprite GetCookBookSprite(string name)
+    {
+        return cookbookSprite.FirstOrDefault(x => x.name == name);
     }
 
     public void LoadSpriteFromPath()
@@ -93,6 +99,10 @@ public class UIManager : MonoSingleton<UIManager>
             }
             sprite.name = resetName;
         }
+
+        cookbookSprite = new List<Sprite>();
+        cookbookSprite = Resources.LoadAll<Sprite>("Icon/CookBook").ToList();
+
         // string path = Application.dataPath+"/Resources/Textures";
         // DirectoryInfo dir = new DirectoryInfo(path);
         // FileInfo[] info = dir.GetFiles("*.png");

@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodSprite: {fileID: 877580292}
-  foodNameText: {fileID: 0}
+  foodNameText: {fileID: 1741630751}
   foodLocalText: {fileID: 1623260652}
   toggle: {fileID: 0}
 --- !u!1 &26435920
@@ -1619,7 +1619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodSprite: {fileID: 1784108758}
-  foodNameText: {fileID: 0}
+  foodNameText: {fileID: 411479012}
   foodLocalText: {fileID: 331474442}
   toggle: {fileID: 0}
 --- !u!1 &75996512
@@ -3929,7 +3929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &195728007
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4502,7 +4502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodSprite: {fileID: 762391550}
-  foodNameText: {fileID: 0}
+  foodNameText: {fileID: 1819508964}
   foodLocalText: {fileID: 1747002639}
   toggle: {fileID: 0}
 --- !u!1 &235638307
@@ -5627,6 +5627,7 @@ MonoBehaviour:
   seasonText: {fileID: 0}
   nutritionTips: {fileID: 0}
   detailPanelFood: {fileID: 0}
+  scanFood: {fileID: 0}
   resultPanel: {fileID: 1355663950}
   scorePanel: {fileID: 165796572}
   finalPanel: {fileID: 1284795700}
@@ -5652,6 +5653,8 @@ MonoBehaviour:
   finalCookbookImage: {fileID: 0}
   finalFoodItems: []
   seasonImages: []
+  returnTitleBtn: {fileID: 0}
+  playAgainBtn: {fileID: 0}
 --- !u!224 &324851109
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6690,7 +6693,7 @@ GameObject:
   - component: {fileID: 379445895}
   - component: {fileID: 379445896}
   m_Layer: 5
-  m_Name: 0 (1)
+  m_Name: ScanFood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8900,7 +8903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodSprite: {fileID: 1233788664}
-  foodNameText: {fileID: 0}
+  foodNameText: {fileID: 1949120222}
   foodLocalText: {fileID: 356479671}
   toggle: {fileID: 0}
 --- !u!1 &456069146
@@ -10936,6 +10939,7 @@ MonoBehaviour:
   seasonText: {fileID: 844728080}
   nutritionTips: {fileID: 700348248}
   detailPanelFood: {fileID: 415600026}
+  scanFood: {fileID: 379445896}
   resultPanel: {fileID: 195728006}
   scorePanel: {fileID: 481734809}
   finalPanel: {fileID: 426073048}
@@ -10961,6 +10965,8 @@ MonoBehaviour:
   finalCookbookImage: {fileID: 49084829}
   finalFoodItems: []
   seasonImages: []
+  returnTitleBtn: {fileID: 1586705717}
+  playAgainBtn: {fileID: 1659992647}
 --- !u!1 &568399007
 GameObject:
   m_ObjectHideFlags: 0
@@ -25825,7 +25831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1459329590
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29903,6 +29909,7 @@ GameObject:
   - component: {fileID: 1694735330}
   - component: {fileID: 1694735332}
   - component: {fileID: 1694735333}
+  - component: {fileID: 1694735334}
   m_Layer: 0
   m_Name: CoreObject
   m_TagString: Untagged
@@ -29960,6 +29967,7 @@ MonoBehaviour:
   stage4_OBJ: {fileID: 563996040}
   stage5_OBJ: {fileID: 324851107}
   sprites: []
+  cookbookSprite: []
 --- !u!114 &1694735333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29986,6 +29994,30 @@ MonoBehaviour:
     otherfood1: 
     otherfood2: 
     steps: []
+--- !u!114 &1694735334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694735329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e9204d298a0d8e409615e518d09e34f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  bgmSource: {fileID: 0}
+  audioClips:
+  - {fileID: 8300000, guid: 5273d01cd703b1a4d9d60d5a9e4f8934, type: 3}
+  - {fileID: 8300000, guid: 8be310246d7e42940b0ed1d6df40c0d9, type: 3}
+  - {fileID: 8300000, guid: ea6dd359f2726ea41ba62451126f03a1, type: 3}
+  - {fileID: 8300000, guid: 4ac2965ffdf429e4c9d99c87adc8c5a5, type: 3}
+  - {fileID: 8300000, guid: f81c62812afbca841858d42bb070c1fb, type: 3}
+  - {fileID: 8300000, guid: 8850a5236bfa3a1499725260227e916d, type: 3}
+  bgmClips:
+  - {fileID: 8300000, guid: 9e71748cb396b16448505cc2608f0f72, type: 3}
+  - {fileID: 8300000, guid: 1832d7c0d36f9674b976cf69cd212f03, type: 3}
 --- !u!1 &1695869205
 GameObject:
   m_ObjectHideFlags: 0
@@ -33842,7 +33874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1907600062
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33885,7 +33917,7 @@ MonoBehaviour:
   readyStartGame: 0
   descPanel: {fileID: 551307231}
   descImage: {fileID: 235638309}
-  descTex01: {fileID: 21300000, guid: 743e1002ed86ff04685dfc389ef31175, type: 3}
+  descTex01: {fileID: 21300000, guid: a018789708f35af43900dd76164c1702, type: 3}
   descTex02: {fileID: 21300000, guid: e106476bd61b2c64ca5ae396d2db2833, type: 3}
   nextDescTex: {fileID: 675167533}
   resultPanel: {fileID: 1071128292}

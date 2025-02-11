@@ -93,6 +93,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     private void ShowNextDesc()
     {
+        AudioManager.Instance.PlayAudioOnce(1);
         var currentActive = descItem.FirstOrDefault(x => x.activeSelf);
         var currentIndex = descItem.IndexOf(currentActive);
         currentActive.SetActive(false);
@@ -201,10 +202,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                 GoToFinalStep();
                 return;
             }
-            if (currentStep < steps.Count)
-            {
-                countdownTimer.StopTimer();
-            }
+            // if (currentStep < steps.Count)
+            // {
+            //     countdownTimer.StopTimer();
+            // }
             cookbookStepText.text = steps[currentStep];
             stepTitleImage.sprite = stepTitleSprites[currentStep];
         }
@@ -248,6 +249,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         {
             Debug.LogWarning("Step Contains Food :" + foodName);
             ShowNextStep();
+            AudioManager.Instance.PlayAudioOnce(4);
         }
     }
 }

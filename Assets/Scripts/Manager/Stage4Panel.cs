@@ -25,6 +25,8 @@ public class Stage4Panel : MonoBehaviour
     public TextMeshProUGUI nutritionTips;
     public Image detailPanelFood;
 
+    public FoodItem scanFood;
+
     [Header("最後結算")]
     public GameObject resultPanel;
     public CanvasGroup scorePanel;
@@ -48,6 +50,9 @@ public class Stage4Panel : MonoBehaviour
     public Image finalCookbookImage;
     public List<FoodItem> finalFoodItems;
     public List<Image> seasonImages;
+
+    public Button returnTitleBtn;
+    public Button playAgainBtn;
 
     private bool isInit = false;
     void Start()
@@ -77,6 +82,26 @@ public class Stage4Panel : MonoBehaviour
             });
         });
 
+        returnTitleBtn.onClick.AddListener(() =>
+        {
+            UIManager.Instance.SetState(UIManager.UIState.Stage_1);
+        });
+
+        playAgainBtn.onClick.AddListener(() =>
+        {
+            UIManager.Instance.SetState(UIManager.UIState.Stage_1);
+        });
+
+        foreach (var item in foodItems)
+        {
+            item.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                detailPanelFood.gameObject.SetActive(true);
+                detailPanelFood.sprite = item.foodSprite.sprite;
+                SetDetialPanelInfo(item.foodSprite.sprite.name);
+            });
+        }
+
         ResetStatus();
 
         isInit = true;
@@ -97,6 +122,7 @@ public class Stage4Panel : MonoBehaviour
 
         SetCookBookInfo();
 
+        scanFood.gameObject.SetActive(false);
         scorePanel.gameObject.SetActive(true);
         finalPanel.gameObject.SetActive(false);
 
@@ -106,15 +132,7 @@ public class Stage4Panel : MonoBehaviour
         nutritionTips.text = "";
 
         detailPanelFood.gameObject.SetActive(false);
-        foreach (var item in foodItems)
-        {
-            item.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                detailPanelFood.gameObject.SetActive(true);
-                detailPanelFood.sprite = item.foodSprite.sprite;
-                SetDetialPanelInfo(item.foodSprite.sprite.name);
-            });
-        }
+
 
         foreach (var item in otherFoodItems)
         {
@@ -158,6 +176,7 @@ public class Stage4Panel : MonoBehaviour
         SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
         cookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
         finalCookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
+        finalCookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
     }
 
     public void SetFoodItems(int cookbookIndex)
@@ -191,15 +210,22 @@ public class Stage4Panel : MonoBehaviour
     //設定詳細頁面
     void SetDetialPanel()
     {
-        detailPanelTimer.StartTimer(30.0f);
+        detailPanelTimer.StartTimer(10.0f); //先設10秒
         detailPanelTimer.onEnd += () =>
         {
             SetFinalPanel();
         };
     }
 
+    /// <summary>
+    /// 掃描後顯示資訊
+    /// </summary>
+    /// <param name="foodName"></param>
     void SetDetialPanelInfo(string foodName)
     {
+        //TODO : 這裡要判斷這個物件是不是有完成
+        AudioManager.Instance.PlayAudioOnce(5);
+
         FoodInfo foodInfo = DataManager.Instance.GetFoodInfo(foodName);
         if (foodInfo == null)
         {
@@ -209,6 +235,9 @@ public class Stage4Panel : MonoBehaviour
         foodText.text = foodInfo.name;
         seasonText.text = foodInfo.season_text;
         nutritionTips.text = foodInfo.nutritionTips;
+
+        scanFood.gameObject.SetActive(true);
+        scanFood.SetFoodItem(UIManager.Instance.GetFoodSprite(foodInfo.name), foodInfo.name);
     }
     #endregion
 

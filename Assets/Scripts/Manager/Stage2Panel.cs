@@ -69,7 +69,6 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         descItem.First().SetActive(true);
         btnImage.sprite = normalSprite;
         PickItemToBucket();
-
         SetCookBookInfo();
     }
 
@@ -89,6 +88,7 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
                 string fruitName = item.name.Split('-')[1];
                 OnTriggerFoodItem(fruitName);
             };
+
         }
     }
 
@@ -130,12 +130,12 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
 
     private void ShowNextDesc()
     {
+        AudioManager.Instance.PlayAudioOnce(1);
         var currentActive = descItem.FirstOrDefault(x => x.activeSelf);
         var currentIndex = descItem.IndexOf(currentActive);
         currentActive.SetActive(false);
         if (currentIndex + 1 < descItem.Count)
         {
-            Debug.LogError(currentIndex + 1);
             descItem[currentIndex + 1].SetActive(true);
             if (currentIndex + 1 == descItem.Count - 1)
             {
@@ -149,7 +149,8 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         else
         {
             descObj.SetActive(false);
-            countdownTimer.StartTimer(30.0f);
+            countdownTimer.StartTimer(10.0f);
+            AudioManager.Instance.PlayBGM(1);
         }
     }
 
@@ -159,6 +160,11 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         if (DataManager.Instance.haveFoodbyCookbook(GameManager.Instance.CurrentCookBookIndex, foodName, out foodIndex))
         {
             foodItems[foodIndex - 1].Checked(foodName);
+            AudioManager.Instance.PlayAudioOnce(2);
+        }
+        else
+        {
+            AudioManager.Instance.PlayAudioOnce(3);
         }
     }
 }

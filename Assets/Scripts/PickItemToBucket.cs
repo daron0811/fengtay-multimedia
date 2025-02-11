@@ -13,6 +13,8 @@ public class PickItemToBucket : MonoBehaviour, IPointerDownHandler, IBeginDragHa
 
     public event Action onDragItem;
 
+    public event Action onNonDropItem;
+
     private void Awake()
     {
         foodImage = GetComponent<Image>();
@@ -52,6 +54,10 @@ public class PickItemToBucket : MonoBehaviour, IPointerDownHandler, IBeginDragHa
             // Debug.LogWarning(_rectTransform.name + " dropped on bucket");
             // string fruitName = _rectTransform.name.Split('-')[1];
             // Stage2Panel.Instance.OnTriggerFoodItem(fruitName);
+        }
+        else
+        {
+            onNonDropItem?.Invoke();
         }
         _rectTransform.position = _originalPosition;
         //_rectTransform = null;

@@ -50,19 +50,23 @@ public class IntroPanel : MonoBehaviour
         nextDescTex.onClick.AddListener(ShowNextDesc);
         startBtn.onClick.AddListener(() =>
         {
+            AudioManager.Instance.PlayAudioOnce(0);
             ShowDesc(true, true);
         });
         descBtn.onClick.AddListener(() =>
         {
+            AudioManager.Instance.PlayAudioOnce(0);
             ShowDesc();
         });
         repickBtn.onClick.AddListener(() =>
         {
+            AudioManager.Instance.PlayAudioOnce(0);
             resultPanel.SetActive(false);
             ShowDesc(true, true);
         });
         startGameBtn.onClick.AddListener(() =>
         {
+            AudioManager.Instance.PlayAudioOnce(0);
             UIManager.Instance.SetState(UIManager.UIState.Stage_2);
         });
 
@@ -75,6 +79,7 @@ public class IntroPanel : MonoBehaviour
         resultPanel.SetActive(false);
         descImage.sprite = descTex01;
         descPanel.SetActive(false);
+        AudioManager.Instance.PlayBGM(0);
     }
 
     private void OnEnable()
@@ -106,6 +111,7 @@ public class IntroPanel : MonoBehaviour
     /// </summary>
     void ShowNextDesc()
     {
+        AudioManager.Instance.PlayAudioOnce(1);
         if (descImage.sprite == descTex01)
         {
             descImage.sprite = descTex02;
