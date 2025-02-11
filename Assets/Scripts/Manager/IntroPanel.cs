@@ -34,17 +34,19 @@ public class IntroPanel : MonoBehaviour
 
     public List<Sprite> seasonBackSprite;
 
+    public bool isInit = false;
+
     void Start()
     {
         Init();
     }
     void Init()
     {
-        readyStartGame = false;
-        resultPanel.SetActive(false);
-        descImage.sprite = descTex01;
-        descPanel.SetActive(false);
-
+        if (isInit)
+        {
+            return;
+        }
+        ResetStatus();
         nextDescTex.onClick.AddListener(ShowNextDesc);
         startBtn.onClick.AddListener(() =>
         {
@@ -63,6 +65,28 @@ public class IntroPanel : MonoBehaviour
         {
             UIManager.Instance.SetState(UIManager.UIState.Stage_2);
         });
+
+        isInit = true;
+    }
+
+    public void ResetStatus()
+    {
+        readyStartGame = false;
+        resultPanel.SetActive(false);
+        descImage.sprite = descTex01;
+        descPanel.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        if (isInit == false)
+        {
+            Init();
+        }
+        else
+        {
+            ResetStatus();
+        }
     }
 
     /// <summary>

@@ -36,6 +36,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     [Header("食物演出")]
     public List<GameObject> foodSpriteList;
+
+    bool isFinalStep = false;
+
+    bool isInit = false;
     void Start()
     {
         Init();
@@ -43,25 +47,47 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     public void Init()
     {
+        if (isInit)
+        {
+            return;
+        }
         // nextDescBtn.onClick.AddListener(StartGame);
+        nextDescBtn.onClick.AddListener(ShowNextDesc);
+        foodItems = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
+        foodSprites = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<PickItemToBucket>().ToList();
+
+        ResetStatus();
+        isInit = true;
+    }
+
+    void ResetStatus()
+    {
         descObj.SetActive(true);
         foreach (var item in descItem)
         {
             item.SetActive(false);
         }
         descItem.First().SetActive(true);
-        nextDescBtn.onClick.AddListener(ShowNextDesc);
-
         gameObj.SetActive(false);
-        foodItems = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
-        foodSprites = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<PickItemToBucket>().ToList();
         PickItemToBucket();
-
         btnImage.sprite = normalSprite;
-
         foreach (var item in foodSpriteList)
         {
             item.SetActive(false);
+        }
+        isFinalStep = false;
+    }
+
+
+    void OnEnable()
+    {
+        if (isInit == false)
+        {
+            Init();
+        }
+        else   // 重置狀態
+        {
+            ResetStatus();
         }
     }
 
@@ -122,38 +148,73 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         descObj.SetActive(false);
         gameObj.SetActive(true);
 
-        countdownTimer.StartTimer();
+        countdownTimer.StartTimer(30.0f);
         countdownTimer.onEnd += () =>
         {
+            //TODO:原本是執行下一步，現在改成30秒
+            isFinalStep = true;
             ShowNextStep();
         };
     }
 
+    //執行下一步
     public void ShowNextStep()
     {
-        if (countdownTimer.IsRunning)
+        ////原本每10秒執行下一個步驟的作法
+        // if (countdownTimer.IsRunning)
+        // {
+        //     countdownTimer.StopTimer();
+        // }
+        // foodSpriteList[currentStep].SetActive(true);
+
+        // currentStep++;
+
+        // if (currentStep >= steps.Count) // 結束步驟
+        // {
+        //     countdownTimer.StopTimer();
+        //     countdownTimer.onEnd -= ShowNextStep;
+        //     UIManager.Instance.SetState(UIManager.UIState.Stage_4);
+        //     return;
+        // }
+        // if (currentStep < steps.Count)
+        // {
+        //     countdownTimer.StopTimer();
+        // }
+        // cookbookStepText.text = steps[currentStep];
+        // stepTitleImage.sprite = stepTitleSprites[currentStep];
+        // countdownTimer.StartTimer();
+
+
+        ///
+        if (isFinalStep)
         {
-            countdownTimer.StopTimer();
-        }
-
-        foodSpriteList[currentStep].SetActive(true);
-
-        currentStep++;
-
-        if (currentStep >= steps.Count) // 結束步驟
-        {
-            countdownTimer.StopTimer();
-            countdownTimer.onEnd -= ShowNextStep;
-            UIManager.Instance.SetState(UIManager.UIState.Stage_4);
+            GoToFinalStep();
             return;
         }
-        if (currentStep < steps.Count)
+        else
         {
-            countdownTimer.StopTimer();
+            foodSpriteList[currentStep].SetActive(true);
+            currentStep++;
+
+            if (currentStep >= steps.Count) // 結束步驟
+            {
+                GoToFinalStep();
+                return;
+            }
+            if (currentStep < steps.Count)
+            {
+                countdownTimer.StopTimer();
+            }
+            cookbookStepText.text = steps[currentStep];
+            stepTitleImage.sprite = stepTitleSprites[currentStep];
         }
-        cookbookStepText.text = steps[currentStep];
-        stepTitleImage.sprite = stepTitleSprites[currentStep];
-        countdownTimer.StartTimer();
+    }
+
+    public void GoToFinalStep()
+    {
+        countdownTimer.StopTimer();
+        countdownTimer.onEnd -= ShowNextStep;
+        UIManager.Instance.SetState(UIManager.UIState.Stage_4);
     }
 
     public void SetFoodItems(int cookbookIndex)

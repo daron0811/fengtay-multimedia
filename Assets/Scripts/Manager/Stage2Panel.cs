@@ -22,6 +22,7 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
     public Sprite normalSprite;
     public Sprite goSprite;
 
+    public bool isInit = false;
     void Start()
     {
         Init();
@@ -29,26 +30,49 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
 
     public void Init()
     {
+        if (isInit)
+        {
+            return;
+        }
+        nextDescBtn.onClick.AddListener(ShowNextDesc);
+        foodItems = transform.Find("PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
+        dragFoodsOnMap = transform.Find("FoodGroup").GetComponentsInChildren<PickItemToBucket>().ToList();
+
+        countdownTimer.onEnd += () =>
+        {
+            UIManager.Instance.SetState(UIManager.UIState.Stage_3);
+        };
+
+        ResetStatus();
+        isInit = true;
+    }
+
+    void OnEnable()
+    {
+        if (isInit == false)
+        {
+            Init();
+        }
+        else
+        {
+            ResetStatus();
+        }
+    }
+
+    public void ResetStatus()
+    {
         descObj.SetActive(true);
         foreach (var item in descItem)
         {
             item.SetActive(false);
         }
         descItem.First().SetActive(true);
-        nextDescBtn.onClick.AddListener(ShowNextDesc);
-        foodItems = transform.Find("PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
-
-        dragFoodsOnMap = transform.Find("FoodGroup").GetComponentsInChildren<PickItemToBucket>().ToList();
+        btnImage.sprite = normalSprite;
         PickItemToBucket();
 
         SetCookBookInfo();
-        countdownTimer.onEnd += () =>
-        {
-            UIManager.Instance.SetState(UIManager.UIState.Stage_3);
-        };
-
-        btnImage.sprite = normalSprite;
     }
+
 
     void PickItemToBucket()
     {
@@ -70,6 +94,12 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
 
     public void SetCookBookInfo()
     {
+        if (GameManager.Instance.CurrentCookBookIndex < 0)
+        {
+            Debug.LogWarning("CurrentCookBookIndex < 0");
+            cookbookNameText.text = "未知";
+            return;
+        }
         SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
         cookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
     }

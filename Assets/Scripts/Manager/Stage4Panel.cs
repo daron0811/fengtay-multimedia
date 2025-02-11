@@ -49,12 +49,40 @@ public class Stage4Panel : MonoBehaviour
     public List<FoodItem> finalFoodItems;
     public List<Image> seasonImages;
 
+    private bool isInit = false;
     void Start()
     {
         Init();
     }
 
     void Init()
+    {
+        if (isInit)
+        {
+            return;
+        }
+
+        foodItems = detailPanel.transform.Find("Content/PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
+        otherFoodItems = detailPanel.transform.Find("Content/OtherFoods").GetComponentsInChildren<FoodItem>().ToList();
+        finalFoodItems = resultPanel.transform.Find("FinalPanel/Food/FoodGroup").GetComponentsInChildren<FoodItem>().ToList();
+        seasonImages = resultPanel.transform.Find("FinalPanel/Season/SeasonIcon").GetComponentsInChildren<Image>().ToList();
+
+        gotoEndBtn.onClick.AddListener(() =>
+        {
+            cookbookItem.DOLocalMove(resultPos, 1.0f).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                finalPanel.gameObject.SetActive(true);
+                scorePanel.DOFade(0.0f, 1.0f);
+                finalPanel.DOFade(1.0f, 1.0f);
+            });
+        });
+
+        ResetStatus();
+
+        isInit = true;
+    }
+
+    public void ResetStatus()
     {
         descObj.SetActive(true);
         foreach (var item in descItem)
@@ -67,25 +95,10 @@ public class Stage4Panel : MonoBehaviour
         detailPanel.SetActive(false);
         resultPanel.SetActive(false);
 
-        foodItems = detailPanel.transform.Find("Content/PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
-        otherFoodItems = detailPanel.transform.Find("Content/OtherFoods").GetComponentsInChildren<FoodItem>().ToList();
-        finalFoodItems = resultPanel.transform.Find("FinalPanel/Food/FoodGroup").GetComponentsInChildren<FoodItem>().ToList();
-        seasonImages = resultPanel.transform.Find("FinalPanel/Season/SeasonIcon").GetComponentsInChildren<Image>().ToList();
-
         SetCookBookInfo();
 
         scorePanel.gameObject.SetActive(true);
         finalPanel.gameObject.SetActive(false);
-
-        gotoEndBtn.onClick.AddListener(() =>
-        {
-            cookbookItem.DOLocalMove(resultPos, 1.0f).SetEase(Ease.OutBack).OnComplete(() =>
-            {
-                finalPanel.gameObject.SetActive(true);
-                scorePanel.DOFade(0.0f, 1.0f);
-                finalPanel.DOFade(1.0f, 1.0f);
-            });
-        });
 
         localText.text = "";
         foodText.text = "";
@@ -107,6 +120,19 @@ public class Stage4Panel : MonoBehaviour
         {
             item.Hide();
         }
+    }
+
+    void OnEnable()
+    {
+        if (isInit == false)
+        {
+            Init();
+        }
+        else
+        {
+            ResetStatus();
+        }
+        // ResetStatus();
     }
 
     private void ShowNextDesc()

@@ -13,7 +13,6 @@ public class DataManager : MonoSingleton<DataManager>
     public Dictionary<int, List<FoodInfo>> foodBySeason;
     public TextAsset cookBookAsset;
     public List<CookBookInfo> cookBookInfos;
-
     public TextAsset configAsset;
     public Dictionary<string, object> configDatas;
 
@@ -188,6 +187,25 @@ public class DataManager : MonoSingleton<DataManager>
         return foods;
     }
 
+    public List<string> GetOtherFoodbyCookbook(int index)
+    {
+        List<string> foods = new List<string>();
+        CookBookInfo cookBookInfo = GetCookBookInfo(index);
+        if (cookBookInfo == null)
+        {
+            return foods;
+        }
+        if (!string.IsNullOrEmpty(cookBookInfo.otherfood1))
+        {
+            foods.Add(cookBookInfo.otherfood1);
+        }
+        if (!string.IsNullOrEmpty(cookBookInfo.otherfood2))
+        {
+            foods.Add(cookBookInfo.otherfood2);
+        }
+        return foods;
+    }
+
     //驗證是不是有這個食材
     public bool haveFoodbyCookbook(int index, string food, out int foodIndex)
     {
@@ -245,6 +263,7 @@ public class CookBookInfo
     public string food3; //{ get; set; }
     public string food4; //{ get; set; }
     public string step;
-
+    public string otherfood1;
+    public string otherfood2;
     public List<string> steps;
 }
