@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,14 @@ public class IntroPanel : MonoBehaviour
     public Button startBtn; //開始按鈕
     public Button descBtn; // 說明按鈕
     public bool readyStartGame = false; // 準備進入遊戲
+    public bool readyScanCookbook = false;
+
+    [Header("掃描頁面")]
+    public GameObject scanPanel;
+    public TextMeshProUGUI scanTipText;
+    private string waitScanText = "等待食譜掃描中";
+    private int dotCount = 3;
+    private Tween loopTween;
 
     [Header("描述說明")]
     //說明描述板子
@@ -40,6 +49,7 @@ public class IntroPanel : MonoBehaviour
     {
         Init();
     }
+
     void Init()
     {
         if (isInit)
@@ -82,6 +92,21 @@ public class IntroPanel : MonoBehaviour
         AudioManager.Instance.PlayBGM(0);
     }
 
+    private void Update()
+    {
+        if (readyScanCookbook == true)
+        {
+            if (Input.GetKeyUp(KeyCode.F1))
+            {
+                readyScanCookbook = false;
+                readyStartGame = true;
+                scanPanel.SetActive(false);
+                resultPanel.SetActive(true);
+                SenserStatus();
+            }
+        }
+    }
+
     private void OnEnable()
     {
         if (isInit == false)
@@ -119,14 +144,26 @@ public class IntroPanel : MonoBehaviour
         else if (descImage.sprite == descTex02)
         {
             descPanel.SetActive(false);
-            resultPanel.SetActive(readyStartGame);
-            SenserStatus();
+            // resultPanel.SetActive(readyStartGame);
+
+            // loopTween = DOTween.To(() => dotCount, x => dotCount = x, 3, 0.5f) // 在 0.5 秒內變化 dotCount (0~3)
+            // .SetLoops(-1, LoopType.Restart) // 無限循環
+            // .OnUpdate(() => scanTipText.text = waitScanText + new string('.', dotCount)) // 更新文字
+            // .SetEase(Ease.Linear);
+            readyScanCookbook = true;
+            scanPanel.SetActive(true);
+            // SenserStatus();
         }
     }
+
 
     //TODO : 感應器狀態要從這邊設定
     void SenserStatus()
     {
+        if (loopTween != null)
+        {
+            loopTween.Kill(); // 避免物件刪除時仍執行動畫
+        }
         GameManager.Instance.CurrentCookBookIndex = 0; // 目前預設是西瓜
         SetCookBookInfo();
     }

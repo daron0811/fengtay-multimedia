@@ -100,6 +100,11 @@ public class UIManager : MonoSingleton<UIManager>
             sprite.name = resetName;
         }
 
+
+        var otherFood = new List<Sprite>();
+        otherFood = Resources.LoadAll<Sprite>("Icon/OtherFood").ToList();
+        sprites.AddRange(otherFood);
+
         cookbookSprite = new List<Sprite>();
         cookbookSprite = Resources.LoadAll<Sprite>("Icon/CookBook").ToList();
 

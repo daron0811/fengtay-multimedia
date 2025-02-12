@@ -51,8 +51,12 @@ public class Stage4Panel : MonoBehaviour
     public List<FoodItem> finalFoodItems;
     public List<Image> seasonImages;
 
+    public TextMeshProUGUI commonText;
+
     public Button returnTitleBtn;
     public Button playAgainBtn;
+
+    public List<string> rateCommonText;
 
     private bool isInit = false;
     void Start()
@@ -134,10 +138,10 @@ public class Stage4Panel : MonoBehaviour
         detailPanelFood.gameObject.SetActive(false);
 
 
-        foreach (var item in otherFoodItems)
-        {
-            item.Hide();
-        }
+        // foreach (var item in otherFoodItems)
+        // {
+        //     item.Hide();
+        // }
     }
 
     void OnEnable()
@@ -174,6 +178,7 @@ public class Stage4Panel : MonoBehaviour
     public void SetCookBookInfo()
     {
         SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
+        SetOtherFoodItems(GameManager.Instance.CurrentCookBookIndex);
         cookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
         finalCookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
         finalCookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
@@ -205,6 +210,35 @@ public class Stage4Panel : MonoBehaviour
                 foodItems[i].Hide();
             }
         }
+    }
+
+    public void SetOtherFoodItems(int cookbookIndex)
+    {
+        if (cookbookIndex == -1)
+        {
+            return;
+        }
+        List<string> otherFoods = DataManager.Instance.GetOtherFoodbyCookbook(cookbookIndex);
+        if (otherFoods == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < otherFoodItems.Count; i++)
+        {
+            if (i < otherFoods.Count)
+            {
+                Sprite sprite = UIManager.Instance.GetFoodSprite(otherFoods[i]);
+                otherFoodItems[i].SetFoodItem(sprite, otherFoods[i]);
+                otherFoodItems[i].Show();
+            }
+            else
+            {
+                otherFoodItems[i].Hide();
+            }
+        }
+
+
     }
 
     //設定詳細頁面
@@ -262,12 +296,15 @@ public class Stage4Panel : MonoBehaviour
 
         SetFinalFoodInfo(GameManager.Instance.CurrentCookBookIndex);
         SetFinalFoodSeason();
-        int score = 0;//= GameManager.Instance.GetScore();
-        int rate = 0;//GameManager.Instance.GetRate();
-        int season = 0;//GameManager.Instance.GetSeason();
+
+        int rate = 5;//GameManager.Instance.GetRate();
+        CookBookInfo cookBookInfo = GameManager.Instance.CurrentCookBookInfo;
+        int season = cookBookInfo.season - 1;//GameManager.Instance.GetSeason();
 
         rateImage.sprite = rateSprites[rate];
         seasonImage.sprite = seasonSprites[season];
+        commonText.text = rateCommonText[rate];
+
         // cookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookIndex);
     }
 

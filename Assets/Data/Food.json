@@ -190,5 +190,93 @@
 		"season": "0",
 		"season_text": "",
 		"nutritionTips": ""
+	},
+	{
+		"id": "24",
+		"name": "橄欖油",
+		"locate": "共用",
+		"season": "0",
+		"season_text": "",
+		"nutritionTips": ""
+	},
+	{
+		"id": "25",
+		"name": "薑",
+		"locate": "共用",
+		"season": "0",
+		"season_text": "",
+		"nutritionTips": ""
+	},
+	{
+		"id": "26",
+		"name": "蔥",
+		"locate": "共用",
+		"season": "0",
+		"season_text": "",
+		"nutritionTips": ""
+	},
+	{
+		"id": "27",
+		"name": "義大利麵",
+		"locate": "共用",
+		"season": "0",
+		"season_text": "",
+		"nutritionTips": ""
+	},
+	{
+		"id": "28",
+		"name": "辣椒",
+		"locate": "共用",
+		"season": "0",
+		"season_text": "",
+		"nutritionTips": ""
+	},
+	{
+		"id": "29",
+		"name": "香菜",
+		"locate": "共用",
+		"season": "0",
+		"season_text": "",
+		"nutritionTips": ""
+	},
+	{
+		"id": "30",
+		"name": "豆腐",
+		"locate": "共用",
+		"season": "0",
+		"season_text": "",
+		"nutritionTips": ""
+	},
+	{
+		"id": "31",
+		"name": "花椒",
+		"locate": "共用",
+		"season": "0",
+		"season_text": "",
+		"nutritionTips": ""
+	},
+	{
+		"id": "32",
+		"name": "洋蔥",
+		"locate": "共用",
+		"season": "0",
+		"season_text": "",
+		"nutritionTips": ""
+	},
+	{
+		"id": "33",
+		"name": "咖哩",
+		"locate": "共用",
+		"season": "0",
+		"season_text": "",
+		"nutritionTips": ""
+	},
+	{
+		"id": "34",
+		"name": "醬油",
+		"locate": "共用",
+		"season": "1",
+		"season_text": "",
+		"nutritionTips": ""
 	}
 ]
