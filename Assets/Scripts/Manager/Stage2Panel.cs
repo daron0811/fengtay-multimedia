@@ -40,7 +40,10 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
 
         countdownTimer.onEnd += () =>
         {
-            UIManager.Instance.SetState(UIManager.UIState.Stage_3);
+            PopupPanel.Instance.PlayTimeUp(() =>
+            {
+                UIManager.Instance.SetState(UIManager.UIState.Stage_3);
+            });
         };
 
         ResetStatus();
@@ -149,10 +152,14 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         else
         {
             descObj.SetActive(false);
-            countdownTimer.StartTimer(10.0f);
-            AudioManager.Instance.PlayBGM(1);
+            PopupPanel.Instance.PlayReadyPanel(() =>
+            {
+                countdownTimer.StartTimer(30.0f);
+                AudioManager.Instance.PlayBGM(1);
+            });
         }
     }
+
 
     public void OnTriggerFoodItem(string foodName)
     {

@@ -149,13 +149,19 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         descObj.SetActive(false);
         gameObj.SetActive(true);
 
-        countdownTimer.StartTimer(30.0f);
         countdownTimer.onEnd += () =>
-        {
-            //TODO:原本是執行下一步，現在改成30秒
-            isFinalStep = true;
-            ShowNextStep();
-        };
+                {
+                    //TODO:原本是執行下一步，現在改成30秒
+                    isFinalStep = true;
+                    ShowNextStep();
+                };
+
+
+        PopupPanel.Instance.PlayReadyPanel(() =>
+           {
+               countdownTimer.StartTimer(30.0f);
+           });
+
     }
 
     //執行下一步
@@ -215,7 +221,12 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     {
         countdownTimer.StopTimer();
         countdownTimer.onEnd -= ShowNextStep;
-        UIManager.Instance.SetState(UIManager.UIState.Stage_4);
+        PopupPanel.Instance.PlayTimeUp(() =>
+           {
+               UIManager.Instance.SetState(UIManager.UIState.Stage_4);
+           });
+
+
     }
 
     public void SetFoodItems(int cookbookIndex)

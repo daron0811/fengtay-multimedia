@@ -17,6 +17,8 @@ public class AudioManager : MonoSingleton<AudioManager>
     05:試吃掃描逼逼聲
     06:合格
     07:不合格
+    08:倒數計時開始
+    09:時間到
     */
     public List<AudioClip> bgmClips;
 

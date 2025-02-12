@@ -210,7 +210,14 @@ public class Stage4Panel : MonoBehaviour
     //設定詳細頁面
     void SetDetialPanel()
     {
-        detailPanelTimer.StartTimer(10.0f); //先設10秒
+        PopupPanel.Instance.PlayReadyPanel(
+            () =>
+            {
+                detailPanelTimer.StartTimer(10.0f); //先設10秒
+            }
+        );
+
+
         detailPanelTimer.onEnd += () =>
         {
             SetFinalPanel();
