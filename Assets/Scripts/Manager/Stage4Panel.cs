@@ -27,6 +27,10 @@ public class Stage4Panel : MonoBehaviour
 
     public FoodItem scanFood;
 
+    [Header("檢查完成")]
+    public GameObject checkEndPanel;
+    public Button gotoResultBtn;
+
     [Header("最後結算")]
     public GameObject resultPanel;
     public CanvasGroup scorePanel;
@@ -76,6 +80,12 @@ public class Stage4Panel : MonoBehaviour
         finalFoodItems = resultPanel.transform.Find("FinalPanel/Food/FoodGroup").GetComponentsInChildren<FoodItem>().ToList();
         seasonImages = resultPanel.transform.Find("FinalPanel/Season/SeasonIcon").GetComponentsInChildren<Image>().ToList();
 
+
+        gotoResultBtn.onClick.AddListener(() =>
+        {
+            SetFinalPanel();
+        });
+
         gotoEndBtn.onClick.AddListener(() =>
         {
             cookbookItem.DOLocalMove(resultPos, 1.0f).SetEase(Ease.OutBack).OnComplete(() =>
@@ -113,6 +123,7 @@ public class Stage4Panel : MonoBehaviour
 
     public void ResetStatus()
     {
+        checkEndPanel.SetActive(false);
         descObj.SetActive(true);
         foreach (var item in descItem)
         {
@@ -254,7 +265,8 @@ public class Stage4Panel : MonoBehaviour
 
         detailPanelTimer.onEnd += () =>
         {
-            SetFinalPanel();
+            checkEndPanel.SetActive(true);
+            // SetFinalPanel();
         };
     }
 
@@ -301,9 +313,9 @@ public class Stage4Panel : MonoBehaviour
         CookBookInfo cookBookInfo = GameManager.Instance.CurrentCookBookInfo;
         int season = cookBookInfo.season - 1;//GameManager.Instance.GetSeason();
 
-        rateImage.sprite = rateSprites[rate];
+        rateImage.sprite = rateSprites[rate - 1];
         seasonImage.sprite = seasonSprites[season];
-        commonText.text = rateCommonText[rate];
+        commonText.text = rateCommonText[rate - 1];
 
         // cookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookIndex);
     }

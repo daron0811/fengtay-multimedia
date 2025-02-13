@@ -37,6 +37,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     [Header("食物演出")]
     public List<GameObject> foodSpriteList;
 
+    [Header("結束片段")]
+    public GameObject finishPanel;
+    public Button finishBtn;
+
     bool isFinalStep = false;
 
     bool isInit = false;
@@ -56,12 +60,17 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         foodItems = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
         foodSprites = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<PickItemToBucket>().ToList();
 
+        finishBtn.onClick.AddListener(() =>
+        {
+            UIManager.Instance.SetState(UIManager.UIState.Stage_4);
+        });
         ResetStatus();
         isInit = true;
     }
 
     void ResetStatus()
     {
+        finishPanel.SetActive(false);
         descObj.SetActive(true);
         foreach (var item in descItem)
         {
@@ -223,10 +232,9 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         countdownTimer.onEnd -= ShowNextStep;
         PopupPanel.Instance.PlayTimeUp(() =>
            {
-               UIManager.Instance.SetState(UIManager.UIState.Stage_4);
+               finishPanel.SetActive(true);
+               //    UIManager.Instance.SetState(UIManager.UIState.Stage_4);
            });
-
-
     }
 
     public void SetFoodItems(int cookbookIndex)
