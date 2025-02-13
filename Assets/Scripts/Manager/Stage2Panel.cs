@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using TMPro;
 using UnityCommunity.UnitySingleton;
 using UnityEngine;
@@ -13,6 +14,10 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
     public List<GameObject> descItem;
     public Button nextDescBtn;
     private List<FoodItem> foodItems; //從子物件下取得
+
+    public GameObject finishPanel;
+    public Button finishBtn;
+    private List<FoodItem> resultFoodItems;
     public CountdownTimer countdownTimer;
     public TextMeshProUGUI cookbookNameText; //食譜名稱
 
@@ -21,6 +26,8 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
     public Image btnImage;
     public Sprite normalSprite;
     public Sprite goSprite;
+
+    public RectTransform buckTransform;
 
     public bool isInit = false;
     void Start()
@@ -36,15 +43,22 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         }
         nextDescBtn.onClick.AddListener(ShowNextDesc);
         foodItems = transform.Find("PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
+        resultFoodItems = finishPanel.transform.Find("PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
         dragFoodsOnMap = transform.Find("FoodGroup").GetComponentsInChildren<PickItemToBucket>().ToList();
 
         countdownTimer.onEnd += () =>
         {
             PopupPanel.Instance.PlayTimeUp(() =>
             {
-                UIManager.Instance.SetState(UIManager.UIState.Stage_3);
+                finishPanel.gameObject.SetActive(true);
+                // UIManager.Instance.SetState(UIManager.UIState.Stage_3);
             });
         };
+
+        finishBtn.onClick.AddListener(() =>
+        {
+            UIManager.Instance.SetState(UIManager.UIState.Stage_3);
+        });
 
         ResetStatus();
         isInit = true;
@@ -64,6 +78,7 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
 
     public void ResetStatus()
     {
+        finishPanel.SetActive(false);
         descObj.SetActive(true);
         foreach (var item in descItem)
         {
@@ -129,6 +144,21 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
                 foodItems[i].Hide();
             }
         }
+
+        for (int i = 0; i < resultFoodItems.Count; i++)
+        {
+            if (i < foods.Count)
+            {
+                Sprite sprite = UIManager.Instance.GetFoodSprite(foods[i]);
+                Debug.LogError(sprite.name + foods[i]);
+                resultFoodItems[i].SetFoodItem(sprite, foods[i]);
+                resultFoodItems[i].Show();
+            }
+            else
+            {
+                resultFoodItems[i].Hide();
+            }
+        }
     }
 
     private void ShowNextDesc()
@@ -160,18 +190,31 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         }
     }
 
-
+    public float rotateAmount = 15f; // 旋轉角度
+    public float duration = 0.2f; // 旋轉時間
     public void OnTriggerFoodItem(string foodName)
     {
         int foodIndex = -1;
         if (DataManager.Instance.haveFoodbyCookbook(GameManager.Instance.CurrentCookBookIndex, foodName, out foodIndex))
         {
+            //成功
             foodItems[foodIndex - 1].Checked(foodName);
+            resultFoodItems[foodIndex - 1].Checked(foodName);
             AudioManager.Instance.PlayAudioOnce(2);
         }
         else
         {
+            //失敗
             AudioManager.Instance.PlayAudioOnce(3);
+            buckTransform.DORotate(new Vector3(0, 0, rotateAmount), duration).SetEase(Ease.InOutSine)
+            .OnComplete(() =>
+            {
+                buckTransform.DORotate(new Vector3(0, 0, -rotateAmount), duration).SetEase(Ease.InOutSine)
+                    .OnComplete(() =>
+                    {
+                        buckTransform.DORotate(Vector3.zero, duration).SetEase(Ease.InOutSine);
+                    });
+            });
         }
     }
 }

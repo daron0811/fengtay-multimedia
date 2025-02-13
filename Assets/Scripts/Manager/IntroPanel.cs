@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
@@ -16,9 +17,11 @@ public class IntroPanel : MonoBehaviour
     [Header("掃描頁面")]
     public GameObject scanPanel;
     public TextMeshProUGUI scanTipText;
-    private string waitScanText = "等待食譜掃描中";
+    private string waitScanText = "等待食譜掃描中 ";
     private int dotCount = 3;
     private Tween loopTween;
+
+    bool isDotRunning = false;
 
     [Header("描述說明")]
     //說明描述板子
@@ -44,6 +47,7 @@ public class IntroPanel : MonoBehaviour
     public List<Sprite> seasonBackSprite;
 
     public bool isInit = false;
+
 
     void Start()
     {
@@ -86,10 +90,13 @@ public class IntroPanel : MonoBehaviour
     public void ResetStatus()
     {
         readyStartGame = false;
+        isDotRunning = false;
         resultPanel.SetActive(false);
         descImage.sprite = descTex01;
+        scanPanel.SetActive(false);
         descPanel.SetActive(false);
         AudioManager.Instance.PlayBGM(0);
+        
     }
 
     private void Update()
@@ -98,6 +105,8 @@ public class IntroPanel : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.F1))
             {
+                isDotRunning = false;
+                AudioManager.Instance.PlayAudioOnce(5);
                 readyScanCookbook = false;
                 readyStartGame = true;
                 scanPanel.SetActive(false);
@@ -152,7 +161,18 @@ public class IntroPanel : MonoBehaviour
             // .SetEase(Ease.Linear);
             readyScanCookbook = true;
             scanPanel.SetActive(true);
+            isDotRunning = true;
+            StartCoroutine(AnimateDots());
             // SenserStatus();
+        }
+    }
+    IEnumerator AnimateDots()
+    {
+        while (isDotRunning)
+        {
+            scanTipText.text = waitScanText + new string('.', dotCount); // 更新文字
+            dotCount = (dotCount + 1) % 4; // 讓dotCount 從 0 到 3 循環
+            yield return new WaitForSeconds(0.5f); // 每 0.5 秒更新一次
         }
     }
 
