@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityCommunity.UnitySingleton;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +38,8 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     [Header("食物演出")]
     public List<GameObject> foodSpriteList;
+
+    public Animator potAnimator;
 
     [Header("結束片段")]
     public GameObject finishPanel;
@@ -211,19 +215,44 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         {
             foodSpriteList[currentStep].SetActive(true);
             currentStep++;
+            float waitForAnimSeconds = PlayAnimation("Food_0" + currentStep);
 
-            if (currentStep >= steps.Count) // 結束步驟
-            {
-                GoToFinalStep();
-                return;
-            }
-            // if (currentStep < steps.Count)
+            StartCoroutine(SetStepAnimation(currentStep, waitForAnimSeconds));
+            // if (currentStep >= steps.Count) // 結束步驟
             // {
-            //     countdownTimer.StopTimer();
+            //     GoToFinalStep();
+            //     return;
             // }
-            cookbookStepText.text = steps[currentStep];
-            stepTitleImage.sprite = stepTitleSprites[currentStep];
+            // // if (currentStep < steps.Count)
+            // // {
+            // //     countdownTimer.StopTimer();
+            // // }
+            // cookbookStepText.text = steps[currentStep];
+            // stepTitleImage.sprite = stepTitleSprites[currentStep];
         }
+    }
+
+    IEnumerator SetStepAnimation(int currentStep = 0, float WaitForSeconds = 0.0f)
+    {
+        yield return new WaitForSeconds(WaitForSeconds);
+        if (currentStep >= steps.Count)
+        {
+            GoToFinalStep();
+            yield break;
+        }
+
+        cookbookStepText.text = steps[currentStep];
+        stepTitleImage.sprite = stepTitleSprites[currentStep];
+        yield break;
+    }
+
+
+    float PlayAnimation(string animationName)
+    {
+        potAnimator.Play(animationName, -1, 0); // 立即播放動畫，從頭開始
+        AnimatorStateInfo stateInfo = potAnimator.GetCurrentAnimatorStateInfo(0);
+        Debug.LogError(stateInfo.length);
+        return stateInfo.length;
     }
 
     public void GoToFinalStep()
@@ -258,6 +287,13 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             {
                 foodItems[i].Hide();
             }
+        }
+
+        Sprite sp = UIManager.Instance.GetFoodSprite("起司");
+        if (sp != null)
+        {
+            foodItems.Last().SetFoodItem(sp, "起司", "起司");
+            foodItems.Last().Show();
         }
     }
 

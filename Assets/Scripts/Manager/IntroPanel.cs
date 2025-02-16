@@ -30,6 +30,9 @@ public class IntroPanel : MonoBehaviour
     public Sprite descTex01;
     public Sprite descTex02;
 
+    public GameObject descOBJ1;
+    public GameObject descOBJ2;
+
     public Button nextDescTex;
 
     [Header("遊戲管理")]
@@ -92,11 +95,15 @@ public class IntroPanel : MonoBehaviour
         readyStartGame = false;
         isDotRunning = false;
         resultPanel.SetActive(false);
-        descImage.sprite = descTex01;
+
+        // descImage.sprite = descTex01;
+        descOBJ1.SetActive(true);
+        descOBJ2.SetActive(false);
+
         scanPanel.SetActive(false);
         descPanel.SetActive(false);
         AudioManager.Instance.PlayBGM(0);
-        
+
     }
 
     private void Update()
@@ -136,7 +143,11 @@ public class IntroPanel : MonoBehaviour
     void ShowDesc(bool show = true, bool readyToGame = false)
     {
         readyStartGame = readyToGame;
-        descImage.sprite = descTex01;
+        // descImage.sprite = descTex01;
+
+        descOBJ1.SetActive(true);
+        descOBJ2.SetActive(false);
+
         descPanel.SetActive(show);
     }
 
@@ -146,11 +157,13 @@ public class IntroPanel : MonoBehaviour
     void ShowNextDesc()
     {
         AudioManager.Instance.PlayAudioOnce(1);
-        if (descImage.sprite == descTex01)
+
+        if (descOBJ1.activeInHierarchy)
         {
-            descImage.sprite = descTex02;
+            descOBJ1.SetActive(false);
+            descOBJ2.SetActive(true);
         }
-        else if (descImage.sprite == descTex02)
+        else
         {
             descPanel.SetActive(false);
             // resultPanel.SetActive(readyStartGame);
@@ -159,13 +172,40 @@ public class IntroPanel : MonoBehaviour
             // .SetLoops(-1, LoopType.Restart) // 無限循環
             // .OnUpdate(() => scanTipText.text = waitScanText + new string('.', dotCount)) // 更新文字
             // .SetEase(Ease.Linear);
-            readyScanCookbook = true;
-            scanPanel.SetActive(true);
-            isDotRunning = true;
-            StartCoroutine(AnimateDots());
-            // SenserStatus();
+            if (readyStartGame)
+            {
+                readyScanCookbook = true;
+                scanPanel.SetActive(true);
+                isDotRunning = true;
+                StartCoroutine(AnimateDots());
+            }
         }
+
+        // if (descImage.sprite == descTex01)
+        // {
+        //     descImage.sprite = descTex02;
+        // }
+        // else if (descImage.sprite == descTex02)
+        // {
+        //     descPanel.SetActive(false);
+        //     // resultPanel.SetActive(readyStartGame);
+
+        //     // loopTween = DOTween.To(() => dotCount, x => dotCount = x, 3, 0.5f) // 在 0.5 秒內變化 dotCount (0~3)
+        //     // .SetLoops(-1, LoopType.Restart) // 無限循環
+        //     // .OnUpdate(() => scanTipText.text = waitScanText + new string('.', dotCount)) // 更新文字
+        //     // .SetEase(Ease.Linear);
+        //     if (readyStartGame)
+        //     {
+        //         readyScanCookbook = true;
+        //         scanPanel.SetActive(true);
+        //         isDotRunning = true;
+        //         StartCoroutine(AnimateDots());
+        //     }
+        //     // SenserStatus();
+        // }
     }
+
+
     IEnumerator AnimateDots()
     {
         while (isDotRunning)

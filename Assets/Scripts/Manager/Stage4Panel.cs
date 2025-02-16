@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
+using System.Collections;
 
 public class Stage4Panel : MonoBehaviour
 {
@@ -30,6 +32,19 @@ public class Stage4Panel : MonoBehaviour
     [Header("檢查完成")]
     public GameObject checkEndPanel;
     public Button gotoResultBtn;
+
+    public GameObject waitScanTipOBJ;
+    private bool waitForScan = false;
+
+    private string waitScanTipTex = "等待掃描中 ";
+
+    public TextMeshProUGUI waitScanTipText;
+    public TextMeshProUGUI waitScanTipText2;
+
+    public TextMeshProUGUI waitTipText;
+    private string gotoResultText = "耐心等待評分中 ";
+    private bool isDotRunning = false;
+    private int dotCount = 3;
 
     [Header("最後結算")]
     public GameObject resultPanel;
@@ -134,6 +149,8 @@ public class Stage4Panel : MonoBehaviour
 
         detailPanel.SetActive(false);
         resultPanel.SetActive(false);
+        waitScanTipOBJ.SetActive(false);
+        waitForScan = false;
 
         SetCookBookInfo();
 
@@ -180,8 +197,22 @@ public class Stage4Panel : MonoBehaviour
         else
         {
             descObj.SetActive(false);
+            waitScanTipOBJ.SetActive(true);
+            waitForScan = true;
             detailPanel.SetActive(true);
+            StartCoroutine(AnimateWaitDots());
             SetDetialPanel();
+        }
+    }
+
+    IEnumerator AnimateWaitDots()
+    {
+        while (waitForScan)
+        {
+            waitScanTipText.text = waitScanTipTex + new string('.', dotCount); // 更新文字
+            waitScanTipText2.text = waitScanTipTex + new string('.', dotCount); // 更新文字
+            dotCount = (dotCount + 1) % 4; // 讓dotCount 從 0 到 3 循環
+            yield return new WaitForSeconds(0.5f); // 每 0.5 秒更新一次
         }
     }
 
@@ -258,7 +289,7 @@ public class Stage4Panel : MonoBehaviour
         PopupPanel.Instance.PlayReadyPanel(
             () =>
             {
-                detailPanelTimer.StartTimer(10.0f); //先設10秒
+                detailPanelTimer.StartTimer(15.0f); //先設10秒
             }
         );
 
@@ -266,8 +297,29 @@ public class Stage4Panel : MonoBehaviour
         detailPanelTimer.onEnd += () =>
         {
             checkEndPanel.SetActive(true);
+            isDotRunning = true;
+            StartCoroutine(AnimateDots());
             // SetFinalPanel();
         };
+    }
+
+    IEnumerator AnimateDots()
+    {
+        float waitTimer = Time.time;
+        while (isDotRunning)
+        {
+            float nowT = Time.time - waitTimer;
+
+            waitTipText.text = gotoResultText + new string('.', dotCount); // 更新文字
+            dotCount = (dotCount + 1) % 4; // 讓dotCount 從 0 到 3 循環
+            yield return new WaitForSeconds(0.5f); // 每 0.5 秒更新一次
+            if (nowT > 4.0f)
+            {
+                isDotRunning = false;
+                checkEndPanel.SetActive(false);
+                SetFinalPanel();
+            }
+        }
     }
 
     /// <summary>
@@ -276,6 +328,7 @@ public class Stage4Panel : MonoBehaviour
     /// <param name="foodName"></param>
     void SetDetialPanelInfo(string foodName)
     {
+        waitScanTipOBJ.SetActive(false);
         //TODO : 這裡要判斷這個物件是不是有完成
         AudioManager.Instance.PlayAudioOnce(5);
 
