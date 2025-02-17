@@ -213,7 +213,6 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         }
         else
         {
-            foodSpriteList[currentStep].SetActive(true);
             currentStep++;
             float waitForAnimSeconds = PlayAnimation("Food_0" + currentStep);
 
@@ -232,6 +231,20 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         }
     }
 
+    float GetAnimationClipLength(string clipName)
+    {
+        foreach (AnimationClip clip in potAnimator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName)
+            {
+                Debug.LogError(clipName + " Clip 的影片長度 : " + clip.length);
+                return clip.length;
+            }
+        }
+        Debug.LogError("找不到動畫：" + clipName);
+        return 0f;
+    }
+
     IEnumerator SetStepAnimation(int currentStep = 0, float WaitForSeconds = 0.0f)
     {
         yield return new WaitForSeconds(WaitForSeconds);
@@ -241,18 +254,29 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             yield break;
         }
 
+        foodSpriteList[currentStep - 1].SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        
         cookbookStepText.text = steps[currentStep];
         stepTitleImage.sprite = stepTitleSprites[currentStep];
-        yield break;
+
+
+        if (currentStep == 3)
+        {
+            yield return new WaitForSeconds(0.5f);
+            ShowNextStep();
+        }
     }
 
 
     float PlayAnimation(string animationName)
     {
         potAnimator.Play(animationName, -1, 0); // 立即播放動畫，從頭開始
-        AnimatorStateInfo stateInfo = potAnimator.GetCurrentAnimatorStateInfo(0);
-        Debug.LogError(stateInfo.length);
-        return stateInfo.length;
+        float aniLength = GetAnimationClipLength(animationName);
+        return aniLength;
+        // AnimatorStateInfo stateInfo = potAnimator.GetCurrentAnimatorStateInfo(0);
+        // Debug.LogError(stateInfo.length);
+        // return stateInfo.length;
     }
 
     public void GoToFinalStep()
@@ -289,6 +313,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             }
         }
 
+        return;
         Sprite sp = UIManager.Instance.GetFoodSprite("起司");
         if (sp != null)
         {
