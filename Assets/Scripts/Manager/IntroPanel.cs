@@ -75,12 +75,20 @@ public class IntroPanel : MonoBehaviour
             AudioManager.Instance.PlayAudioOnce(0);
             ShowDesc();
         });
+
+        //返回重選
         repickBtn.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayAudioOnce(0);
             resultPanel.SetActive(false);
-            ShowDesc(true, true);
+            scanPanel.SetActive(true);
+            readyScanCookbook = true;
+            readyStartGame = false;
+            //todo : 這裡要做arduino掃描
+            // ShowDesc(true, true);
         });
+
+
         startGameBtn.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayAudioOnce(0);
@@ -97,7 +105,7 @@ public class IntroPanel : MonoBehaviour
         resultPanel.SetActive(false);
 
         // descImage.sprite = descTex01;
-        descOBJ1.SetActive(true);
+        descOBJ1.SetActive(false);
         descOBJ2.SetActive(false);
 
         scanPanel.SetActive(false);
@@ -146,6 +154,7 @@ public class IntroPanel : MonoBehaviour
         // descImage.sprite = descTex01;
 
         descOBJ1.SetActive(true);
+        TweenerFade(descOBJ1.transform);
         descOBJ2.SetActive(false);
 
         descPanel.SetActive(show);
@@ -162,6 +171,7 @@ public class IntroPanel : MonoBehaviour
         {
             descOBJ1.SetActive(false);
             descOBJ2.SetActive(true);
+            TweenerFade(descOBJ2.transform);
         }
         else
         {
@@ -236,4 +246,43 @@ public class IntroPanel : MonoBehaviour
         // cookbookIcon.sprite = UIManager.Instance.GetFoodSprite(GameManager.Instance.CurrentCookBookInfo.food1);
     }
 
+
+    public void TweenerFade(Transform fatherTrans)
+    {
+        if (fatherTrans == null)
+        {
+            return;
+        }
+
+        List<Image> childImages = new List<Image>();
+
+        int count = fatherTrans.childCount;
+
+        for (int i = 0; i < count; i++)
+        {
+            Transform childTran = fatherTrans.GetChild(i);
+            Image childImage = childTran.GetComponent<Image>();
+            childImage.color = new Color(1, 1, 1, 0);
+            childImages.Add(childImage);
+
+            // 記錄初始位置
+            Vector3 startPos = childTran.position;
+            childTran.position = new Vector3(startPos.x, startPos.y - 50f, startPos.z); // 往下移 50
+
+        }
+
+        // 創建 DoTween Sequence
+        Sequence sequence = DOTween.Sequence();
+        float delayBetweenAnimations = 0.2f; // 每個物件間隔 0.2 秒開始動畫
+
+        foreach (Image img in childImages)
+        {
+            Transform imgTransform = img.transform;
+            sequence.Append(
+                img.DOFade(1f, 0.5f) // 透明度 0 → 1，0.5 秒
+                     .OnStart(() => imgTransform.DOMoveY(imgTransform.position.y + 50f, 0.5f)) // 移動回原來的位置
+            )
+            .AppendInterval(delayBetweenAnimations); // 每個動畫間隔
+        }
+    }
 }
