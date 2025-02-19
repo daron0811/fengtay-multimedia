@@ -201,6 +201,7 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
             foodItems[foodIndex - 1].Checked(foodName);
             resultFoodItems[foodIndex - 1].Checked(foodName);
             AudioManager.Instance.PlayAudioOnce(2);
+            GameManager.Instance.SetPickedFoods(foodName);
         }
         else
         {

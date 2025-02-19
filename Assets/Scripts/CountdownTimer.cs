@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections;
+using DG.Tweening; // 引入 DoTween
 
 public class CountdownTimer : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class CountdownTimer : MonoBehaviour
     private bool isRunning = false;
     public bool IsRunning { get { return isRunning; } }
 
+    public float shakeThreshold = 5.0f; // 🟢 剩餘幾秒時開始晃動
+    private bool isShaking = false;   // 是否正在晃動
+
     public void StartTimer(float durationTime = 10.0f)
     {
         if (isRunning) return;
@@ -28,6 +32,8 @@ public class CountdownTimer : MonoBehaviour
         duration = durationTime;
         timeLeft = isCountdown ? duration : 0f;
         isRunning = true;
+        isShaking = false; // 確保重啟時停止晃動
+
         onStart?.Invoke();
         StartCoroutine(TimerRoutine());
     }
@@ -36,6 +42,7 @@ public class CountdownTimer : MonoBehaviour
     {
         isRunning = false;
         StopAllCoroutines();
+        StopShaking(); // 🛑 停止晃動
     }
 
     private IEnumerator TimerRoutine()
@@ -50,11 +57,18 @@ public class CountdownTimer : MonoBehaviour
             else
                 timeLeft++;
 
+            // 🔥 剩餘時間 <= shakeThreshold 開始晃動
+            if (isCountdown && timeLeft <= shakeThreshold && !isShaking)
+            {
+                StartShaking();
+            }
+
             if ((isCountdown && timeLeft <= 0) || (!isCountdown && timeLeft >= duration))
             {
                 isRunning = false;
                 onEnd?.Invoke();
                 UpdateUI();
+                StopShaking(); // 🛑 停止晃動
                 yield break;
             }
         }
@@ -67,16 +81,33 @@ public class CountdownTimer : MonoBehaviour
         int tens = (num / 10) % 10;
         int units = num % 10;
 
-        // 更新百位數圖片
         if (hundredImage != null)
             hundredImage.sprite = (hundreds > 0 || num == 0) ? numberSprites[hundreds] : defaultSprite;
 
-        // 更新十位數圖片
         if (tenImage != null)
             tenImage.sprite = (hundreds > 0 || tens > 0 || num == 0) ? numberSprites[tens] : defaultSprite;
 
-        // 更新個位數圖片
         if (unitImage != null)
             unitImage.sprite = numberSprites[units];
+    }
+
+    // ✅ 使用 DoTween 讓數字晃動
+    private void StartShaking()
+    {
+        isShaking = true;
+        Transform target = unitImage.transform.parent; // 讓整個數字區域晃動
+
+        target.DOShakePosition(0.5f, 5f, 10, 90, false, true)
+              .SetLoops(-1) // 無限循環
+              .SetId("ShakeEffect");
+    }
+
+    // 🛑 停止晃動
+    private void StopShaking()
+    {
+        isShaking = false;
+        DOTween.Kill("ShakeEffect"); // 停止 ID 為 "ShakeEffect" 的動畫
+        Transform target = unitImage.transform.parent;
+        target.localPosition = Vector3.zero; // 重設回原位
     }
 }

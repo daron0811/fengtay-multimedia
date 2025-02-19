@@ -243,6 +243,7 @@ public class IntroPanel : MonoBehaviour
         cookBookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
         cookbookNameText_2.text = GameManager.Instance.CurrentCookBookInfo.name;
         cookbookSeasonImage.sprite = seasonBackSprite[GameManager.Instance.CurrentCookBookInfo.season - 1];
+        cookbookIcon.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
         // cookbookIcon.sprite = UIManager.Instance.GetFoodSprite(GameManager.Instance.CurrentCookBookInfo.food1);
     }
 

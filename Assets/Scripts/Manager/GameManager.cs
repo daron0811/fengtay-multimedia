@@ -18,11 +18,20 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 CurrentCookBookInfo = DataManager.Instance.cookBookInfos[currentCookBookIndex];
             }
+
+            pickedFoods = new Dictionary<string, bool>();
+            List<string> foods = DataManager.Instance.GetFoodbyCookbook(currentCookBookIndex);
+            for (int i = 0; i < foods.Count; i++)
+            {
+                pickedFoods[foods[i]] = false;
+            }
         }
 
     }
     public CookBookInfo CurrentCookBookInfo = null;
-    private List<bool> pickedFoods = new List<bool>();
+
+    private Dictionary<string, bool> pickedFoods;
+    // private List<bool> pickedFoods = new List<bool>();
     private void Awake()
     {
         Init();
@@ -36,6 +45,35 @@ public class GameManager : MonoSingleton<GameManager>
     public void ResetStatus()
     {
         CurrentCookBookIndex = -1;
+    }
+
+    //用來判斷這個食材是否有被選擇
+    public void SetPickedFoods(string foodName)
+    {
+        if (pickedFoods == null)
+        {
+            pickedFoods = new Dictionary<string, bool>();
+        }
+        if (pickedFoods.ContainsKey(foodName))
+        {
+            if (pickedFoods[foodName] == true)
+            {
+                Debug.LogError(foodName + " 已經完成");
+                return;
+            }
+
+            Debug.LogError(foodName + " : 完成");
+            pickedFoods[foodName] = true;
+        }
+        else
+        {
+            Debug.LogError("Not This Food : " + foodName);
+        }
+    }
+
+    public int MaxFoods()
+    {
+        return DataManager.Instance.GetFoodbyCookbook(currentCookBookIndex).Count;
     }
 
     // private void SetPickedFoods()
