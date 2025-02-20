@@ -6,12 +6,14 @@ public class PopupPanel : MonoSingleton<PopupPanel>
 {
     public GameObject popupPanel = null;
     public GameObject timeUpsPanel = null;
+    public GameObject goPanel = null;
 
     public GameObject goodJobPanel = null;
 
     public event Action onPopupPanelEnd;
     public event Action onTimeUpsPanel;
     public event Action onGoodJobPanel;
+    public event Action onGoPanel;
 
     void Awake()
     {
@@ -23,6 +25,7 @@ public class PopupPanel : MonoSingleton<PopupPanel>
         popupPanel.SetActive(false);
         timeUpsPanel.SetActive(false);
         goodJobPanel.SetActive(false);
+        goPanel.SetActive(false);
         ClearAction();
     }
 
@@ -73,10 +76,26 @@ public class PopupPanel : MonoSingleton<PopupPanel>
         onGoodJobPanel = null;
     }
 
+    public void PlayGo(Action action)
+    {
+        AudioManager.Instance.PlayAudioOnce(9);
+        goPanel.SetActive(true);
+        Invoke("StopGoAction", 1.0f); //時間到的長度
+        onGoPanel += action;
+    }
+
+    public void StopGoAction()
+    {
+        goPanel.SetActive(false);
+        onGoPanel?.Invoke();
+        onGoPanel = null;
+    }
+
     public void ClearAction()
     {
         onPopupPanelEnd = null;
         onTimeUpsPanel = null;
         onGoodJobPanel = null;
+        onGoPanel = null;
     }
 }

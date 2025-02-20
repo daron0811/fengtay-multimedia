@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityCommunity.UnitySingleton;
 using UnityEngine;
 
@@ -71,9 +72,25 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    public int MaxFoods()
+    public int MaxFoodsCount()
     {
         return DataManager.Instance.GetFoodbyCookbook(currentCookBookIndex).Count;
+    }
+
+
+    public int GetPickedFoodsCount()
+    {
+        // 計算 pickedFoods 中值為 true 的項目數量
+        return pickedFoods.Count(pair => pair.Value);
+    }
+
+    public bool CheckArriver()
+    {
+        if (GetPickedFoodsCount() == GameManager.Instance.MaxFoodsCount())
+        {
+            return true;
+        }
+        return false;
     }
 
     // private void SetPickedFoods()

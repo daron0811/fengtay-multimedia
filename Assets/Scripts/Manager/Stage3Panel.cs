@@ -110,6 +110,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         var currentActive = descItem.FirstOrDefault(x => x.activeSelf);
         var currentIndex = descItem.IndexOf(currentActive);
         currentActive.SetActive(false);
+
         if (currentIndex + 1 < descItem.Count)
         {
             Debug.LogError(currentIndex + 1);
@@ -155,8 +156,8 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         cookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
         steps = GameManager.Instance.CurrentCookBookInfo.steps;
 
-        currentStep = 0;
-        cookbookStepText.text = steps[currentStep];
+        // currentStep = 0;
+        cookbookStepText.text = " 步驟準備中... ";//steps[currentStep];
         stepTitleImage.sprite = stepTitleSprites[currentStep];
 
         descObj.SetActive(false);
@@ -173,6 +174,9 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         PopupPanel.Instance.PlayReadyPanel(() =>
            {
                countdownTimer.StartTimer(30.0f);
+               currentStep = 0;
+               cookbookStepText.text = steps[currentStep];
+               stepTitleImage.sprite = stepTitleSprites[currentStep];
            });
 
     }
