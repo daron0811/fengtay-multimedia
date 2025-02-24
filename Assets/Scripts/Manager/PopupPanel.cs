@@ -1,19 +1,24 @@
 using System;
 using UnityEngine;
 using UnityCommunity.UnitySingleton;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class PopupPanel : MonoSingleton<PopupPanel>
 {
     public GameObject popupPanel = null;
     public GameObject timeUpsPanel = null;
     public GameObject goPanel = null;
-
     public GameObject goodJobPanel = null;
+
+    public GameObject cutScenePanel = null;
 
     public event Action onPopupPanelEnd;
     public event Action onTimeUpsPanel;
     public event Action onGoodJobPanel;
     public event Action onGoPanel;
+
+    public event Action onGoCutScene;
 
     void Awake()
     {
@@ -26,6 +31,7 @@ public class PopupPanel : MonoSingleton<PopupPanel>
         timeUpsPanel.SetActive(false);
         goodJobPanel.SetActive(false);
         goPanel.SetActive(false);
+        cutScenePanel.SetActive(false);
         ClearAction();
     }
 
@@ -91,11 +97,42 @@ public class PopupPanel : MonoSingleton<PopupPanel>
         onGoPanel = null;
     }
 
+    public void PlayCutScene(Action action)
+    {
+        AudioManager.Instance.PlayAudioOnce(9);
+        cutScenePanel.SetActive(true);
+        float duration = 1.0f;
+        Material targetMaterial = cutScenePanel.GetComponent<RawImage>().material;
+        DOTween.To(() => targetMaterial.GetFloat("_Fade"),
+                   x => targetMaterial.SetFloat("_Fade", x),
+                   1, duration) // 0 → 1
+               .OnComplete(() =>
+               {
+                   Invoke("StopCutSceneAction", 0.3f); //時間到的長度
+                   DOTween.To(() => targetMaterial.GetFloat("_Fade"),
+                              x => targetMaterial.SetFloat("_Fade", x),
+                              0, duration).OnComplete(() =>
+                              {
+                                  cutScenePanel.SetActive(false);
+                              }).SetDelay(0.3f);
+               });
+        // ); // 1 → 0
+        onGoCutScene += action;
+    }
+
+    public void StopCutSceneAction()
+    {
+
+        onGoCutScene?.Invoke();
+        onGoCutScene = null;
+    }
+
     public void ClearAction()
     {
         onPopupPanelEnd = null;
         onTimeUpsPanel = null;
         onGoodJobPanel = null;
         onGoPanel = null;
+        onGoCutScene = null;
     }
 }

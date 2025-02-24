@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      taste_text_tasteresult_review1024x1024_0: 7300678580552929490
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

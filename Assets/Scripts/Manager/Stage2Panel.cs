@@ -88,6 +88,12 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         btnImage.sprite = normalSprite;
         PickItemToBucket();
         SetCookBookInfo();
+
+        for (int i = 0; i < buckTransform.transform.childCount; i++)
+        {
+            Transform childTran = buckTransform.transform.GetChild(i);
+            childTran.gameObject.SetActive(false);
+        }
     }
 
 

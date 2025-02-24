@@ -197,7 +197,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      start_pic_forkandspoon_0: -2988094417642333734
+      start_pic_forkandspoon_1: 7200086317877178874
+      start_pic_forkandspoon_2: -767320196644778911
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

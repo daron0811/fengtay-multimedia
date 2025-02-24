@@ -247,7 +247,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cook_pic_bling_all_0: 2448128364620659780
+      cook_pic_bling_all_1: -3316849259358612534
+      cook_pic_bling_all_2: 3417269066190800889
+      cook_pic_bling_all_3: 162463511950341124
+      cook_pic_bling_all_4: -6331588403790459479
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

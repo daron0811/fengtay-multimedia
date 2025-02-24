@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pic_blingeffect_0: -7752013241889340471
+      pic_blingeffect_1: -1357318425568993505
+      pic_blingeffect_2: 6835686232454048312
+      pic_blingeffect_3: -2925451117812272168
+      pic_blingeffect_4: -6279726189644069935
+      pic_blingeffect_5: -554785028062618243
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

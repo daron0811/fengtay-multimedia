@@ -27,15 +27,28 @@ public class UIManager : MonoSingleton<UIManager>
 
     void Start()
     {
-        SetState(UIState.Stage_1);
+        SetState(UIState.Stage_1, false);
         LoadSpriteFromPath();
     }
 
-    public void SetState(UIState newState)
+    public void SetState(UIState newState, bool cutScene = true)
     {
         Debug.LogError("SetState: " + newState);
         currentState = newState;
-        UpdateUI();
+        if (cutScene == true)
+        {
+            PopupPanel.Instance.PlayCutScene(() =>
+            {
+                UpdateUI();
+            });
+            // Invoke("UpdateUI", 0.5f); //時間到的長度
+        }
+        else
+        {
+            UpdateUI();
+        }
+
+
     }
 
     private void UpdateUI()
