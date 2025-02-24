@@ -15,6 +15,10 @@ public class GameManager : MonoSingleton<GameManager>
         set
         {
             currentCookBookIndex = value;
+            if (value < 0)
+            {
+                return;
+            }
             if (currentCookBookIndex >= 0)
             {
                 CurrentCookBookInfo = DataManager.Instance.cookBookInfos[currentCookBookIndex];

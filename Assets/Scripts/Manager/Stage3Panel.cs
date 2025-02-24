@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityCommunity.UnitySingleton;
@@ -45,6 +46,9 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public GameObject finishPanel;
     public Button finishBtn;
 
+    public Transform starEffect;
+    private List<Image> starImages;
+
     bool isFinalStep = false;
 
     bool isInit = false;
@@ -69,6 +73,16 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             UIManager.Instance.SetState(UIManager.UIState.Stage_4);
         });
         ResetStatus();
+        starImages = new List<Image>();
+        if (starEffect != null)
+        {
+            for (int i = 0; i < starEffect.transform.childCount; i++)
+            {
+                Transform childTran = starEffect.transform.GetChild(i);
+                starImages.Add(childTran.GetComponent<Image>());
+                childTran.gameObject.SetActive(false);
+            }
+        }
         isInit = true;
     }
 
@@ -260,7 +274,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
         foodSpriteList[currentStep - 1].SetActive(true);
         yield return new WaitForSeconds(0.5f);
-        
+
         cookbookStepText.text = steps[currentStep];
         stepTitleImage.sprite = stepTitleSprites[currentStep];
 
@@ -287,11 +301,56 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     {
         countdownTimer.StopTimer();
         countdownTimer.onEnd -= ShowNextStep;
-        PopupPanel.Instance.PlayTimeUp(() =>
+        // PopupPanel.Instance.goodJobPanel()
+        PopupPanel.Instance.PlayGoodJob(() =>
            {
                finishPanel.SetActive(true);
+               foreach (Image star in starImages)
+               {
+                   star.gameObject.SetActive(true);
+                   FlickerStar(star);
+               }
                //    UIManager.Instance.SetState(UIManager.UIState.Stage_4);
            });
+    }
+    void OnDisable()
+    {
+        foreach (Image star in starImages)
+        {
+            star.DOKill(); // 停止該 Image 上的所有 DoTween 動畫
+        }
+    }
+
+
+    public void FlickerStar(Image star)
+    {
+        float duration = UnityEngine.Random.Range(0.5f, 1.5f); // 隨機閃爍時間
+        float delay = UnityEngine.Random.Range(0f, 1f); // 隨機延遲開始時間
+
+        // 執行閃爍動畫
+        star.DOFade(0, duration)
+            .SetDelay(delay)
+            .SetEase(Ease.InOutSine)
+            .OnComplete(() => // 動畫完成後
+            {
+                float waitTime = UnityEngine.Random.Range(1f, 3f); // 隨機停頓 1~3 秒
+                star.DOFade(1, 0.5f).OnComplete(() => // 先恢復顯示
+                {
+                    ChangePosition(star); // 隨機改變位置
+                    FlickerStar(star); // 重新播放動畫
+                }).SetDelay(waitTime);
+            });
+
+        // 可選：加入縮放變化
+        star.transform.DOScale(UnityEngine.Random.Range(0.8f, 1.2f), duration)
+            .SetEase(Ease.InOutSine);
+    }
+
+    void ChangePosition(Image star)
+    {
+        float newX = UnityEngine.Random.Range(-580.0f, 580.0f);
+        float newY = UnityEngine.Random.Range(270.0f, -178.0f);
+        star.rectTransform.anchoredPosition = new Vector2(newX, newY);
     }
 
     public void SetFoodItems(int cookbookIndex)

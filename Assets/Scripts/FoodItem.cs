@@ -10,6 +10,18 @@ public class FoodItem : MonoBehaviour
 
     private FoodInfo foodInfo;
 
+    private Material imageMat;
+
+    public void Awake()
+    {
+        if (foodSprite.material != null)
+        {
+            imageMat = new Material(foodSprite.material); // 產生材質的副本
+            foodSprite.material = imageMat;
+            // imageMat = foodSprite.material;
+        }
+    }
+
     public void Show()
     {
         gameObject.SetActive(true);
@@ -20,7 +32,7 @@ public class FoodItem : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SetFoodItem(Sprite sprite, string name = "", string local = "")
+    public void SetFoodItem(Sprite sprite, string name = "", string local = "", bool isGray = false)
     {
         if (foodSprite != null)
         {
@@ -39,6 +51,27 @@ public class FoodItem : MonoBehaviour
         {
             toggle.isOn = false;
         }
+
+        if (imageMat == null)
+        {
+            if (foodSprite.material != null)
+            {
+                imageMat = new Material(foodSprite.material); // 產生材質的副本
+                foodSprite.material = imageMat;
+            }
+        }
+
+        if (imageMat != null)
+        {
+            if (isGray == false)
+            {
+                imageMat.SetFloat("_Grayscale", 1);
+            }
+            else
+            {
+                imageMat.SetFloat("_Grayscale", 0);
+            }
+        }
     }
 
     public void Checked(string foodName)
@@ -53,4 +86,24 @@ public class FoodItem : MonoBehaviour
         }
     }
 
+    public void SetGary(bool value = true)
+    {
+        if (foodSprite.material == null)
+        {
+            return;
+        }
+        if (imageMat == null)
+        {
+            if (foodSprite.material != null)
+            {
+                imageMat = new Material(foodSprite.material); // 產生材質的副本
+                foodSprite.material = imageMat;
+            }
+        }
+        if (imageMat != null)
+        {
+            imageMat.SetFloat("_Grayscale", value ? 0 : 1);
+        }
+
+    }
 }

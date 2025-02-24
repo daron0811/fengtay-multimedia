@@ -19,6 +19,7 @@ public class AudioManager : MonoSingleton<AudioManager>
     07:不合格
     08:倒數計時開始
     09:時間到
+    10:顯示結算
     */
     public List<AudioClip> bgmClips;
 

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using TMPro;
 using UnityCommunity.UnitySingleton;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class Stage2Panel : MonoSingleton<Stage2Panel>
 {
@@ -142,7 +144,8 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
             {
                 Sprite sprite = UIManager.Instance.GetFoodSprite(foods[i]);
                 Debug.LogError(sprite.name + foods[i]);
-                foodItems[i].SetFoodItem(sprite, foods[i]);
+                foodItems[i].SetFoodItem(sprite, foods[i], "", true);
+                foodItems[i].SetGary();
                 foodItems[i].Show();
             }
             else
@@ -158,6 +161,7 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
                 Sprite sprite = UIManager.Instance.GetFoodSprite(foods[i]);
                 Debug.LogError(sprite.name + foods[i]);
                 resultFoodItems[i].SetFoodItem(sprite, foods[i]);
+                resultFoodItems[i].SetGary();
                 resultFoodItems[i].Show();
             }
             else
@@ -205,9 +209,12 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         {
             //成功
             foodItems[foodIndex - 1].Checked(foodName);
+            foodItems[foodIndex - 1].SetGary(false);
             resultFoodItems[foodIndex - 1].Checked(foodName);
+            resultFoodItems[foodIndex - 1].SetGary(false);
             AudioManager.Instance.PlayAudioOnce(2);
             GameManager.Instance.SetPickedFoods(foodName);
+            OnSuccessPlayBucketEffect();
             if (GameManager.Instance.CheckArriver() == true)
             {
                 countdownTimer.StopTimer();
@@ -215,6 +222,7 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
                     () =>
                     {
                         finishPanel.gameObject.SetActive(true);
+                        AudioManager.Instance.PlayAudioOnce(10);
                     }
                 );
             }
@@ -232,6 +240,22 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
                         buckTransform.DORotate(Vector3.zero, duration).SetEase(Ease.InOutSine);
                     });
             });
+        }
+    }
+    // public DOTweenAnimation dOTweenAnimation1;
+    public async void OnSuccessPlayBucketEffect()
+    {
+        if (buckTransform != null)
+        {
+            // dOTweenAnimation1.DOPlay();
+            buckTransform.DOScale(new Vector3(1.2f, 0.9f, 1.0f), 0.3f).SetEase(Ease.OutQuad).SetLoops(2, LoopType.Yoyo);
+            for (int i = 0; i < buckTransform.transform.childCount; i++)
+            {
+                Transform childTran = buckTransform.transform.GetChild(i);
+                childTran.gameObject.SetActive(false);
+                childTran.gameObject.SetActive(true);
+                await UniTask.Delay(UnityEngine.Random.Range(0, 500));
+            }
         }
     }
 }
