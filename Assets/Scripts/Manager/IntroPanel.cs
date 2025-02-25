@@ -126,6 +126,68 @@ public class IntroPanel : MonoBehaviour
                 readyStartGame = true;
                 scanPanel.SetActive(false);
                 resultPanel.SetActive(true);
+
+                GameManager.Instance.CurrentCookBookIndex = 0; // 目前預設是西瓜
+                SenserStatus();
+            }
+            if (Input.GetKeyUp(KeyCode.F2))
+            {
+                isDotRunning = false;
+                AudioManager.Instance.PlayAudioOnce(5);
+                readyScanCookbook = false;
+                readyStartGame = true;
+                scanPanel.SetActive(false);
+                resultPanel.SetActive(true);
+
+                GameManager.Instance.CurrentCookBookIndex = 1; // 目前預設是西瓜
+                SenserStatus();
+            }
+            if (Input.GetKeyUp(KeyCode.F3))
+            {
+                isDotRunning = false;
+                AudioManager.Instance.PlayAudioOnce(5);
+                readyScanCookbook = false;
+                readyStartGame = true;
+                scanPanel.SetActive(false);
+                resultPanel.SetActive(true);
+
+                GameManager.Instance.CurrentCookBookIndex = 2; // 目前預設是西瓜
+                SenserStatus();
+            }
+            if (Input.GetKeyUp(KeyCode.F4))
+            {
+                isDotRunning = false;
+                AudioManager.Instance.PlayAudioOnce(5);
+                readyScanCookbook = false;
+                readyStartGame = true;
+                scanPanel.SetActive(false);
+                resultPanel.SetActive(true);
+
+                GameManager.Instance.CurrentCookBookIndex = 3; // 目前預設是西瓜
+                SenserStatus();
+            }
+            if (Input.GetKeyUp(KeyCode.F5))
+            {
+                isDotRunning = false;
+                AudioManager.Instance.PlayAudioOnce(5);
+                readyScanCookbook = false;
+                readyStartGame = true;
+                scanPanel.SetActive(false);
+                resultPanel.SetActive(true);
+
+                GameManager.Instance.CurrentCookBookIndex = 4; // 目前預設是西瓜
+                SenserStatus();
+            }
+            if (Input.GetKeyUp(KeyCode.F6))
+            {
+                isDotRunning = false;
+                AudioManager.Instance.PlayAudioOnce(5);
+                readyScanCookbook = false;
+                readyStartGame = true;
+                scanPanel.SetActive(false);
+                resultPanel.SetActive(true);
+
+                GameManager.Instance.CurrentCookBookIndex = 5; // 目前預設是西瓜
                 SenserStatus();
             }
         }
@@ -234,7 +296,7 @@ public class IntroPanel : MonoBehaviour
         {
             loopTween.Kill(); // 避免物件刪除時仍執行動畫
         }
-        GameManager.Instance.CurrentCookBookIndex = 0; // 目前預設是西瓜
+
         SetCookBookInfo();
     }
 

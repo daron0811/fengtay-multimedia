@@ -189,10 +189,20 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
            {
                countdownTimer.StartTimer(30.0f);
                currentStep = 0;
-               cookbookStepText.text = steps[currentStep];
-               stepTitleImage.sprite = stepTitleSprites[currentStep];
+               SetStepInfo();
            });
 
+    }
+
+    private void SetStepInfo()
+    {
+        cookbookStepText.color = new Color(1, 1, 1, 0);
+        cookbookStepText.rectTransform.anchoredPosition = new Vector2(26.0f, -60.0f);
+        cookbookStepText.text = steps[currentStep];
+        stepTitleImage.sprite = stepTitleSprites[currentStep];
+
+        cookbookStepText.DOFade(1.0f, 0.3f);
+        cookbookStepText.rectTransform.DOLocalMove(new Vector3(26.0f, -40.0f, 0.0f), 1.0f);
     }
 
     //執行下一步
@@ -275,9 +285,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         foodSpriteList[currentStep - 1].SetActive(true);
         yield return new WaitForSeconds(0.5f);
 
-        cookbookStepText.text = steps[currentStep];
-        stepTitleImage.sprite = stepTitleSprites[currentStep];
-
+        SetStepInfo();
 
         if (currentStep == 3)
         {
