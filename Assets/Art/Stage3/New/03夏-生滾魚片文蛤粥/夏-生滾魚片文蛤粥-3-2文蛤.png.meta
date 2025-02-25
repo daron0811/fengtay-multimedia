@@ -58,7 +58,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -133,7 +133,7 @@ TextureImporter:
         width: 132
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -155,7 +155,7 @@ TextureImporter:
         width: 122
         height: 102
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -164,72 +164,6 @@ TextureImporter:
       bones: []
       spriteID: 52a9715ac64bb6cf0800000000000000
       internalID: -257914174924416475
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\u590F-\u751F\u6EFE\u9B5A\u7247\u6587\u86E4\u7CA5-3-2\u6587\u86E4_2"
-      rect:
-        serializedVersion: 2
-        x: 326
-        y: 287
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1127b2ae665fff020800000000000000
-      internalID: 2377888950639096337
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\u590F-\u751F\u6EFE\u9B5A\u7247\u6587\u86E4\u7CA5-3-2\u6587\u86E4_3"
-      rect:
-        serializedVersion: 2
-        x: 258
-        y: 259
-        width: 17
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6b2663ea1c9d2a060800000000000000
-      internalID: 6963367399742923446
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\u590F-\u751F\u6EFE\u9B5A\u7247\u6587\u86E4\u7CA5-3-2\u6587\u86E4_4"
-      rect:
-        serializedVersion: 2
-        x: 394
-        y: 259
-        width: 17
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 751f0575db9f598c0800000000000000
-      internalID: -3993010902985019049
       vertices: []
       indices: 
       edges: []
