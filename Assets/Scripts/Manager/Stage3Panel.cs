@@ -21,6 +21,8 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public TextMeshProUGUI cookbookNameText;
     public TextMeshProUGUI cookbookStepText;
 
+    public Image cookbookImage;
+
     public List<string> steps;
     public int currentStep = 0;
 
@@ -37,10 +39,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public List<PickItemToBucket> foodSprites;
     public RectTransform dragTarget;
 
-    [Header("食物演出")]
-    public List<GameObject> foodSpriteList;
-
-    public Animator potAnimator;
+    // [Header("食物演出")]
+    // public List<GameObject> foodSpriteList;
+    // public Animator potAnimator;
+    public CookBookStepItem targetCookBookStep = null;
 
     [Header("結束片段")]
     public GameObject finishPanel;
@@ -48,6 +50,8 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     public Transform starEffect;
     private List<Image> starImages;
+
+    public Image finishImage;
 
     bool isFinalStep = false;
 
@@ -98,10 +102,16 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         gameObj.SetActive(false);
         PickItemToBucket();
         btnImage.sprite = normalSprite;
-        foreach (var item in foodSpriteList)
-        {
-            item.SetActive(false);
-        }
+        fire.alpha = 0.0f;
+        HideSmoke();
+
+        //TODO : 改由一開始載入當時食譜的CookbookStepItem
+
+        // foreach (var item in foodSpriteList)
+        // {
+        //     item.SetActive(false);
+        // }
+
         isFinalStep = false;
     }
 
@@ -166,9 +176,9 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public void StartGame()
     {
         SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
-
+        cookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
         cookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
-        steps = GameManager.Instance.CurrentCookBookInfo.steps;
+        // steps = GameManager.Instance.CurrentCookBookInfo.steps;
 
         // currentStep = 0;
         cookbookStepText.text = " 步驟準備中... ";//steps[currentStep];
@@ -187,18 +197,18 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
         PopupPanel.Instance.PlayReadyPanel(() =>
            {
-               countdownTimer.StartTimer(30.0f);
+               countdownTimer.StartTimer(60.0f);
                currentStep = 0;
                SetStepInfo();
            });
 
     }
 
-    private void SetStepInfo()
+    public void SetStepInfo()
     {
         cookbookStepText.color = new Color(1, 1, 1, 0);
         cookbookStepText.rectTransform.anchoredPosition = new Vector2(26.0f, -60.0f);
-        cookbookStepText.text = steps[currentStep];
+        cookbookStepText.text = GameManager.Instance.CurrentCookBookInfo.steps[currentStep];
         stepTitleImage.sprite = stepTitleSprites[currentStep];
 
         cookbookStepText.DOFade(1.0f, 0.3f);
@@ -242,9 +252,14 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         else
         {
             currentStep++;
-            float waitForAnimSeconds = PlayAnimation("Food_0" + currentStep);
+            //如果有觸發成功，播動畫
+            targetCookBookStep.PlayNextStep(currentStep);
 
-            StartCoroutine(SetStepAnimation(currentStep, waitForAnimSeconds));
+            // float waitForAnimSeconds = PlayAnimation("Food_0" + currentStep);
+
+            // StartCoroutine(SetStepAnimation(currentStep, waitForAnimSeconds));
+
+
             // if (currentStep >= steps.Count) // 結束步驟
             // {
             //     GoToFinalStep();
@@ -259,51 +274,53 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         }
     }
 
-    float GetAnimationClipLength(string clipName)
-    {
-        foreach (AnimationClip clip in potAnimator.runtimeAnimatorController.animationClips)
-        {
-            if (clip.name == clipName)
-            {
-                Debug.LogError(clipName + " Clip 的影片長度 : " + clip.length);
-                return clip.length;
-            }
-        }
-        Debug.LogError("找不到動畫：" + clipName);
-        return 0f;
-    }
+    // float GetAnimationClipLength(string clipName)
+    // {
+    //     foreach (AnimationClip clip in potAnimator.runtimeAnimatorController.animationClips)
+    //     {
+    //         if (clip.name == clipName)
+    //         {
+    //             Debug.LogError(clipName + " Clip 的影片長度 : " + clip.length);
+    //             return clip.length;
+    //         }
+    //     }
+    //     Debug.LogError("找不到動畫：" + clipName);
+    //     return 0f;
+    // }
 
-    IEnumerator SetStepAnimation(int currentStep = 0, float WaitForSeconds = 0.0f)
-    {
-        yield return new WaitForSeconds(WaitForSeconds);
-        if (currentStep >= steps.Count)
-        {
-            GoToFinalStep();
-            yield break;
-        }
+    // IEnumerator SetStepAnimation(int currentStep = 0, float WaitForSeconds = 0.0f)
+    // {
+    //     yield return new WaitForSeconds(WaitForSeconds);
+    //     if (currentStep >= GameManager.Instance.CurrentCookBookInfo.steps.Count)
+    //     {
+    //         GoToFinalStep();
+    //         yield break;
+    //     }
 
-        foodSpriteList[currentStep - 1].SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+    //     // foodSpriteList[currentStep - 1].SetActive(true);
+    //     yield return new WaitForSeconds(0.5f);
 
-        SetStepInfo();
+    //     SetStepInfo();
 
-        if (currentStep == 3)
-        {
-            yield return new WaitForSeconds(0.5f);
-            ShowNextStep();
-        }
-    }
+    //     if (currentStep == 3)
+    //     {
+    //         yield return new WaitForSeconds(0.5f);
+    //         ShowNextStep();
+    //     }
+    // }
 
 
-    float PlayAnimation(string animationName)
-    {
-        potAnimator.Play(animationName, -1, 0); // 立即播放動畫，從頭開始
-        float aniLength = GetAnimationClipLength(animationName);
-        return aniLength;
-        // AnimatorStateInfo stateInfo = potAnimator.GetCurrentAnimatorStateInfo(0);
-        // Debug.LogError(stateInfo.length);
-        // return stateInfo.length;
-    }
+    // float PlayAnimation(string animationName)
+    // {
+    //     potAnimator.Play(animationName, -1, 0); // 立即播放動畫，從頭開始
+    //     float aniLength = GetAnimationClipLength(animationName);
+    //     return aniLength;
+
+
+    //     // AnimatorStateInfo stateInfo = potAnimator.GetCurrentAnimatorStateInfo(0);
+    //     // Debug.LogError(stateInfo.length);
+    //     // return stateInfo.length;
+    // }
 
     public void GoToFinalStep()
     {
@@ -312,6 +329,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         // PopupPanel.Instance.goodJobPanel()
         PopupPanel.Instance.PlayGoodJob(() =>
            {
+               finishImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
                finishPanel.SetActive(true);
                foreach (Image star in starImages)
                {
@@ -396,11 +414,57 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public void OnTriggerFoodItem(string foodName)
     {
         Debug.LogWarning(foodName);
-        if (steps[currentStep].Contains(foodName) == true)
+        if (GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep].Contains(foodName) == true)
         {
             Debug.LogWarning("Step Contains Food :" + foodName);
             ShowNextStep();
             AudioManager.Instance.PlayAudioOnce(4);
         }
+        else
+        {
+            Debug.LogWarning("Step :" + currentStep + "沒有此步驟 :" + foodName + " [ " + GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep] + "]");
+        }
     }
+
+    public bool CheckStep()
+    {
+        return false;
+    }
+
+    #region 特效部分
+    public CanvasGroup fire;
+    public ParticleSystem smoke;
+
+    public void ShowFire()
+    {
+        fire.alpha = 0.0f;
+        fire.DOFade(1, 0.5f);
+    }
+    public void HideFire()
+    {
+        fire.alpha = 1.0f;
+        fire.DOFade(0, 0.5f);
+    }
+
+    public void ShowSmoke()
+    {
+        if (smoke != null)
+        {
+            smoke.gameObject.SetActive(true);
+            var emission = smoke.emission;//.enabled = false;
+            emission.enabled = true;
+        }
+    }
+
+    public void HideSmoke()
+    {
+        if (smoke != null)
+        {
+            smoke.gameObject.SetActive(true);
+            var emission = smoke.emission;//.enabled = false;
+            emission.enabled = false;
+        }
+    }
+
+    #endregion
 }

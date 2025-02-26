@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cook_pic_smallfire512x256_0: -6882235076661024060
+      cook_pic_smallfire512x256_1: 3986371701626647216
+      cook_pic_smallfire512x256_2: 6201924743189690557
+      cook_pic_smallfire512x256_3: -8019142584571601723
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

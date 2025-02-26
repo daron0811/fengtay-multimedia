@@ -65,6 +65,11 @@ public class DataManager : MonoSingleton<DataManager>
                 }
                 cookBookInfo.steps = new List<string>();
                 cookBookInfo.steps.AddRange(cookBookInfo.step.Split('\n'));
+                cookBookInfo.triggerSteps = new List<string>();
+                if (string.IsNullOrEmpty(cookBookInfo.triggerStep) == false)
+                {
+                    cookBookInfo.triggerSteps.AddRange(cookBookInfo.triggerStep.Split('\n'));
+                }
             }
         }
 
@@ -263,7 +268,9 @@ public class CookBookInfo
     public string food3; //{ get; set; }
     public string food4; //{ get; set; }
     public string step;
+    public string triggerStep;
     public string otherfood1;
     public string otherfood2;
     public List<string> steps;
+    public List<string> triggerSteps;
 }
