@@ -97,6 +97,31 @@ public class PopupPanel : MonoSingleton<PopupPanel>
         onGoPanel = null;
     }
 
+    public void SetCutScenBG(int season)
+    {
+        Material targetMaterial = cutScenePanel.GetComponent<RawImage>().material;
+
+        Color seasonColor = Color.white;
+
+        switch (season)
+        {
+            case 1:
+                seasonColor = new Color32(233, 183, 173, 255);
+                break;
+            case 2:
+                seasonColor = new Color32(147, 192, 130, 255);
+                break;
+            case 3:
+                seasonColor = new Color32(238, 208, 130, 255);
+                break;
+            case 4:
+                seasonColor = new Color32(174, 158, 147, 255);
+                break;
+        }
+
+        targetMaterial.SetColor("_Color", seasonColor);
+    }
+
     public void PlayCutScene(Action action)
     {
         AudioManager.Instance.PlayAudioOnce(9);

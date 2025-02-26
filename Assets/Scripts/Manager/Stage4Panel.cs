@@ -21,6 +21,8 @@ public class Stage4Panel : MonoBehaviour
     public TextMeshProUGUI cookbookNameText;
     public CountdownTimer detailPanelTimer;
 
+    public Image cookbookDetailImage; //TODO:要用最後狀態的圖
+
     public TextMeshProUGUI localText;
     public TextMeshProUGUI foodText;
     public TextMeshProUGUI seasonText;
@@ -57,8 +59,6 @@ public class Stage4Panel : MonoBehaviour
 
     public Image seasonImage;
     public List<Sprite> seasonSprites;
-
-    public Image cookbookImage; //圖示
 
     public Transform cookbookItem;
 
@@ -222,6 +222,7 @@ public class Stage4Panel : MonoBehaviour
         SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
         SetOtherFoodItems(GameManager.Instance.CurrentCookBookIndex);
         cookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
+        cookbookDetailImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
         finalCookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
         finalCookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
     }
