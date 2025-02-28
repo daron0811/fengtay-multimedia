@@ -49,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -119,10 +119,10 @@ TextureImporter:
       name: "\u79CB-\u9752\u6728\u74DC\u6587\u65E6\u6C99\u5F8B-\u652A\u62CC\u7528\u7B77\u5B50_0"
       rect:
         serializedVersion: 2
-        x: 129
-        y: 116
-        width: 265
-        height: 356
+        x: 124
+        y: 101
+        width: 311
+        height: 382
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,28 +133,6 @@ TextureImporter:
       bones: []
       spriteID: d20987566b661a4c0800000000000000
       internalID: -4278025237452779475
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\u79CB-\u9752\u6728\u74DC\u6587\u65E6\u6C99\u5F8B-\u652A\u62CC\u7528\u7B77\u5B50_1"
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 104
-        width: 293
-        height: 334
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cf95d3b14500ff020800000000000000
-      internalID: 2377619489509169660
       vertices: []
       indices: 
       edges: []

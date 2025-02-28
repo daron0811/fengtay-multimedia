@@ -213,6 +213,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
         cookbookStepText.DOFade(1.0f, 0.3f);
         cookbookStepText.rectTransform.DOLocalMove(new Vector3(26.0f, -40.0f, 0.0f), 1.0f);
+        if (GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep].Contains("tap"))
+        {
+            ShowNextStep();
+        }
     }
 
     //執行下一步
