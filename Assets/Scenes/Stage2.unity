@@ -840,17 +840,17 @@ RectTransform:
   m_Children:
   - {fileID: 1044107673}
   - {fileID: 1171332963}
-  - {fileID: 1905905067}
   - {fileID: 76088465}
+  - {fileID: 1905905067}
   - {fileID: 865740153}
   - {fileID: 1343107521}
   - {fileID: 1776760352}
   - {fileID: 1148595044}
-  m_Father: {fileID: 1923352884}
+  m_Father: {fileID: 207182104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 433, y: -209.70789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &24162154
@@ -867,9 +867,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepObjs:
   - {fileID: 1171332962}
+  - {fileID: 76088464}
   - {fileID: 1905905066}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 865740152}
   - {fileID: 1343107520}
   animator: {fileID: 1776760354}
   currentIndex: 0
@@ -2598,7 +2598,7 @@ GameObject:
   - component: {fileID: 76088465}
   - component: {fileID: 76088466}
   m_Layer: 5
-  m_Name: Step3
+  m_Name: Step2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6343,6 +6343,8 @@ RectTransform:
   - {fileID: 1450486198}
   - {fileID: 1199039403}
   - {fileID: 1238125812}
+  - {fileID: 340594497}
+  - {fileID: 24162153}
   m_Father: {fileID: 367852769}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -14544,11 +14546,11 @@ RectTransform:
   - {fileID: 187612022}
   - {fileID: 72242630}
   - {fileID: 449185430}
-  m_Father: {fileID: 1923352884}
+  m_Father: {fileID: 207182104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 433, y: -209.70789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &340594498
@@ -22684,7 +22686,7 @@ MonoBehaviour:
   goSprite: {fileID: 21300000, guid: 43e967e5e22c4224ba84d1eb7f2fafb1, type: 3}
   foodSprites: []
   dragTarget: {fileID: 207182104}
-  targetCookBookStep: {fileID: 1238125813}
+  targetCookBookStep: {fileID: 24162154}
   finishPanel: {fileID: 105439345}
   finishBtn: {fileID: 1353053087}
   starEffect: {fileID: 423770280}
@@ -47497,7 +47499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1238125812
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49995,7 +49997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1343107521
 RectTransform:
   m_ObjectHideFlags: 0
@@ -71337,7 +71339,7 @@ GameObject:
   - component: {fileID: 1905905067}
   - component: {fileID: 1905905069}
   m_Layer: 5
-  m_Name: Step2
+  m_Name: Step3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71787,8 +71789,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 24162153}
-  - {fileID: 340594497}
   - {fileID: 1957088172}
   - {fileID: 599627506}
   - {fileID: 1907600062}
@@ -80031,7 +80031,7 @@ PrefabInstance:
       objectReference: {fileID: 886251988}
     - target: {fileID: 5499317050372684498, guid: 2298e1f58f989414582b9e9cfb60a5da, type: 3}
       propertyPath: m_Name
-      value: "\u6771\u52E2\u9109-\u5F69\u8272\u80E1\u863F\u8514"
+      value: "\u6771\u52E2\u9109-\u4E94\u5F69\u80E1\u863F\u8514"
       objectReference: {fileID: 0}
     - target: {fileID: 7895994895423296595, guid: 2298e1f58f989414582b9e9cfb60a5da, type: 3}
       propertyPath: m_Pivot.x
