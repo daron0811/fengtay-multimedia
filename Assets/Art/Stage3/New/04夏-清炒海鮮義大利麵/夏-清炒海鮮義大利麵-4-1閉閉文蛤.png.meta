@@ -125,37 +125,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u590F-\u6E05\u7092\u6D77\u9BAE\u7FA9\u5927\u5229\u9EB5-4-1\u9589\u9589\u6587\u86E4_0"
-      rect:
-        serializedVersion: 2
-        x: 258
-        y: 220
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fb7fda5307552fd70800000000000000
-      internalID: 9075410139530262463
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: "\u590F-\u6E05\u7092\u6D77\u9BAE\u7FA9\u5927\u5229\u9EB5-4-1\u9589\u9589\u6587\u86E4_1"
       rect:
         serializedVersion: 2
         x: 261
         y: 189
-        width: 64
+        width: 59
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -174,10 +152,10 @@ TextureImporter:
         serializedVersion: 2
         x: 129
         y: 139
-        width: 67
+        width: 61
         height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -191,37 +169,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u590F-\u6E05\u7092\u6D77\u9BAE\u7FA9\u5927\u5229\u9EB5-4-1\u9589\u9589\u6587\u86E4_3"
-      rect:
-        serializedVersion: 2
-        x: 252
-        y: 108
-        width: 7
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d4a15aae2e5ab8550800000000000000
-      internalID: 6164202909004536397
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: "\u590F-\u6E05\u7092\u6D77\u9BAE\u7FA9\u5927\u5229\u9EB5-4-1\u9589\u9589\u6587\u86E4_4"
       rect:
         serializedVersion: 2
         x: 255
         y: 77
-        width: 64
+        width: 61
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -238,7 +194,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 533e3191294655c4e8715d060c56887f
     internalID: 0
     vertices: []
     indices: 
