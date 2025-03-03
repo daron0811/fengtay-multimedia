@@ -54,7 +54,7 @@ Material:
     - _UseUIAlphaClip: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.5764706, g: 0.7529412, b: 0.50980395, a: 1}
+    - _Color: {r: 0.93333334, g: 0.8156863, b: 0.50980395, a: 1}
     - _Offset: {r: 0.3, g: 0.3, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _Tiling: {r: 5, g: 5, b: 0, a: 0}
