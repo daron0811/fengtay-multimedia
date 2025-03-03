@@ -202,6 +202,18 @@ public class IntroPanel : MonoBehaviour
                 GameManager.Instance.CurrentCookBookIndex = 6; // 目前預設是西瓜
                 SenserStatus();
             }
+            if (Input.GetKeyUp(KeyCode.Alpha8))
+            {
+                isDotRunning = false;
+                AudioManager.Instance.PlayAudioOnce(5);
+                readyScanCookbook = false;
+                readyStartGame = true;
+                scanPanel.SetActive(false);
+                resultPanel.SetActive(true);
+
+                GameManager.Instance.CurrentCookBookIndex = 7; // 目前預設是西瓜
+                SenserStatus();
+            }
         }
     }
 
