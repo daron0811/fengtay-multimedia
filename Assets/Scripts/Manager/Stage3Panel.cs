@@ -211,11 +211,19 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     public void SetStepInfo()
     {
+        if (currentStep >= GameManager.Instance.CurrentCookBookInfo.steps.Count)
+        {
+            GoToFinalStep();
+            return;
+        }
         Debug.LogError("CurrentStep : " + currentStep + "\n" + GameManager.Instance.CurrentCookBookInfo.steps[currentStep] + "\n" + GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep]);
         cookbookStepText.color = new Color(1, 1, 1, 0);
         cookbookStepText.rectTransform.anchoredPosition = new Vector2(26.0f, -60.0f);
         cookbookStepText.text = GameManager.Instance.CurrentCookBookInfo.steps[currentStep];
-        stepTitleImage.sprite = stepTitleSprites[currentStep];
+        if (currentStep < stepTitleSprites.Count)
+        {
+            stepTitleImage.sprite = stepTitleSprites[currentStep];
+        }
 
         cookbookStepText.DOFade(1.0f, 0.3f);
         cookbookStepText.rectTransform.DOLocalMove(new Vector3(26.0f, -40.0f, 0.0f), 1.0f);
@@ -287,6 +295,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         else
         {
             currentStep++;
+            currentStep = Mathf.Clamp(currentStep, 0, GameManager.Instance.CurrentCookBookInfo.steps.Count);
             //如果有觸發成功，播動畫
             targetCookBookStep.PlayNextStep(currentStep);
 
