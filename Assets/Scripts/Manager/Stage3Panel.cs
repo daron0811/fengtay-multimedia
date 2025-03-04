@@ -39,6 +39,8 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public List<PickItemToBucket> foodSprites;
     public RectTransform dragTarget;
 
+    private UIAnimationController foodAnimCtrl;
+
     // [Header("食物演出")]
     // public List<GameObject> foodSpriteList;
     // public Animator potAnimator;
@@ -72,6 +74,9 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         foodItems = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
         foodSprites = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<PickItemToBucket>().ToList();
 
+        foodAnimCtrl = dragTarget.GetComponent<UIAnimationController>();
+        foodAnimCtrl.enabled = false;
+
         finishBtn.onClick.AddListener(() =>
         {
             UIManager.Instance.SetState(UIManager.UIState.Stage_4);
@@ -104,7 +109,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         btnImage.sprite = normalSprite;
         fire.alpha = 0.0f;
         HideSmoke();
-
+        currentStep = 0;
         //TODO : 改由一開始載入當時食譜的CookbookStepItem
 
         // foreach (var item in foodSpriteList)
@@ -206,6 +211,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     public void SetStepInfo()
     {
+        Debug.LogError("CurrentStep : " + currentStep + "\n" + GameManager.Instance.CurrentCookBookInfo.steps[currentStep] + "\n" + GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep]);
         cookbookStepText.color = new Color(1, 1, 1, 0);
         cookbookStepText.rectTransform.anchoredPosition = new Vector2(26.0f, -60.0f);
         cookbookStepText.text = GameManager.Instance.CurrentCookBookInfo.steps[currentStep];
@@ -213,9 +219,34 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
         cookbookStepText.DOFade(1.0f, 0.3f);
         cookbookStepText.rectTransform.DOLocalMove(new Vector3(26.0f, -40.0f, 0.0f), 1.0f);
-        if (GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep].Contains("tap"))
+
+
+        //如果下一個步驟是要持續滑動
+        if (GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep].Contains("swipe"))
+        {
+            //
+            Debug.LogWarning("!!!SetSwipeStep");
+            SetSwipeStep();
+        }
+        else if (GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep].Contains("null"))
         {
             ShowNextStep();
+        }
+    }
+
+    public void SetSwipeStep()
+    {
+        if (foodAnimCtrl != null)
+        {
+            currentStep++;
+            foodAnimCtrl.animator = targetCookBookStep.animator;
+            foodAnimCtrl.animationName = "Food_0" + currentStep;
+            foodAnimCtrl.enabled = true;
+            foodAnimCtrl.onAnimationEnd = () =>
+            {
+                foodAnimCtrl.enabled = false;
+                SetStepInfo();
+            };
         }
     }
 

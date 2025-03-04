@@ -56,7 +56,11 @@ public class CookBookStepItem : MonoBehaviour
     {
         Debug.LogError(currentStep + " : " + GameManager.Instance.CurrentCookBookInfo.steps.Count);
         yield return new WaitForSeconds(WaitForSeconds);
-        stepObjs[currentStep - 1].SetActive(true);
+        if ((currentStep - 1) < stepObjs.Count)
+        {
+            stepObjs[currentStep - 1].SetActive(true);
+        }
+
         if (currentStep >= GameManager.Instance.CurrentCookBookInfo.steps.Count)
         {
             Stage3Panel.Instance.GoToFinalStep();

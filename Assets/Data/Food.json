@@ -5,7 +5,7 @@
 		"locate": "斗六市",
 		"season": "3",
 		"season_text": "9-10月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "低卡高維生素Ｃ，促進膠原蛋白的形成，維持青春美麗好狀態。"
 	},
 	{
 		"id": "1",
@@ -13,7 +13,7 @@
 		"locate": "斗南鎮",
 		"season": "14",
 		"season_text": "2-3月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "一顆只有109大卡，低熱量、0脂肪、0膽固醇，含有抗性澱粉及比香蕉更豐富的鉀。"
 	},
 	{
 		"id": "2",
@@ -21,7 +21,7 @@
 		"locate": "林內鄉",
 		"season": "23",
 		"season_text": "6-11月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "含豐富維生素C抗氧化， 木瓜酵素幫助消化為健康加分！"
 	},
 	{
 		"id": "3",
@@ -29,7 +29,7 @@
 		"locate": "古坑鄉",
 		"season": "34",
 		"season_text": "10-12月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "含咖啡因支援精神活力，多酚促進新陳代謝增強運動表現。"
 	},
 	{
 		"id": "4",
@@ -37,7 +37,7 @@
 		"locate": "大埤鄉",
 		"season": "4",
 		"season_text": "1-2月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "天然發酵風味濃郁口感酸脆，含有豐富膳食纖維及益生菌，改變菌叢生態。"
 	},
 	{
 		"id": "5",
@@ -45,7 +45,7 @@
 		"locate": "莿桐鄉",
 		"season": "1",
 		"season_text": "3-4月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "豐富大蒜素維持良好精氣神，增強體力，讓人活力充沛。"
 	},
 	{
 		"id": "6",
@@ -53,7 +53,7 @@
 		"locate": "虎尾鎮",
 		"season": "134",
 		"season_text": "11-3月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "水分充足口感佳的甘蔗含有天然的糖及礦物質鉀，入菜取代精製糖更健康。"
 	},
 	{
 		"id": "7",
@@ -61,7 +61,7 @@
 		"locate": "西螺鎮",
 		"season": "23",
 		"season_text": "6月、11月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "白米溫和好消化；糙米高纖增加飽足感、促進腸道蠕動維持菌叢生態。"
 	},
 	{
 		"id": "8",
@@ -69,7 +69,7 @@
 		"locate": "土庫鎮",
 		"season": "1",
 		"season_text": "4月",
-		"nutritionTips": "蜂蜜主要成分是果糖和葡萄糖，並有少量維生素B群、C、E等。果糖、葡萄糖屬於單醣類，人類易於吸收，可以快速補充能量"
+		"nutritionTips": "含微量維生素、礦物質及多酚，低GI值適量吃更友善。"
 	},
 	{
 		"id": "9",
@@ -77,7 +77,7 @@
 		"locate": "褒忠鄉",
 		"season": "1234",
 		"season_text": "全年",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "3C族保養基本款！豐富玉米黃素，讓你晶亮健康更舒適！"
 	},
 	{
 		"id": "10",
@@ -85,7 +85,7 @@
 		"locate": "二崙鄉",
 		"season": "1",
 		"season_text": "4-5月",
-		"nutritionTips": "西瓜含豐富水分、維生素C與茄紅素，有助於補水、抗氧化並促進心血管健康，是夏季消暑的理想水果。"
+		"nutritionTips": "含豐富β-胡蘿蔔素，增進黏膜的健康，提升保護力。"
 	},
 	{
 		"id": "11",
@@ -93,7 +93,7 @@
 		"locate": "崙背鄉",
 		"season": "4",
 		"season_text": "12-3月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "1ml就有1mg的鈣，維持骨骼牙齒健康及神經感應性，幫助入睡。"
 	},
 	{
 		"id": "12",
@@ -101,7 +101,7 @@
 		"locate": "麥寮鄉",
 		"season": "1234",
 		"season_text": "全年",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "豐富維生素B1穩定神經系統的正常功能，好入睡好精神！"
 	},
 	{
 		"id": "13",
@@ -109,7 +109,7 @@
 		"locate": "臺西鄉",
 		"season": "2",
 		"season_text": "5-8月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "含豐富鐵質及維生素B12，有助於紅血球的形成，輕鬆打造活力好氣色。"
 	},
 	{
 		"id": "14",
@@ -117,7 +117,7 @@
 		"locate": "東勢鄉",
 		"season": "1",
 		"season_text": "3月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "含多酚及維生素Ａ，有助於維持在暗處的視覺。"
 	},
 	{
 		"id": "15",
@@ -125,7 +125,7 @@
 		"locate": "北港鎮",
 		"season": "4",
 		"season_text": "12-1月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "含有豐富的單元不飽和脂肪酸及維生素E，幫助抗氧化。"
 	},
 	{
 		"id": "16",
@@ -133,7 +133,7 @@
 		"locate": "元長鄉",
 		"season": "23",
 		"season_text": "6-12月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "豐富維生素E減少自由基的產生，增進皮膚與血球健康。"
 	},
 	{
 		"id": "17",
@@ -141,7 +141,7 @@
 		"locate": "四湖鄉",
 		"season": "14",
 		"season_text": "12-3月",
-		"nutritionTips": "小番茄富含維生素C、茄紅素與膳食纖維，有助於抗氧化、有助於維持皮膚健康與延緩老化，增強免疫力和促進消化，是健康低熱量的營養水果。"
+		"nutritionTips": "含有豐富茄紅素及維生素C，19顆小番茄就能滿足100%一日建議量。"
 	},
 	{
 		"id": "18",
@@ -149,7 +149,7 @@
 		"locate": "口湖鄉",
 		"season": "23",
 		"season_text": "5-11月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "好消化的優質蛋白質提供滿滿營養，幫助肌肉生長。"
 	},
 	{
 		"id": "19",
@@ -157,7 +157,7 @@
 		"locate": "水林鄉",
 		"season": "134",
 		"season_text": "10-4月",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": "營養密度高！豐富膳食纖維高飽足，鉀幫助身體好代謝，鈣維持骨骼牙齒健康！"
 	},
 	{
 		"id": "20",
@@ -165,7 +165,7 @@
 		"locate": "共用",
 		"season": "0",
 		"season_text": "",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": ""
 	},
 	{
 		"id": "21",
@@ -173,7 +173,7 @@
 		"locate": "共用",
 		"season": "0",
 		"season_text": "",
-		"nutritionTips": "填你想填的 :D"
+		"nutritionTips": ""
 	},
 	{
 		"id": "22",
