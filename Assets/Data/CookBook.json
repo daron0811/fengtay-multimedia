@@ -10,9 +10,9 @@
 		"food4": "",
 		"otherfood1": "起司",
 		"otherfood2": "橄欖油",
-		"step": "<u><color=#6d5f50>西瓜</color></u> 去皮，切成小方塊後放入大碗中
-<u><color=#6d5f50>小番茄</color></u>切半，放入大碗中。
-淋上<u><color=#6d5f50>蜂蜜</color></u>、<u><color=#6d5f50>橄欖油</color></u>及<u><color=#6d5f50>檸檬汁</color></u>。
+		"step": "<color=#FFFF00>西瓜</color>   去皮，切成小方塊後放入大碗中
+<color=#FFFF00>小番茄</color>   切半，放入大碗中。
+淋上<color=#FFFF00>蜂蜜</color>   、<color=#FFFF00>橄欖油</color>   及<color=#FFFF00>檸檬汁</color>  。
 輕輕攪拌後，放上起司及薄荷葉。
 輕輕攪拌後，放上起司及薄荷葉。","triggerStep": "西瓜
 小番茄
@@ -31,10 +31,11 @@ null"
 		"food4": "玉米",
 		"otherfood1": "蒜頭",
 		"otherfood2": "小番茄",
-		"step": "鍋中放入橄欖油，加入豬肉拌炒。
-豬肉半熟時，依序放入馬鈴薯、胡蘿蔔、玉米等食材一起拌炒。
-豬肉半熟時，依序放入馬鈴薯、胡蘿蔔、玉米等食材一起拌炒。
-豬肉半熟時，依序放入馬鈴薯、胡蘿蔔、玉米等食材一起拌炒。加入水燉煮20分鐘。
+		"step": "鍋中放入橄欖油，加入<color=#FFFF00>豬肉</color>  拌炒。
+豬肉半熟時，依序放入<color=#FFFF00>馬鈴薯</color>  、<color=#FFFF00>胡蘿蔔</color>  、<color=#FFFF00>玉米</color>  等食材一起拌炒。
+豬肉半熟時，依序放入<color=#FFFF00>馬鈴薯</color>  、<color=#FFFF00>胡蘿蔔</color>  、<color=#FFFF00>玉米</color>  等食材一起拌炒。
+豬肉半熟時，依序放入<color=#FFFF00>馬鈴薯</color>  、<color=#FFFF00>胡蘿蔔</color>  、<color=#FFFF00>玉米</color>  等食材一起拌炒。
+加入水燉煮20分鐘。
 放入鹽、黑胡椒及蔥花。","triggerStep": "豬
 馬鈴薯
 五彩胡蘿蔔
@@ -52,10 +53,10 @@ tap"
 		"food4": "豬",
 		"otherfood1": "薑",
 		"otherfood2": "蔥",
-		"step": "將米洗淨加水煮成白粥。
-加入豬絞肉煮滾。
-依序放入鯛魚片、文蛤。
-依序放入鯛魚片、文蛤。
+		"step": "將米洗淨加<color=#FFFF00>水</color> 煮成白粥。
+加入<color=#FFFF00>豬絞肉</color> 煮滾。
+依序放入<color=#FFFF00>台灣鯛</color> 、文蛤</color> 。
+依序放入<color=#FFFF00>台灣鯛</color> 、文蛤</color> 。
 最後放入薑絲及蔥花，並持續攪拌以避免粘鍋。","triggerStep": "米
 豬
 台灣鯛
@@ -74,11 +75,11 @@ tap"
 		"otherfood1": "義大利麵",
 		"otherfood2": "橄欖油",
 		"step": "準備一鍋沸水，煮滾後放入義大利麵，煮好取出備用。
-炒鍋中放入橄欖油，放入鯛魚片煎熟取出備用。
-放入蒜頭、辣椒炒出香氣，並放入小番茄炒軟。
-放入蒜頭、辣椒炒出香氣，並放入小番茄炒軟。
-加入文蛤翻炒，放入白酒煮至文蛤開取出備用。
-將煮好的麵條放入炒鍋中，並加入鯛魚片、文蛤，拌勻後關火即完成。","triggerStep": "null
+炒鍋中放入橄欖油，放入<color=#FFFF00>台灣鯛</color> 煎熟取出備用。
+放入<color=#FFFF00>蒜頭</color> 、辣椒炒出香氣，並放入<color=#FFFF00>小番茄</color> 炒軟。
+放入<color=#FFFF00>蒜頭</color> 、辣椒炒出香氣，並放入<color=#FFFF00>小番茄</color> 炒軟。
+加入<color=#FFFF00>文蛤</color> 翻炒，放入白酒煮至文蛤開取出備用。
+將煮好的麵條放入炒鍋中，並加入台灣鯛、文蛤，拌勻後關火即完成。","triggerStep": "null
 台灣鯛
 蒜頭
 小番茄
@@ -96,17 +97,17 @@ null"
 		"food4": "小番茄",
 		"otherfood1": "蒜頭",
 		"otherfood2": "香菜",
-		"step": "加入去皮刨絲的青木瓜與洗淨的蝦米。
-依序放入文旦、花生米、小番茄等其他所有食材。
-依序放入文旦、花生米、小番茄等其他所有食材。
-依序放入文旦、花生米、小番茄等其他所有食材。
+		"step": "加入去皮刨絲的<color=#FFFF00>青木瓜</color> 與洗淨的蝦米。
+依序放入<color=#FFFF00>文旦</color> 、<color=#FFFF00>花生米</color> 、<color=#FFFF00>小番茄</color> 等其他所有食材。
+依序放入<color=#FFFF00>文旦</color> 、<color=#FFFF00>花生米</color> 、<color=#FFFF00>小番茄</color> 等其他所有食材。
+依序放入<color=#FFFF00>文旦</color> 、<color=#FFFF00>花生米</color> 、<color=#FFFF00>小番茄</color> 等其他所有食材。
 放入魚露、砂糖、檸檬汁等調味料。
 使用筷子攪拌均勻。","triggerStep": "木瓜
 文旦
 花生
 小番茄
-null
-null"
+tap
+tap"
 	},
 	{
 		"id": "5",
@@ -119,13 +120,12 @@ null"
 		"food4": "蒜頭",
 		"otherfood1": "豆腐",
 		"otherfood2": "蔥",
-		"step": "米洗淨瀝乾，加水放入電鍋，蒸煮備用。
-開小火，鍋中放入橄欖油及花椒。
-依序加入豬絞肉及蒜末炒至金黃色後，加入豆瓣醬。
-依序加入豬絞肉及蒜末炒至金黃色後，加入豆瓣醬。
+		"step": "<color=#FFFF00>米</color> 洗淨瀝乾，加水放入電鍋，蒸煮備用。
+開小火，鍋中放入橄欖油。
+依序加入<color=#FFFF00>豬肉</color> 及<color=#FFFF00>蒜頭</color> 炒至金黃色後，加入豆瓣醬。
+依序加入<color=#FFFF00>豬肉</color> 及<color=#FFFF00>蒜頭</color> 炒至金黃色後，加入豆瓣醬。
 放入醬油及水，放入切塊的板豆腐小火燉煮3分鐘、撒上蔥花。
-將麻婆豆腐放至飯上，撒上花生米。","triggerStep": "米
-null
+將麻婆豆腐放至飯上，撒上<color=#FFFF00>花生米</color> 。","triggerStep": "米null
 豬
 蒜頭
 null
@@ -142,10 +142,10 @@ null
 		"food4": "麻油",
 		"otherfood1": "蒜頭",
 		"otherfood2": "醬油",
-		"step": "鍋中放入橄欖油，加入切塊的豬肉拌炒。
-放入切段的甘蔗、酸菜、蒜頭及醬油稍微拌炒。
-放入切段的甘蔗、酸菜、蒜頭及醬油稍微拌炒。
-加入麻油及水，水須蓋過肉。
+		"step": "鍋中放入橄欖油，加入切塊的<color=#FFFF00>豬肉</color> 拌炒。
+放入切段的<color=#FFFF00>甘蔗</color> 、<color=#FFFF00>酸菜</color> 、蒜頭及醬油稍微拌炒。
+放入切段的<color=#FFFF00>甘蔗</color> 、<color=#FFFF00>酸菜</color> 、蒜頭及醬油稍微拌炒。
+加入<color=#FFFF00>麻油</color> 及水，水須蓋過肉。
 蓋上鍋蓋，小火燉煮1小時，起鍋前放入蔥段。","triggerStep": "豬
 甘蔗
 酸菜
@@ -163,14 +163,14 @@ null"
 		"food4": "咖啡",
 		"otherfood1": "洋蔥",
 		"otherfood2": "咖哩",
-		"step": "蕃薯去皮切塊，蒸熟備用。
-鍋中放入橄欖油、切塊的豬肉拌炒。
+		"step": "<color=#FFFF00>蕃薯</color> 去皮切塊，蒸熟備用。
+鍋中放入橄欖油、切塊的<color=#FFFF00>豬肉</color> 拌炒。
 加入切塊的胡蘿蔔、洋蔥、蒸熟的蕃薯。
-依序加入咖啡、鮮乳及瑪莎曼咖哩，小火燉煮50分鐘。
-依序加入咖啡、鮮乳及瑪莎曼咖哩，小火燉煮50分鐘。","triggerStep": "番薯
+依序加入瑪莎曼咖哩、<color=#FFFF00>鮮乳</color> 、<color=#FFFF00>咖啡</color> ，小火燉煮50分鐘。
+依序加入瑪莎曼咖哩、<color=#FFFF00>鮮乳</color> 、<color=#FFFF00>咖啡</color> ，小火燉煮50分鐘。","triggerStep": "番薯
 豬
-null
 鮮乳
-咖啡"
+咖啡
+tap"
 	}
 ]
