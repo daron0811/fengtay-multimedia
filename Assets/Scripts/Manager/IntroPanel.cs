@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -26,14 +27,21 @@ public class IntroPanel : MonoBehaviour
     [Header("描述說明")]
     //說明描述板子
     public GameObject descPanel;
-    public Image descImage;
-    public Sprite descTex01;
-    public Sprite descTex02;
 
-    public GameObject descOBJ1;
-    public GameObject descOBJ2;
+    public GameObject descTitle; //契作說明
+    public GameObject descOBJ1; //遊戲流程說明
+    public GameObject descOBJ2;//選擇食譜
+    public GameObject descOBJ3;//貼上食材小卡
 
-    public Button nextDescTex;
+    public Button descBtn0; // 契作按鈕
+    public Button descBtn1; // 遊戲流程說明按鈕
+    public Button descBtn2; // 選擇食譜按鈕
+    public Button descBtn3; // 貼上食材小卡按鈕
+
+    public GameObject readyToStartPanel;//準備開始
+    public Button gotoStage2; // 開始遊戲按鈕
+
+    public Button nextDescBtn;
 
     [Header("遊戲管理")]
     public GameObject resultPanel;
@@ -64,17 +72,66 @@ public class IntroPanel : MonoBehaviour
             return;
         }
         ResetStatus();
-        nextDescTex.onClick.AddListener(ShowNextDesc);
+        nextDescBtn.onClick.AddListener(ShowNextDesc);
+
+
         startBtn.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayAudioOnce(0);
-            ShowDesc(true, true);
+            // ShowDesc(true, true);
+            readyStartGame = true;
+            descTitle.SetActive(true);
+            descOBJ1.SetActive(false);
+            descPanel.SetActive(true);
         });
+
+
+        //說明按鈕,目前關閉
         descBtn.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayAudioOnce(0);
             ShowDesc();
         });
+
+        //契作下一步按鈕
+        descBtn0.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayAudioOnce(0);
+            titleObj.SetActive(false);
+            descTitle.SetActive(false);
+            descOBJ1.SetActive(true);
+            TweenerFade(descOBJ1.transform);
+        });
+
+        descBtn1.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayAudioOnce(0);
+            descOBJ1.SetActive(false);
+            descOBJ2.SetActive(true);
+            TweenerFade(descOBJ2.transform);
+        });
+
+        descBtn2.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayAudioOnce(0);
+            descOBJ2.SetActive(false);
+            descOBJ3.SetActive(true);
+            TweenerFade(descOBJ3.transform);
+        });
+
+        descBtn3.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayAudioOnce(0);
+
+            descOBJ3.SetActive(false);
+
+            readyScanCookbook = true;
+            scanPanel.SetActive(true);
+            isDotRunning = true;
+            StartCoroutine(AnimateDots());
+        });
+
+
 
         //返回重選
         repickBtn.onClick.AddListener(() =>
@@ -84,15 +141,28 @@ public class IntroPanel : MonoBehaviour
             scanPanel.SetActive(true);
             readyScanCookbook = true;
             readyStartGame = false;
+            isDotRunning = true;
+            StartCoroutine(AnimateDots());
             //todo : 這裡要做arduino掃描
             // ShowDesc(true, true);
         });
 
-
-        startGameBtn.onClick.AddListener(() =>
+        //最後準備頁面前往按鈕
+        gotoStage2.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayAudioOnce(0);
             UIManager.Instance.SetState(UIManager.UIState.Stage_2);
+        });
+
+        //選完食譜的食譜頁
+        startGameBtn.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayAudioOnce(0);
+            resultPanel.SetActive(false);
+            readyToStartPanel.SetActive(true);
+            scanPanel.SetActive(false);
+            TweenerFade(readyToStartPanel.transform);
+            // UIManager.Instance.SetState(UIManager.UIState.Stage_2);
         });
 
         isInit = true;
@@ -104,14 +174,17 @@ public class IntroPanel : MonoBehaviour
         isDotRunning = false;
         resultPanel.SetActive(false);
 
+        titleObj.SetActive(true);
         // descImage.sprite = descTex01;
+        descTitle.SetActive(false);
         descOBJ1.SetActive(false);
         descOBJ2.SetActive(false);
+        descOBJ3.SetActive(false);
+        readyToStartPanel.SetActive(false);
 
         scanPanel.SetActive(false);
         descPanel.SetActive(false);
         AudioManager.Instance.PlayBGM(0);
-
     }
 
     private void Update()
@@ -237,14 +310,16 @@ public class IntroPanel : MonoBehaviour
     void ShowDesc(bool show = true, bool readyToGame = false)
     {
         readyStartGame = readyToGame;
-        // descImage.sprite = descTex01;
 
-        descOBJ1.SetActive(true);
+        descTitle.SetActive(true);
+
+        descOBJ1.SetActive(false);
         TweenerFade(descOBJ1.transform);
         descOBJ2.SetActive(false);
 
         descPanel.SetActive(show);
     }
+
 
     /// <summary>
     /// 顯示下一個說明
