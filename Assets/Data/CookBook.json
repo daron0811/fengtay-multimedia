@@ -12,13 +12,11 @@
 		"otherfood2": "橄欖油",
 		"step": "<color=#FFFF00>西瓜</color>   去皮，切成小方塊後放入大碗中
 <color=#FFFF00>小番茄</color>   切半，放入大碗中。
-淋上<color=#FFFF00>蜂蜜</color>   、<color=#FFFF00>橄欖油</color>   及<color=#FFFF00>檸檬汁</color>  。
-輕輕攪拌後，放上起司及薄荷葉。
+淋上<color=#FFFF00>蜂蜜</color> 橄欖油及檸檬汁 。
 輕輕攪拌後，放上起司及薄荷葉。","triggerStep": "西瓜
 小番茄
 蜂蜜
-swipe
-null"
+swipe"
 	},
 	{
 		"id": "1",
@@ -33,13 +31,10 @@ null"
 		"otherfood2": "小番茄",
 		"step": "鍋中放入橄欖油，加入<color=#FFFF00>豬肉</color>  拌炒。
 豬肉半熟時，依序放入<color=#FFFF00>馬鈴薯</color>  、<color=#FFFF00>胡蘿蔔</color>  、<color=#FFFF00>玉米</color>  等食材一起拌炒。
-豬肉半熟時，依序放入<color=#FFFF00>馬鈴薯</color>  、<color=#FFFF00>胡蘿蔔</color>  、<color=#FFFF00>玉米</color>  等食材一起拌炒。
-豬肉半熟時，依序放入<color=#FFFF00>馬鈴薯</color>  、<color=#FFFF00>胡蘿蔔</color>  、<color=#FFFF00>玉米</color>  等食材一起拌炒。
 加入水燉煮20分鐘。
 放入鹽、黑胡椒及蔥花。","triggerStep": "豬
-馬鈴薯
-五彩胡蘿蔔
-玉米
+馬鈴薯,五彩胡蘿蔔,玉米
+null
 tap"
 	},
 	{

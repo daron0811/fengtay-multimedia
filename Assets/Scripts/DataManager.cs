@@ -69,6 +69,10 @@ public class DataManager : MonoSingleton<DataManager>
                 if (string.IsNullOrEmpty(cookBookInfo.triggerStep) == false)
                 {
                     cookBookInfo.triggerSteps.AddRange(cookBookInfo.triggerStep.Split('\n'));
+                    for (int i = 0; i < cookBookInfo.triggerSteps.Count; i++)
+                    {
+                        cookBookInfo.triggerSteps[i] = cookBookInfo.triggerSteps[i].Replace("\n", "").Replace("\r", ""); //清除多餘的換行符號
+                    }
                 }
             }
         }

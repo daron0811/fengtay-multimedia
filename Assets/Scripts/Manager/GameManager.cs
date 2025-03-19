@@ -35,6 +35,28 @@ public class GameManager : MonoSingleton<GameManager>
     }
     public CookBookInfo CurrentCookBookInfo = null;
 
+    private int score = 5;
+
+    public int Score
+    {
+        get
+        {
+            return score;
+        }
+        set
+        {
+            score = value;
+            if (score < 0)
+            {
+                score = 0;
+            }
+            if (score > 5)
+            {
+                score = 5;
+            }
+        }
+    }
+
     private Dictionary<string, bool> pickedFoods;
     // private List<bool> pickedFoods = new List<bool>();
     private void Awake()
@@ -50,6 +72,7 @@ public class GameManager : MonoSingleton<GameManager>
     public void ResetStatus()
     {
         CurrentCookBookIndex = -1;
+        Score = 5;
     }
 
     //用來判斷這個食材是否有被選擇

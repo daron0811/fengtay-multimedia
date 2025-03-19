@@ -23,9 +23,13 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     public Image cookbookImage;
 
-    public List<string> steps;
+    [Header("食譜步驟")]
     public int currentStep = 0;
+    List<string> stepConditions;
+    private string[] currentIngredients;
+    private int ingredientIndex = 0;
 
+    //標題的步驟數字
     public Image stepTitleImage;
     public List<Sprite> stepTitleSprites;
 
@@ -69,7 +73,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         {
             return;
         }
-        // nextDescBtn.onClick.AddListener(StartGame);
+
         nextDescBtn.onClick.AddListener(ShowNextDesc);
         foodItems = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
         foodSprites = gameObj.transform.Find("Food/PickupFoods").GetComponentsInChildren<PickItemToBucket>().ToList();
@@ -109,7 +113,8 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         btnImage.sprite = normalSprite;
         fire.alpha = 0.0f;
         HideSmoke();
-        currentStep = 0;
+
+
         //TODO : 改由一開始載入當時食譜的CookbookStepItem
 
         // foreach (var item in foodSpriteList)
@@ -120,6 +125,29 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         isFinalStep = false;
     }
 
+    //TODO:可能會有重複進入問題
+    public void PickItemToBucket()
+    {
+        if (foodSprites == null || foodSprites.Count == 0)
+        {
+            return;
+        }
+
+        foreach (PickItemToBucket item in foodSprites)
+        {
+            item.bucket = dragTarget;
+            item.onDragItem += () =>
+            {
+                OnTriggerFoodItem(item.foodImage.sprite.name);
+            };
+        }
+    }
+
+    //當投入物件的時候要做檢查
+    public void OnTriggerFoodItem(string foodName)
+    {
+        CheckCondition(foodName);
+    }
 
     void OnEnable()
     {
@@ -133,6 +161,66 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         }
     }
 
+    //開始遊戲準備前的設定
+    public void StartGame()
+    {
+        SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
+        cookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
+        cookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
+
+        currentStep = 0;
+        stepConditions = GameManager.Instance.CurrentCookBookInfo.triggerSteps;
+        cookbookStepText.text = " 步驟準備中... ";
+        stepTitleImage.sprite = stepTitleSprites[currentStep];
+
+        descObj.SetActive(false);
+        gameObj.SetActive(true);
+
+        countdownTimer.onEnd += () =>
+                {
+                    //TODO:原本是執行下一步，現在改成30秒
+                    isFinalStep = true;
+                    CheckNextStep();
+                };
+
+        PopupPanel.Instance.PlayReadyPanel(() =>
+           {
+               countdownTimer.StartTimer(60.0f);
+               currentStep = 0;
+               SetStepInfo(); // 開始遊戲後設置資訊
+           });
+    }
+
+    #region UI相關 
+
+    //設定櫃子上食材類型
+    public void SetFoodItems(int cookbookIndex)
+    {
+        List<string> foods = DataManager.Instance.GetFoodbyCookbook(cookbookIndex);
+        if (foods == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < foodItems.Count; i++)
+        {
+            if (i < foods.Count)
+            {
+                Sprite sprite = UIManager.Instance.GetFoodSprite(foods[i]);
+                // Debug.LogError(sprite.name + foods[i]);
+                foodItems[i].SetFoodItem(sprite, foods[i], DataManager.Instance.GetFoodInfo(foods[i]).locate);
+                foodItems[i].Show();
+            }
+            else
+            {
+                foodItems[i].Hide();
+            }
+        }
+    }
+
+    #endregion
+
+    #region 前置說明
     private void ShowNextDesc()
     {
         AudioManager.Instance.PlayAudioOnce(1);
@@ -142,7 +230,6 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
         if (currentIndex + 1 < descItem.Count)
         {
-            Debug.LogError(currentIndex + 1);
             descItem[currentIndex + 1].SetActive(true);
             if (currentIndex + 1 == descItem.Count - 1)
             {
@@ -158,109 +245,149 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             StartGame();
         }
     }
+    #endregion
 
-    public void PickItemToBucket()
+
+    //設定步驟資訊
+    public void SetStepInfo()
     {
-        if (foodSprites == null || foodSprites.Count == 0)
+        if (currentStep >= GameManager.Instance.CurrentCookBookInfo.steps.Count)
         {
+            Debug.LogError("已經是最後一步了! 確定要更新資訊?");
             return;
         }
 
-        foreach (PickItemToBucket item in foodSprites)
+        Debug.LogError("SetStepInfo!!!");
+        cookbookStepText.color = new Color(1, 1, 1, 0);
+        cookbookStepText.rectTransform.anchoredPosition = new Vector2(26.0f, -60.0f);
+        cookbookStepText.text = GameManager.Instance.CurrentCookBookInfo.steps[currentStep];
+
+        if (currentStep < stepTitleSprites.Count) // 顯示標題現在第幾步
         {
-            item.bucket = dragTarget;
-            item.onDragItem += () =>
-            {
-                Debug.LogWarning(item.foodImage.sprite.name + " dropped on bucket");
-                // string fruitName = item.name.Split('-')[1];
-                OnTriggerFoodItem(item.foodImage.sprite.name);
-            };
+            stepTitleImage.sprite = stepTitleSprites[currentStep];
         }
-    }
-
-    public void StartGame()
-    {
-        SetFoodItems(GameManager.Instance.CurrentCookBookIndex);
-        cookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
-        cookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
-        // steps = GameManager.Instance.CurrentCookBookInfo.steps;
-
-        // currentStep = 0;
-        cookbookStepText.text = " 步驟準備中... ";//steps[currentStep];
-        stepTitleImage.sprite = stepTitleSprites[currentStep];
-
-        descObj.SetActive(false);
-        gameObj.SetActive(true);
-
-        countdownTimer.onEnd += () =>
-                {
-                    //TODO:原本是執行下一步，現在改成30秒
-                    isFinalStep = true;
-                    ShowNextStep();
-                };
+        cookbookStepText.DOFade(1.0f, 0.3f);
+        cookbookStepText.rectTransform.DOLocalMove(new Vector3(26.0f, -40.0f, 0.0f), 1.0f);
 
 
-        PopupPanel.Instance.PlayReadyPanel(() =>
-           {
-               countdownTimer.StartTimer(60.0f);
-               currentStep = 0;
-               SetStepInfo();
-           });
+        //設定完文字後,檢查目前的狀態
+        CheckCondition(); // 為了檢查狀態，是要播放點擊還是拖拉
+        return;
 
-    }
-
-    public void SetStepInfo()
-    {
         if (currentStep >= GameManager.Instance.CurrentCookBookInfo.steps.Count)
         {
             GoToFinalStep();
             return;
         }
         Debug.LogError("CurrentStep : " + currentStep + "\n" + GameManager.Instance.CurrentCookBookInfo.steps[currentStep] + "\n" + GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep]);
-        cookbookStepText.color = new Color(1, 1, 1, 0);
-        cookbookStepText.rectTransform.anchoredPosition = new Vector2(26.0f, -60.0f);
-        cookbookStepText.text = GameManager.Instance.CurrentCookBookInfo.steps[currentStep];
-        if (currentStep < stepTitleSprites.Count)
+
+        //因為這個階段還沒達成條件
+        if (currentIngredients != null && ingredientIndex < currentIngredients.Length)
         {
-            stepTitleImage.sprite = stepTitleSprites[currentStep];
+            return;
         }
 
-        cookbookStepText.DOFade(1.0f, 0.3f);
-        cookbookStepText.rectTransform.DOLocalMove(new Vector3(26.0f, -40.0f, 0.0f), 1.0f);
 
 
+        CheckCondition(); // 為了檢查狀態
         //如果下一個步驟是要持續滑動
-        if (GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep].Contains("swipe"))
+        // if (GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep].Contains("swipe"))
+        // {
+        //     //
+        //     Debug.LogWarning("!!!SetSwipeStep");
+        //     SetSwipeStep();
+        // }
+        // else if (GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep].Contains("null"))
+        // {
+        //     ShowNextStep();
+        // }
+    }
+
+    //檢查目前的條件是否吻合
+    void CheckCondition(string input = "")
+    {
+        if (stepConditions == null || stepConditions.Count == 0)
         {
-            //
-            Debug.LogWarning("!!!SetSwipeStep");
-            SetSwipeStep();
+            stepConditions = GameManager.Instance.CurrentCookBookInfo.triggerSteps;
         }
-        else if (GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep].Contains("null"))
+
+        if (stepConditions[currentStep].Contains(",")) // 若條件為多個食材，則拆解
         {
-            ShowNextStep();
+            if (currentIngredients == null || currentIngredients.Length == 0)
+            {
+                currentIngredients = stepConditions[currentStep].Split(',');
+                ingredientIndex = 0;
+            }
+
+            if (input == currentIngredients[ingredientIndex])
+            {
+                ingredientIndex++;
+                targetCookBookStep.PlayNextStep(); //播動畫哦！
+            }
+            else
+            {
+                return; // 按錯順序則直接跳出，保持當前進度
+            }
+        }
+        else if (stepConditions[currentStep] == input || stepConditions[currentStep] == "null") // 如果是食材對應
+        {
+            targetCookBookStep.PlayNextStep(); //播動畫哦！
+        }
+        else if (stepConditions[currentStep] == "tap") // 要點擊
+        {
+            // ShowNextStep();
+        }
+        else if (stepConditions[currentStep] == "swipe") // 要滑動
+        {
+            SetSwipeStep();
         }
     }
 
+
+
     public void SetSwipeStep()
     {
+        //這邊有錯 不要用自己的currentstep
+        Debug.LogError("SetSwipeStep");
         if (foodAnimCtrl != null)
         {
             currentStep++;
             foodAnimCtrl.animator = targetCookBookStep.animator;
             foodAnimCtrl.animationName = "Food_0" + currentStep;
             foodAnimCtrl.enabled = true;
+
             foodAnimCtrl.onAnimationEnd = () =>
             {
                 foodAnimCtrl.enabled = false;
-                SetStepInfo();
+                CheckNextStep();
             };
         }
     }
 
     //執行下一步
-    public void ShowNextStep()
+    public void CheckNextStep()
     {
+        ///都從這裡做檢查，是不是要下一步
+        if (currentIngredients != null && currentIngredients.Length != 0 && ingredientIndex < currentIngredients.Length) // 如果還有食材沒放完，則不執行下一步
+        {
+            Debug.LogError("目前還沒完成，請繼續");
+            return;
+        }
+
+        //已經完成
+        if (currentStep >= GameManager.Instance.CurrentCookBookInfo.steps.Count)
+        {
+            Debug.LogError("完成 !");
+            GoToFinalStep();
+            return;
+        }
+        currentStep++; // 進入下一步
+        Debug.LogError("進入下一步 " + currentStep);
+        SetStepInfo();
+        return;
+
+
+
         ////原本每10秒執行下一個步驟的作法
         // if (countdownTimer.IsRunning)
         // {
@@ -285,7 +412,6 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         // stepTitleImage.sprite = stepTitleSprites[currentStep];
         // countdownTimer.StartTimer();
 
-
         ///
         if (isFinalStep)
         {
@@ -297,7 +423,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             currentStep++;
             currentStep = Mathf.Clamp(currentStep, 0, GameManager.Instance.CurrentCookBookInfo.steps.Count);
             //如果有觸發成功，播動畫
-            targetCookBookStep.PlayNextStep(currentStep);
+            targetCookBookStep.PlayNextStep();
 
             // float waitForAnimSeconds = PlayAnimation("Food_0" + currentStep);
 
@@ -369,7 +495,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public void GoToFinalStep()
     {
         countdownTimer.StopTimer();
-        countdownTimer.onEnd -= ShowNextStep;
+        countdownTimer.onEnd -= CheckNextStep;
         // PopupPanel.Instance.goodJobPanel()
         PopupPanel.Instance.PlayGoodJob(() =>
            {
@@ -423,57 +549,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         star.rectTransform.anchoredPosition = new Vector2(newX, newY);
     }
 
-    public void SetFoodItems(int cookbookIndex)
-    {
-        List<string> foods = DataManager.Instance.GetFoodbyCookbook(cookbookIndex);
-        if (foods == null)
-        {
-            return;
-        }
 
-        for (int i = 0; i < foodItems.Count; i++)
-        {
-            if (i < foods.Count)
-            {
-                Sprite sprite = UIManager.Instance.GetFoodSprite(foods[i]);
-                Debug.LogError(sprite.name + foods[i]);
-                foodItems[i].SetFoodItem(sprite, foods[i], DataManager.Instance.GetFoodInfo(foods[i]).locate);
-                foodItems[i].Show();
-            }
-            else
-            {
-                foodItems[i].Hide();
-            }
-        }
-
-        return;
-        Sprite sp = UIManager.Instance.GetFoodSprite("起司");
-        if (sp != null)
-        {
-            foodItems.Last().SetFoodItem(sp, "起司", "起司");
-            foodItems.Last().Show();
-        }
-    }
-
-    public void OnTriggerFoodItem(string foodName)
-    {
-        Debug.LogWarning(foodName);
-        if (GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep].Contains(foodName) == true)
-        {
-            Debug.LogWarning("Step Contains Food :" + foodName);
-            ShowNextStep();
-            AudioManager.Instance.PlayAudioOnce(4);
-        }
-        else
-        {
-            Debug.LogWarning("Step :" + currentStep + "沒有此步驟 :" + foodName + " [ " + GameManager.Instance.CurrentCookBookInfo.triggerSteps[currentStep] + "]");
-        }
-    }
-
-    public bool CheckStep()
-    {
-        return false;
-    }
 
     #region 特效部分
     public CanvasGroup fire;

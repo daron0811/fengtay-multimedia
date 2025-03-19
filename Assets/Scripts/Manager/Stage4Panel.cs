@@ -182,7 +182,6 @@ public class Stage4Panel : MonoBehaviour
         {
             ResetStatus();
         }
-        // ResetStatus();
     }
 
     private void ShowNextDesc()
