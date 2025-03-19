@@ -6937,6 +6937,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   animationName: YourAnimation
   frameInterval: 0.1
+  nowIsTap: 0
+  nowIsDrag: 0
 --- !u!1 &208533027
 GameObject:
   m_ObjectHideFlags: 0
@@ -21656,17 +21658,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494686481}
   m_CullTransparentMesh: 1
---- !u!114 &495846360 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8282511909042313684, guid: cd57beb9b773a634690d4efa3cb5cee0, type: 3}
-  m_PrefabInstance: {fileID: 3810505212110749961}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05bedaf7ed1d35f44b3f6dd7c108a898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &496019686
 GameObject:
   m_ObjectHideFlags: 0
@@ -23890,7 +23881,7 @@ MonoBehaviour:
   goSprite: {fileID: 21300000, guid: 43e967e5e22c4224ba84d1eb7f2fafb1, type: 3}
   foodSprites: []
   dragTarget: {fileID: 207182104}
-  targetCookBookStep: {fileID: 495846360}
+  targetCookBookStep: {fileID: 8104066147542911891}
   finishPanel: {fileID: 105439345}
   finishBtn: {fileID: 1353053087}
   starEffect: {fileID: 423770280}
@@ -85052,7 +85043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6008178172827288106, guid: cd57beb9b773a634690d4efa3cb5cee0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -86593,7 +86584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2574252543191593473, guid: 9d766bf7d1de09548b713363a77c5a89, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4954268001489061806, guid: 9d766bf7d1de09548b713363a77c5a89, type: 3}
       propertyPath: m_Pivot.x
@@ -86688,6 +86679,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d766bf7d1de09548b713363a77c5a89, type: 3}
+--- !u!114 &8104066147542911891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8154313090247671827, guid: 9d766bf7d1de09548b713363a77c5a89, type: 3}
+  m_PrefabInstance: {fileID: 8104066147542911890}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05bedaf7ed1d35f44b3f6dd7c108a898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8901899729611676761
 PrefabInstance:
   m_ObjectHideFlags: 0

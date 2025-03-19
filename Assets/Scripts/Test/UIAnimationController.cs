@@ -2,11 +2,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class UIAnimationController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class UIAnimationController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IPointerClickHandler
 {
     public Animator animator;
     public string animationName = "YourAnimation"; // 設定動畫名稱
     public System.Action onAnimationEnd; // 動畫播放完畢的回調
+
+    public System.Action onTapAnimation; // 動畫播放開始的動畫
     public float frameInterval = 0.1f; // 每一幀的間隔時間 (控制播放速度)
 
     private bool isDragging = false;
@@ -16,12 +18,30 @@ public class UIAnimationController : MonoBehaviour, IPointerDownHandler, IPointe
     private int totalFrames;
     private Coroutine animationCoroutine;
 
+    public bool nowIsTap = false;
+    public bool nowIsDrag = false;
+
     void Start()
     {
         animationLength = GetAnimationLength(animationName);
         totalFrames = Mathf.RoundToInt(animationLength / frameInterval);
+        // ResetStatus();
+    }
 
-        // onAnimationEnd = () => Debug.Log("動畫播放完畢！");
+    public void ResetStatus()
+    {
+        nowIsTap = false;
+        nowIsDrag = false;
+        onAnimationEnd = null;
+        onTapAnimation = null;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (nowIsTap)
+        {
+            onTapAnimation?.Invoke();
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -44,6 +64,14 @@ public class UIAnimationController : MonoBehaviour, IPointerDownHandler, IPointe
         StopAnimation();
     }
 
+    private void PlayAnimation()
+    {
+        if (animator == null) return;
+
+        animator.Play(animationName, 0, 0f); // 直接播放動畫
+        animator.speed = 1; // 確保動畫正常播放
+    }
+
     private void PlayAnimationFrameByFrame()
     {
         if (animationCoroutine != null) return; // 防止重複啟動
@@ -54,7 +82,7 @@ public class UIAnimationController : MonoBehaviour, IPointerDownHandler, IPointe
 
     private IEnumerator PlayFrameByFrame()
     {
-        while (isDragging && currentFrame < totalFrames)
+        while (isDragging && currentFrame < totalFrames && nowIsDrag == true)
         {
             float normalizedTime = (float)currentFrame / totalFrames;
             animator.Play(animationName, 0, normalizedTime);

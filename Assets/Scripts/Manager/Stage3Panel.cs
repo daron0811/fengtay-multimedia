@@ -33,7 +33,6 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public Image stepTitleImage;
     public List<Sprite> stepTitleSprites;
 
-
     public Image btnImage;
     public Sprite normalSprite;
     public Sprite goSprite;
@@ -62,6 +61,9 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     bool isFinalStep = false;
 
     bool isInit = false;
+
+    bool isMulitTrigger = false;
+
     void Start()
     {
         Init();
@@ -123,6 +125,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         // }
 
         isFinalStep = false;
+        isMulitTrigger = false;
     }
 
     //TODO:可能會有重複進入問題
@@ -317,29 +320,50 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             {
                 currentIngredients = stepConditions[currentStep].Split(',');
                 ingredientIndex = 0;
+                isMulitTrigger = true;
             }
 
-            if (input == currentIngredients[ingredientIndex])
+            if (input == currentIngredients[ingredientIndex] || currentIngredients[ingredientIndex] == "null")
             {
                 ingredientIndex++;
                 targetCookBookStep.PlayNextStep(); //播動畫哦！
+            }
+            else if (currentIngredients[ingredientIndex] == "tap") // 要點擊
+            {
+                ingredientIndex++;
+                SetTapStep();
+            }
+            else if (currentIngredients[ingredientIndex] == "swipe") // 要滑動
+            {
+                ingredientIndex++;
+                SetSwipeStep();
             }
             else
             {
                 return; // 按錯順序則直接跳出，保持當前進度
             }
+            return;
         }
         else if (stepConditions[currentStep] == input || stepConditions[currentStep] == "null") // 如果是食材對應
         {
             targetCookBookStep.PlayNextStep(); //播動畫哦！
+            currentIngredients = null;
+            isMulitTrigger = false;
+            ingredientIndex = 0;
         }
         else if (stepConditions[currentStep] == "tap") // 要點擊
         {
-            // ShowNextStep();
+            SetTapStep();
+            currentIngredients = null;
+            isMulitTrigger = false;
+            ingredientIndex = 0;
         }
         else if (stepConditions[currentStep] == "swipe") // 要滑動
         {
             SetSwipeStep();
+            currentIngredients = null;
+            isMulitTrigger = false;
+            ingredientIndex = 0;
         }
     }
 
@@ -351,15 +375,35 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         Debug.LogError("SetSwipeStep");
         if (foodAnimCtrl != null)
         {
-            currentStep++;
             foodAnimCtrl.animator = targetCookBookStep.animator;
-            foodAnimCtrl.animationName = "Food_0" + currentStep;
+            foodAnimCtrl.animationName = "Food_0" + targetCookBookStep.currentIndex;
             foodAnimCtrl.enabled = true;
-
+            foodAnimCtrl.nowIsDrag = true;
             foodAnimCtrl.onAnimationEnd = () =>
             {
-                foodAnimCtrl.enabled = false;
+                targetCookBookStep.currentIndex++;
                 CheckNextStep();
+                foodAnimCtrl.enabled = false;
+                foodAnimCtrl.ResetStatus();
+            };
+        }
+    }
+
+    public void SetTapStep()
+    {
+        //這邊有錯 不要用自己的currentstep
+        Debug.LogError("SetTapStep");
+        if (foodAnimCtrl != null)
+        {
+            // currentStep++;
+            foodAnimCtrl.animator = targetCookBookStep.animator;
+            foodAnimCtrl.enabled = true;
+            foodAnimCtrl.nowIsTap = true;
+            foodAnimCtrl.onTapAnimation = () =>
+            {
+                targetCookBookStep.PlayNextStep(); //播動畫哦！
+                foodAnimCtrl.enabled = false;
+                foodAnimCtrl.ResetStatus();
             };
         }
     }
@@ -370,7 +414,8 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         ///都從這裡做檢查，是不是要下一步
         if (currentIngredients != null && currentIngredients.Length != 0 && ingredientIndex < currentIngredients.Length) // 如果還有食材沒放完，則不執行下一步
         {
-            Debug.LogError("目前還沒完成，請繼續");
+            Debug.LogError("目前還沒完成，請繼續" + currentStep);
+            CheckCondition(); // 因為還沒要更新文字，但還是要繼續檢查狀態！！這邊可能要換成另一個方法
             return;
         }
 
