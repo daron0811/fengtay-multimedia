@@ -11,6 +11,9 @@ using UnityEngine.UI;
 
 public class Stage3Panel : MonoSingleton<Stage3Panel>
 {
+    [Header("食譜物件Prefab")]
+    public List<GameObject> foodPrefabList; // 目前8款
+
     public GameObject descObj;
     public List<GameObject> descItem;
     public GameObject gameObj;
@@ -62,7 +65,9 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     bool isInit = false;
 
-    bool isMulitTrigger = false;
+    bool isMulitTrigger = false; //現在是不是複選項目
+
+    public int pickCountForScore = 0; //計算成績用，依照目前要選的是滿分，有成功選擇+1，如果沒選到就依照這個做扣分依據
 
     void Start()
     {
@@ -114,8 +119,11 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         PickItemToBucket();
         btnImage.sprite = normalSprite;
         fire.alpha = 0.0f;
-        HideSmoke();
 
+        HideSmoke();
+        HideFire();
+        HideSwipeSFX();
+        HideTapSFX();
 
         //TODO : 改由一開始載入當時食譜的CookbookStepItem
 
@@ -171,6 +179,14 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         cookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
         cookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
 
+        //TODO:這邊要先檢查foodAnimCtrl底下是有其他物件
+        GameObject cookbookObj = GameObject.Instantiate(foodPrefabList[GameManager.Instance.CurrentCookBookInfo.id], foodAnimCtrl.transform);
+        targetCookBookStep = cookbookObj.GetComponent<CookBookStepItem>();
+        cookbookObj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        cookbookObj.SetActive(true);
+
+        currentIngredients = null;
+        ingredientIndex = 0;
         currentStep = 0;
         stepConditions = GameManager.Instance.CurrentCookBookInfo.triggerSteps;
         cookbookStepText.text = " 步驟準備中... ";
@@ -183,7 +199,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                 {
                     //TODO:原本是執行下一步，現在改成30秒
                     isFinalStep = true;
-                    CheckNextStep();
+                    GoToFinalStep();
                 };
 
         PopupPanel.Instance.PlayReadyPanel(() =>
@@ -204,7 +220,14 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         {
             return;
         }
-
+        if (foods.Count == 4)
+        {
+            decorateGroup.SetActive(false);
+        }
+        else
+        {
+            decorateGroup.SetActive(true);
+        }
         for (int i = 0; i < foodItems.Count; i++)
         {
             if (i < foods.Count)
@@ -324,7 +347,14 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                 isMulitTrigger = true;
             }
 
-            if (input == currentIngredients[ingredientIndex] || currentIngredients[ingredientIndex] == "null")
+            if (input == currentIngredients[ingredientIndex])
+            {
+                ingredientIndex++;
+                targetCookBookStep.PlayNextStep(); //播動畫哦！
+                //因為食材關係分數要記
+                pickCountForScore++;
+            }
+            else if (currentIngredients[ingredientIndex] == "null")
             {
                 ingredientIndex++;
                 targetCookBookStep.PlayNextStep(); //播動畫哦！
@@ -345,7 +375,14 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             }
             return;
         }
-        else if (stepConditions[currentStep] == input || stepConditions[currentStep] == "null") // 如果是食材對應
+        else if (stepConditions[currentStep] == input) // 如果是食材對應
+        {
+            targetCookBookStep.PlayNextStep(); //播動畫哦！
+            currentIngredients = null;
+            isMulitTrigger = false;
+            ingredientIndex = 0;
+        }
+        else if (stepConditions[currentStep] == "null") // 如果是食材對應
         {
             targetCookBookStep.PlayNextStep(); //播動畫哦！
             currentIngredients = null;
@@ -373,6 +410,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         Debug.LogError("============Start [Swipe]");
         if (foodAnimCtrl != null)
         {
+            ShowSwipeSFX();
             targetCookBookStep.animator.speed = 0;
             foodAnimCtrl.animator = targetCookBookStep.animator;
             foodAnimCtrl.animationName = "Food_0" + targetCookBookStep.currentIndex;
@@ -395,6 +433,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         Debug.LogError("============Start [Tap]");
         if (foodAnimCtrl != null)
         {
+            ShowTapSFX();
             // currentStep++;
             foodAnimCtrl.animator = targetCookBookStep.animator;
             foodAnimCtrl.enabled = true;
@@ -496,53 +535,6 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         }
     }
 
-    // float GetAnimationClipLength(string clipName)
-    // {
-    //     foreach (AnimationClip clip in potAnimator.runtimeAnimatorController.animationClips)
-    //     {
-    //         if (clip.name == clipName)
-    //         {
-    //             Debug.LogError(clipName + " Clip 的影片長度 : " + clip.length);
-    //             return clip.length;
-    //         }
-    //     }
-    //     Debug.LogError("找不到動畫：" + clipName);
-    //     return 0f;
-    // }
-
-    // IEnumerator SetStepAnimation(int currentStep = 0, float WaitForSeconds = 0.0f)
-    // {
-    //     yield return new WaitForSeconds(WaitForSeconds);
-    //     if (currentStep >= GameManager.Instance.CurrentCookBookInfo.steps.Count)
-    //     {
-    //         GoToFinalStep();
-    //         yield break;
-    //     }
-
-    //     // foodSpriteList[currentStep - 1].SetActive(true);
-    //     yield return new WaitForSeconds(0.5f);
-
-    //     SetStepInfo();
-
-    //     if (currentStep == 3)
-    //     {
-    //         yield return new WaitForSeconds(0.5f);
-    //         ShowNextStep();
-    //     }
-    // }
-
-
-    // float PlayAnimation(string animationName)
-    // {
-    //     potAnimator.Play(animationName, -1, 0); // 立即播放動畫，從頭開始
-    //     float aniLength = GetAnimationClipLength(animationName);
-    //     return aniLength;
-
-
-    //     // AnimatorStateInfo stateInfo = potAnimator.GetCurrentAnimatorStateInfo(0);
-    //     // Debug.LogError(stateInfo.length);
-    //     // return stateInfo.length;
-    // }
 
     public void GoToFinalStep()
     {
@@ -558,7 +550,12 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                    star.gameObject.SetActive(true);
                    FlickerStar(star);
                }
-               //    UIManager.Instance.SetState(UIManager.UIState.Stage_4);
+               //計算成績
+               pickCountForScore++;
+               int foodCount = DataManager.Instance.GetFoodbyCookbook(GameManager.Instance.CurrentCookBookIndex).Count;
+               int score = foodCount - pickCountForScore; // 結算
+               GameManager.Instance.Score -= pickCountForScore;
+               Debug.LogError("你的分數:" + GameManager.Instance.Score);
            });
     }
     void OnDisable()
@@ -606,6 +603,12 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     #region 特效部分
     public CanvasGroup fire;
     public ParticleSystem smoke;
+    public ContractInfo contractInfo;
+
+    public GameObject swipeEffect;
+    public GameObject tapEffect;
+
+    public GameObject decorateGroup;
 
     public void ShowFire()
     {
@@ -638,5 +641,29 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         }
     }
 
+    public void ShowControactInfo(int type = 0)
+    {
+        targetCookBookStep.animator.speed = 0;
+        contractInfo.Show(type);
+    }
+    public void ShowSwipeSFX()
+    {
+        swipeEffect.SetActive(true);
+    }
+
+    public void HideSwipeSFX()
+    {
+        swipeEffect.SetActive(false);
+    }
+
+    public void ShowTapSFX()
+    {
+        tapEffect.SetActive(true);
+    }
+
+    public void HideTapSFX()
+    {
+        tapEffect.SetActive(false);
+    }
     #endregion
 }

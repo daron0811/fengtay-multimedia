@@ -39,8 +39,6 @@ public class CookBookStepItem : MonoBehaviour
         StartCoroutine(PlayAnimation(waitForAnimSeconds));
     }
 
-
-
     float GetAnimationLength(string animationName)
     {
         animator.Play(animationName, -1, 0); // 立即播放動畫，從頭開始
@@ -65,6 +63,30 @@ public class CookBookStepItem : MonoBehaviour
     IEnumerator PlayAnimation(float waitTime = 0.0f)
     {
         yield return new WaitForSeconds(waitTime); // 等待這個動畫播放的時間
+
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        string currentAnim = stateInfo.shortNameHash.ToString(); // 取得當前動畫名稱 (避免Idle)
+
+        while (true)
+        {
+            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+            // 如果動畫暫停，則持續等待
+            while (animator.speed == 0)
+            {
+                yield return null; // 等待下一幀
+            }
+
+            // 檢查動畫是否播放完畢 (normalizedTime >= 1 表示動畫已經跑完)
+            if (stateInfo.normalizedTime >= 1f && stateInfo.shortNameHash.ToString() == currentAnim)
+            {
+                break; // 動畫結束，跳出迴圈
+            }
+
+            yield return null; // 每幀檢查
+        }
+
+
         currentIndex++; //準備下一個動畫
 
         //跟Stage3確認下一步，如果已經是最後一步了

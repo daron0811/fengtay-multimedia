@@ -20,4 +20,9 @@ public class AnimEvent : MonoBehaviour
     {
         Stage3Panel.Instance.HideSmoke();
     }
+
+    public void ShowControactInfo(int type = 0)
+    {
+        Stage3Panel.Instance.ShowControactInfo(type);
+    }
 }

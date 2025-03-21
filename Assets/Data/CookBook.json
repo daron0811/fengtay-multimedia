@@ -53,7 +53,7 @@
 		"otherfood1": "義大利麵",
 		"otherfood2": "橄欖油",
 		"step": "準備一鍋沸水，煮滾後放入義大利麵。煮好後取出備用。\n炒鍋中放入橄欖油，放入<color=#FFFF00>台灣鯛</color> 煎熟取出備用。\n放入<color=#FFFF00>蒜頭</color> 、辣椒炒出香氣，並放入<color=#FFFF00>小番茄</color> 炒軟。\n加入<color=#FFFF00>文蛤</color> 翻炒，放入白酒煮至文蛤開取出備用。\n將煮好的麵條放入炒鍋中，並加入台灣鯛、文蛤，拌勻後關火即完成。",
-		"triggerStep": "null,swipe\n台灣鯛\n蒜頭,小番茄\n文蛤\nnull"
+		"triggerStep": "null,tap\n台灣鯛\n蒜頭,小番茄\n文蛤\nnull"
 	},
 	{
 		"id": "4",

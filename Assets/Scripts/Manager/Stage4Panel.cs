@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using System.Collections;
+using Unity.Mathematics;
 
 public class Stage4Panel : MonoBehaviour
 {
@@ -55,7 +56,10 @@ public class Stage4Panel : MonoBehaviour
     public Button gotoEndBtn;
 
     public Image rateImage;
+    public TextMeshProUGUI rateText;
     public List<Sprite> rateSprites;
+
+    public List<string> rateTexts;
 
     public Image seasonImage;
     public List<Sprite> seasonSprites;
@@ -77,7 +81,15 @@ public class Stage4Panel : MonoBehaviour
 
     public List<string> rateCommonText;
 
+    public GameObject contractImage;//契作圖片
     private bool isInit = false;
+
+    public Sprite marksprite;
+    public Sprite unmarksprite;
+
+    public Image sensorImage;
+    public Sprite successSprite;
+    public Sprite failSprite;
     void Start()
     {
         Init();
@@ -154,6 +166,7 @@ public class Stage4Panel : MonoBehaviour
 
         SetCookBookInfo();
 
+        contractImage.SetActive(false);
         scanFood.gameObject.SetActive(false);
         scorePanel.gameObject.SetActive(true);
         finalPanel.gameObject.SetActive(false);
@@ -226,6 +239,7 @@ public class Stage4Panel : MonoBehaviour
         finalCookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
     }
 
+    //設定食材類型
     public void SetFoodItems(int cookbookIndex)
     {
         if (cookbookIndex == -1)
@@ -238,12 +252,19 @@ public class Stage4Panel : MonoBehaviour
             return;
         }
 
+        Dictionary<string, bool> pickedFoods = GameManager.Instance.pickedFoods;
         for (int i = 0; i < foodItems.Count; i++)
         {
             if (i < foods.Count)
             {
+                bool isPicked = true;
+                if (pickedFoods.ContainsKey(foods[i]) == true)
+                {
+                    isPicked = pickedFoods[foods[i]];
+                }
                 Sprite sprite = UIManager.Instance.GetFoodSprite(foods[i]);
-                foodItems[i].SetFoodItem(sprite, foods[i]);
+                foodItems[i].SetFoodItem(sprite, foods[i], "", isPicked);
+                foodItems[i].transform.Find("Background/Checkmark").GetComponent<Image>().sprite = isPicked ? marksprite : unmarksprite;
                 foodItems[i].Show();
             }
             else
@@ -333,6 +354,17 @@ public class Stage4Panel : MonoBehaviour
         AudioManager.Instance.PlayAudioOnce(5);
 
         FoodInfo foodInfo = DataManager.Instance.GetFoodInfo(foodName);
+
+        Dictionary<string, bool> pickedFoods = GameManager.Instance.pickedFoods;
+        if (pickedFoods.ContainsKey(foodName) == true)
+        {
+            sensorImage.sprite = pickedFoods[foodName] ? successSprite : failSprite;
+        }
+        else
+        {
+            sensorImage.sprite = successSprite;
+        }
+
         if (foodInfo == null)
         {
             return;
@@ -341,6 +373,8 @@ public class Stage4Panel : MonoBehaviour
         foodText.text = foodInfo.name;
         seasonText.text = foodInfo.season_text;
         nutritionTips.text = foodInfo.nutritionTips;
+
+        contractImage.SetActive(!string.IsNullOrEmpty(foodInfo.contract));
 
         scanFood.gameObject.SetActive(true);
         scanFood.SetFoodItem(UIManager.Instance.GetFoodSprite(foodInfo.name), foodInfo.name);
@@ -362,13 +396,13 @@ public class Stage4Panel : MonoBehaviour
         SetFinalFoodInfo(GameManager.Instance.CurrentCookBookIndex);
         SetFinalFoodSeason();
 
-        int rate = 5;//GameManager.Instance.GetRate();
+        int rate = GameManager.Instance.Score;
         CookBookInfo cookBookInfo = GameManager.Instance.CurrentCookBookInfo;
         int season = cookBookInfo.season - 1;//GameManager.Instance.GetSeason();
-
-        rateImage.sprite = rateSprites[rate - 1];
+        rate = math.clamp(rate, 0, rateSprites.Count - 1);
+        rateImage.sprite = rateSprites[rate];
         seasonImage.sprite = seasonSprites[season];
-        commonText.text = rateCommonText[rate - 1];
+        commonText.text = rateCommonText[rate];
 
         // cookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookIndex);
     }

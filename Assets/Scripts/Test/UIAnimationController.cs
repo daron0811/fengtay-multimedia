@@ -40,6 +40,7 @@ public class UIAnimationController : MonoBehaviour, IPointerDownHandler, IPointe
     {
         if (nowIsTap)
         {
+            Stage3Panel.Instance.HideTapSFX();
             onTapAnimation?.Invoke();
         }
     }
@@ -54,6 +55,7 @@ public class UIAnimationController : MonoBehaviour, IPointerDownHandler, IPointe
         if (!isPlaying)
         {
             isDragging = true;
+            Stage3Panel.Instance.HideSwipeSFX();
             PlayAnimationFrameByFrame();
         }
     }

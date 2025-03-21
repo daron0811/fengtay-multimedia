@@ -31,6 +31,8 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
 
     public RectTransform buckTransform;
 
+    public int pickCountForScore = 0; //計算成績用，依照目前要選的是滿分，有成功選擇+1，如果沒選到就依照這個做扣分依據
+
     public bool isInit = false;
     void Start()
     {
@@ -55,6 +57,21 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
                 finishPanel.gameObject.SetActive(true);
                 // UIManager.Instance.SetState(UIManager.UIState.Stage_3);
             });
+
+            //Todo : 計算成績
+            foreach (var item in foodItems)
+            {
+                if (item.gameObject.activeSelf == false)
+                {
+                    continue;
+                }
+                if (item.toggle.isOn == false)
+                {
+                    pickCountForScore++;
+                }
+            }
+
+            GameManager.Instance.Score -= pickCountForScore;
         };
 
         finishBtn.onClick.AddListener(() =>
@@ -80,6 +97,7 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
 
     public void ResetStatus()
     {
+        pickCountForScore = 0;
         finishPanel.SetActive(false);
         descObj.SetActive(true);
         foreach (var item in descItem)

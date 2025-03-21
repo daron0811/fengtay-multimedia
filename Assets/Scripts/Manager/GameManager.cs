@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityCommunity.UnitySingleton;
@@ -57,7 +58,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    private Dictionary<string, bool> pickedFoods;
+    public Dictionary<string, bool> pickedFoods;
     // private List<bool> pickedFoods = new List<bool>();
     private void Awake()
     {

@@ -258,6 +258,7 @@ public class FoodInfo
     public string season; //{ get; set; }
     public string season_text; //{ get; set; }
     public string nutritionTips; //{ get; set; }
+    public string contract;//是否契作
 }
 
 [System.Serializable]

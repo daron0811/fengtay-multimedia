@@ -20,6 +20,7 @@ public class AudioManager : MonoSingleton<AudioManager>
     08:倒數計時開始
     09:時間到
     10:顯示結算
+    11:轉場音效
     */
     public List<AudioClip> bgmClips;
 

@@ -124,8 +124,22 @@ public class PopupPanel : MonoSingleton<PopupPanel>
 
     public void PlayCutScene(Action action)
     {
-        AudioManager.Instance.PlayAudioOnce(9);
+        AudioManager.Instance.PlayAudioOnce(11);
         cutScenePanel.SetActive(true);
+        float screenWidth = Screen.width;
+        RectTransform imageRect = cutScenePanel.GetComponent<RectTransform>();
+        // 設定初始位置在畫面外左側
+        imageRect.anchoredPosition = new Vector2(-screenWidth / 2 - imageRect.rect.width, 0);
+
+        // 目標位置（移動到畫面右側並超出）
+        float targetX = screenWidth / 2 + imageRect.rect.width;
+        imageRect.DOAnchorPos(new Vector2(targetX, 0), 2.0f)
+            .SetEase(Ease.Linear) // 設定線性移動
+            .OnComplete(() => Debug.Log("動畫完成")); // 可加入回呼事件
+        onGoCutScene += action;
+        
+        Invoke("StopCutSceneAction", 1.0f);
+        return;
         float duration = 1.0f;
         Material targetMaterial = cutScenePanel.GetComponent<RawImage>().material;
         DOTween.To(() => targetMaterial.GetFloat("_Fade"),
