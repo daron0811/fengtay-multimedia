@@ -257,6 +257,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         if (currentStep >= GameManager.Instance.CurrentCookBookInfo.steps.Count)
         {
             Debug.LogError("已經是最後一步了! 確定要更新資訊?");
+            GoToFinalStep();
             return;
         }
 
@@ -366,15 +367,13 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             ingredientIndex = 0;
         }
     }
-
-
-
     public void SetSwipeStep()
     {
         //這邊有錯 不要用自己的currentstep
-        Debug.LogError("SetSwipeStep");
+        Debug.LogError("============Start [Swipe]");
         if (foodAnimCtrl != null)
         {
+            targetCookBookStep.animator.speed = 0;
             foodAnimCtrl.animator = targetCookBookStep.animator;
             foodAnimCtrl.animationName = "Food_0" + targetCookBookStep.currentIndex;
             foodAnimCtrl.enabled = true;
@@ -385,6 +384,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                 CheckNextStep();
                 foodAnimCtrl.enabled = false;
                 foodAnimCtrl.ResetStatus();
+                targetCookBookStep.animator.speed = 1;
             };
         }
     }
@@ -392,7 +392,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public void SetTapStep()
     {
         //這邊有錯 不要用自己的currentstep
-        Debug.LogError("SetTapStep");
+        Debug.LogError("============Start [Tap]");
         if (foodAnimCtrl != null)
         {
             // currentStep++;
@@ -419,6 +419,13 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             return;
         }
 
+        if (currentIngredients != null && ingredientIndex >= currentIngredients.Length - 1)
+        {
+            Debug.LogError("本次步驟已完成！請繼續" + currentStep);
+            currentIngredients = null;
+            ingredientIndex = 0;
+        }
+
         //已經完成
         if (currentStep >= GameManager.Instance.CurrentCookBookInfo.steps.Count)
         {
@@ -427,7 +434,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             return;
         }
         currentStep++; // 進入下一步
-        Debug.LogError("進入下一步 " + currentStep);
+        Debug.LogError("進入下一步 " + currentStep + " " + GameManager.Instance.CurrentCookBookInfo.triggerStep[currentStep]);
         SetStepInfo();
         return;
 

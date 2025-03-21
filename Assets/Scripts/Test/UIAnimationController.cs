@@ -67,7 +67,6 @@ public class UIAnimationController : MonoBehaviour, IPointerDownHandler, IPointe
     private void PlayAnimation()
     {
         if (animator == null) return;
-
         animator.Play(animationName, 0, 0f); // 直接播放動畫
         animator.speed = 1; // 確保動畫正常播放
     }
