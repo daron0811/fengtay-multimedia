@@ -33,6 +33,10 @@ public class NFCWriter : MonoBehaviour
 
     void OnApplicationQuit()
     {
+        if (serialPort == null)
+        {
+            return;
+        }
         if (serialPort.IsOpen)
         {
             serialPort.Close();

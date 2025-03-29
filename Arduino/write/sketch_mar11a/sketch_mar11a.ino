@@ -3,6 +3,12 @@
 #include <PN532.h>
 #include <NfcAdapter.h>
 
+// PN532	Arduino Uno
+// VCC	5V
+// GND	GND
+// SDA	A4
+// SCL	A5
+
 PN532_I2C pn532_i2c(Wire);
 NfcAdapter nfc(pn532_i2c);
 
