@@ -2,8 +2,17 @@ using UnityEngine;
 using System.IO.Ports;
 using System.Threading;
 using UnityEngine.UI;
+using System;
 
-public class PN532ManagerThreaded : MonoBehaviour
+[Serializable]
+public class ArduinoMessage
+{
+    public int status;    // 狀態碼，例如 0 表示成功
+    public string nfc;    // 偵測到的卡片編號或其他資料
+    public string reader;
+}
+
+public class PN532Manager : MonoBehaviour
 {
     public string portName = "COM3";
     public int baudRate = 115200;
@@ -29,9 +38,8 @@ public class PN532ManagerThreaded : MonoBehaviour
             readThread.Start();
 
             Debug.Log("✅ Serial 執行緒啟動");
-            statusText.text = "✅ Serial Running";
+            if (statusText) statusText.text = "✅ Serial Running";
 
-            // 綁定按鈕事件
             if (stopThreadButton != null)
                 stopThreadButton.onClick.AddListener(StopSerialThread);
         }
@@ -46,7 +54,8 @@ public class PN532ManagerThreaded : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(latestMessage))
         {
-            Debug.Log("📥 " + latestMessage);
+            Debug.Log("📥 接收到原始資料: " + latestMessage);
+            HandleArduinoMessage(latestMessage);
             latestMessage = "";
         }
 
@@ -70,6 +79,35 @@ public class PN532ManagerThreaded : MonoBehaviour
         }
     }
 
+    void HandleArduinoMessage(string message)
+    {
+        try
+        {
+            ArduinoMessage data = JsonUtility.FromJson<ArduinoMessage>(message);
+            Debug.Log($"🔍 狀態碼: {data.status}, 標籤: {data.nfc}, 目前Reader: {data.reader}");
+            OnArduinoCallback(data);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("❌ JSON 解析失敗: " + ex.Message);
+        }
+    }
+
+    void OnArduinoCallback(ArduinoMessage data)
+    {
+        // ✅ 你可以在這裡依照狀態碼做不同邏輯
+        Debug.Log("✅ 處理 Callback 中的資料");
+
+        if (data.status == 202)
+        {
+            Debug.Log("✅ 成功讀取卡片: " + data.nfc);
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ 非成功狀態: " + data.status);
+        }
+    }
+
     void SendCommand(string command)
     {
         if (serialPort != null && serialPort.IsOpen)
@@ -85,7 +123,7 @@ public class PN532ManagerThreaded : MonoBehaviour
 
         Debug.Log("🛑 停止 Serial 執行緒...");
         isRunning = false;
-        Thread.Sleep(100); // 給執行緒時間結束
+        Thread.Sleep(100);
 
         if (readThread != null && readThread.IsAlive)
             readThread.Join();

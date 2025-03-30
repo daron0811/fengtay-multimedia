@@ -11,7 +11,8 @@
 		"otherfood1": "起司",
 		"otherfood2": "橄欖油",
 		"step": "<color=#FFFF00>西瓜</color>   去皮，切成小方塊後放入大碗中\n<color=#FFFF00>小番茄</color>   切半，放入大碗中。\n淋上<color=#FFFF00>蜂蜜</color> 橄欖油及檸檬汁 。\n輕輕攪拌後，放上起司及薄荷葉。",
-		"triggerStep": "西瓜\n小番茄\n蜂蜜\nswipe,null"
+		"triggerStep": "西瓜\n小番茄\n蜂蜜\nswipe,null",
+		"nfc": "0x1d 0xc1 0x2d 0x84 0x08 0x10 0x80"
 	},
 	{
 		"id": "1",
@@ -25,7 +26,8 @@
 		"otherfood1": "蒜頭",
 		"otherfood2": "小番茄",
 		"step": "鍋中放入橄欖油，加入<color=#FFFF00>豬肉</color>  拌炒。\n豬肉半熟時，依序放入<color=#FFFF00>馬鈴薯</color>  、<color=#FFFF00>胡蘿蔔</color>  、<color=#FFFF00>玉米</color>  等食材一起拌炒。\n加入水燉煮20分鐘。\n打開鍋蓋，放入鹽、黑胡椒及蔥花。",
-		"triggerStep": "豬\n馬鈴薯,五彩胡蘿蔔,玉米\nnull\ntap"
+		"triggerStep": "豬\n馬鈴薯,五彩胡蘿蔔,玉米\nnull\ntap",
+		"nfc": ""
 	},
 	{
 		"id": "2",
@@ -39,7 +41,8 @@
 		"otherfood1": "薑",
 		"otherfood2": "蔥",
 		"step": "將米洗淨加<color=#FFFF00>水</color> 煮成白粥。\n加入<color=#FFFF00>豬絞肉</color> 煮滾。\n依序放入<color=#FFFF00>台灣鯛</color> 、<color=#FFFF00>文蛤</color> 。\n最後放入薑絲及蔥花，並持續攪拌以避免粘鍋。",
-		"triggerStep": "米\n豬\n台灣鯛,文蛤\nnull"
+		"triggerStep": "米\n豬\n台灣鯛,文蛤\nnull",
+		"nfc": ""
 	},
 	{
 		"id": "3",
@@ -53,7 +56,8 @@
 		"otherfood1": "義大利麵",
 		"otherfood2": "橄欖油",
 		"step": "準備一鍋沸水，煮滾後放入義大利麵。煮好後取出備用。\n炒鍋中放入橄欖油，放入<color=#FFFF00>台灣鯛</color> 煎熟取出備用。\n放入<color=#FFFF00>蒜頭</color> 、辣椒炒出香氣，並放入<color=#FFFF00>小番茄</color> 炒軟。\n加入<color=#FFFF00>文蛤</color> 翻炒，放入白酒煮至文蛤開取出備用。\n將煮好的麵條放入炒鍋中，並加入台灣鯛、文蛤，拌勻後關火即完成。",
-		"triggerStep": "null,tap\n台灣鯛\n蒜頭,小番茄\n文蛤\nnull"
+		"triggerStep": "null,tap\n台灣鯛\n蒜頭,小番茄\n文蛤\nnull",
+		"nfc": ""
 	},
 	{
 		"id": "4",
@@ -67,7 +71,8 @@
 		"otherfood1": "蒜頭",
 		"otherfood2": "香菜",
 		"step": "加入去皮刨絲的<color=#FFFF00>青木瓜</color> 與洗淨的蝦米。\n依序放入<color=#FFFF00>文旦</color> 、<color=#FFFF00>花生米</color> 、<color=#FFFF00>小番茄</color> 等其他所有食材。\n放入魚露、砂糖、檸檬汁等調味料。\n使用筷子攪拌均勻即完成。",
-		"triggerStep": "木瓜\n文旦,花生,小番茄\nnull\nswipe\n"
+		"triggerStep": "木瓜\n文旦,花生,小番茄\nnull\nswipe\n",
+		"nfc": ""
 	},
 	{
 		"id": "5",
@@ -81,7 +86,8 @@
 		"otherfood1": "豆腐",
 		"otherfood2": "蔥",
 		"step": "<color=#FFFF00>米</color> 洗淨瀝乾，加水放入電鍋，蒸煮備用。\n開小火，鍋中放入橄欖油。\n依序加入<color=#FFFF00>豬肉</color> 及<color=#FFFF00>蒜頭</color> 炒至金黃色後，加入豆瓣醬。\n放入醬油及水，放入切塊的板豆腐小火燉煮3分鐘、撒上蔥花。\n將麻婆豆腐放至飯上，撒上<color=#FFFF00>花生米</color> 。",
-		"triggerStep": "米,tap\nnull\n豬,蒜頭\nnull,tap\n花生"
+		"triggerStep": "米,tap\nnull\n豬,蒜頭\nnull,tap\n花生",
+		"nfc": ""
 	},
 	{
 		"id": "6",
@@ -95,7 +101,8 @@
 		"otherfood1": "蒜頭",
 		"otherfood2": "醬油",
 		"step": "鍋中放入橄欖油，加入切塊的<color=#FFFF00>豬肉</color> 拌炒。\n放入切段的<color=#FFFF00>甘蔗</color> 、<color=#FFFF00>酸菜</color> 、蒜頭及醬油稍微拌炒。\n加入<color=#FFFF00>麻油</color> 及水，水須蓋過肉。\n蓋上鍋蓋，小火燉煮1小時。起鍋前放入蔥段。",
-		"triggerStep": "豬\n甘蔗,酸菜\n麻油\ntap"
+		"triggerStep": "豬\n甘蔗,酸菜\n麻油\ntap",
+		"nfc": ""
 	},
 	{
 		"id": "7",
@@ -109,6 +116,7 @@
 		"otherfood1": "洋蔥",
 		"otherfood2": "咖哩",
 		"step": "<color=#FFFF00>蕃薯</color> 去皮切塊，蒸熟備用。\n鍋中放入橄欖油、切塊的<color=#FFFF00>豬肉</color> 拌炒。\n加入切塊的胡蘿蔔、洋蔥、蒸熟的蕃薯。\n依序加入瑪莎曼咖哩、<color=#FFFF00>鮮乳</color> 、<color=#FFFF00>咖啡</color> 。\n小火燉煮50分鐘，打開鍋蓋即可完成。",
-		"triggerStep": "番薯\n豬\nnull\n鮮乳,咖啡\ntap\n"
+		"triggerStep": "番薯\n豬\nnull\n鮮乳,咖啡\ntap\n",
+		"nfc": ""
 	}
 ]
