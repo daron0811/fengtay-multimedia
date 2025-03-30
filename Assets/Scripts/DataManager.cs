@@ -164,6 +164,20 @@ public class DataManager : MonoSingleton<DataManager>
         return cookBookInfos[index];
     }
 
+    public CookBookInfo GetCookBookInfoByNFC(string nfc)
+    {
+        if (cookBookInfos == null)
+        {
+            return null;
+        }
+        var item = cookBookInfos.Find(x => x.nfc == nfc);
+        if (item == null)
+        {
+            return null;
+        }
+        return item;
+    }
+
     /// <summary>
     /// 取得這個食譜的食材
     /// </summary>
@@ -259,6 +273,7 @@ public class FoodInfo
     public string season_text; //{ get; set; }
     public string nutritionTips; //{ get; set; }
     public string contract;//是否契作
+    public string nfc;
 }
 
 [System.Serializable]
@@ -278,4 +293,5 @@ public class CookBookInfo
     public string otherfood2;
     public List<string> steps;
     public List<string> triggerSteps;
+    public string nfc;
 }

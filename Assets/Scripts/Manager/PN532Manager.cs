@@ -3,6 +3,7 @@ using System.IO.Ports;
 using System.Threading;
 using UnityEngine.UI;
 using System;
+using UnityCommunity.UnitySingleton;
 
 [Serializable]
 public class ArduinoMessage
@@ -12,7 +13,7 @@ public class ArduinoMessage
     public string reader;
 }
 
-public class PN532Manager : MonoBehaviour
+public class PN532Manager : MonoSingleton<PN532Manager>
 {
     public string portName = "COM3";
     public int baudRate = 115200;
@@ -20,34 +21,20 @@ public class PN532Manager : MonoBehaviour
     public Button stopThreadButton;  // 💡 拖入你的「停止按鈕」
     public Text statusText;          // （選填）顯示目前狀態
 
+    public string command = "R1";
+
     private SerialPort serialPort;
     private Thread readThread;
     private bool isRunning = false;
     private string latestMessage = "";
+    public event Action<ArduinoMessage> onSuccessEvent;
 
     void Start()
     {
-        try
-        {
-            serialPort = new SerialPort(portName, baudRate);
-            serialPort.ReadTimeout = 50;
-            serialPort.Open();
+        if (stopThreadButton != null)
+            stopThreadButton.onClick.AddListener(StopSerialThread);
 
-            isRunning = true;
-            readThread = new Thread(ReadSerialLoop);
-            readThread.Start();
-
-            Debug.Log("✅ Serial 執行緒啟動");
-            if (statusText) statusText.text = "✅ Serial Running";
-
-            if (stopThreadButton != null)
-                stopThreadButton.onClick.AddListener(StopSerialThread);
-        }
-        catch
-        {
-            Debug.LogError("❌ Serial 初始化失敗");
-            if (statusText) statusText.text = "❌ Serial Failed";
-        }
+        onSuccessEvent = null;
     }
 
     void Update()
@@ -58,9 +45,8 @@ public class PN532Manager : MonoBehaviour
             HandleArduinoMessage(latestMessage);
             latestMessage = "";
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1)) SendCommand("R1");
-        if (Input.GetKeyDown(KeyCode.Alpha2)) SendCommand("R2");
+        // if (Input.GetKeyDown(KeyCode.Alpha1)) SendCommand("R1");
+        // if (Input.GetKeyDown(KeyCode.Alpha2)) SendCommand("R2");
     }
 
     void ReadSerialLoop()
@@ -96,11 +82,21 @@ public class PN532Manager : MonoBehaviour
     void OnArduinoCallback(ArduinoMessage data)
     {
         // ✅ 你可以在這裡依照狀態碼做不同邏輯
-        Debug.Log("✅ 處理 Callback 中的資料");
+        // Debug.Log("✅ 處理 Callback 中的資料");
 
-        if (data.status == 202)
+        if (data.status == 200)
         {
-            Debug.Log("✅ 成功讀取卡片: " + data.nfc);
+            if (string.IsNullOrEmpty(data.nfc))
+            {
+                return;
+            }
+            if (data.nfc.Length < 20)
+            {
+                Debug.Log("無效標籤");
+                return;
+            }
+            // onSuccessEvent?.Invoke(); // 呼叫成功事件
+            onSuccessEvent?.Invoke(data);
         }
         else
         {
@@ -108,7 +104,7 @@ public class PN532Manager : MonoBehaviour
         }
     }
 
-    void SendCommand(string command)
+    void SendCommand()
     {
         if (serialPort != null && serialPort.IsOpen)
         {
@@ -117,8 +113,36 @@ public class PN532Manager : MonoBehaviour
         }
     }
 
+
+    public void StartSerialThread(string commandLine = "", Action<ArduinoMessage> successEvent = null)
+    {
+        if (isRunning) return;
+        try
+        {
+            serialPort = new SerialPort(portName, baudRate);
+            serialPort.ReadTimeout = 50;
+            serialPort.Open();
+
+            isRunning = true;
+            readThread = new Thread(ReadSerialLoop);
+            readThread.Start();
+            Debug.Log("✅ Serial 執行緒啟動");
+            if (statusText) statusText.text = "✅ Serial Running";
+
+            onSuccessEvent = successEvent;
+            command = commandLine;
+            Invoke("SendCommand", 0.5f);
+        }
+        catch
+        {
+            Debug.LogError("❌ Serial 初始化失敗");
+            if (statusText) statusText.text = "❌ Serial Failed";
+        }
+    }
+
     public void StopSerialThread()
     {
+        onSuccessEvent = null;
         if (!isRunning) return;
 
         Debug.Log("🛑 停止 Serial 執行緒...");

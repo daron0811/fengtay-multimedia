@@ -125,7 +125,7 @@ public class IntroPanel : MonoBehaviour
 
             descOBJ3.SetActive(false);
 
-            readyScanCookbook = true;
+            StartArduinoSensor();
             scanPanel.SetActive(true);
             isDotRunning = true;
             StartCoroutine(AnimateDots());
@@ -139,7 +139,7 @@ public class IntroPanel : MonoBehaviour
             AudioManager.Instance.PlayAudioOnce(0);
             resultPanel.SetActive(false);
             scanPanel.SetActive(true);
-            readyScanCookbook = true;
+            StartArduinoSensor();
             readyStartGame = false;
             isDotRunning = true;
             StartCoroutine(AnimateDots());
@@ -375,6 +375,42 @@ public class IntroPanel : MonoBehaviour
         //     // SenserStatus();
         // }
     }
+
+    #region 感應器
+    public void StartArduinoSensor()
+    {
+        readyScanCookbook = true;
+        PN532Manager.Instance.StartSerialThread("R1", CheckArduinoData);
+    }
+
+    public void CheckArduinoData(ArduinoMessage msg)
+    {
+        if (msg == null)
+        {
+            return;
+        }
+        if (string.IsNullOrEmpty(msg.nfc) || msg.nfc.Length < 20)
+        {
+            return;
+        }
+        var item = DataManager.Instance.GetCookBookInfoByNFC(msg.nfc);
+        if (item == null)
+        {
+            return;
+        }
+
+        AudioManager.Instance.PlayAudioOnce(5);
+        readyScanCookbook = false;
+        readyStartGame = true;
+        scanPanel.SetActive(false);
+        resultPanel.SetActive(true);
+
+        GameManager.Instance.CurrentCookBookIndex = item.id;
+        SenserStatus();
+        PN532Manager.Instance.StopSerialThread();
+    }
+
+    #endregion
 
 
     IEnumerator AnimateDots()

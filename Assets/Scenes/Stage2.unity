@@ -71268,6 +71268,7 @@ GameObject:
   - component: {fileID: 1694735332}
   - component: {fileID: 1694735333}
   - component: {fileID: 1694735334}
+  - component: {fileID: 1694735335}
   m_Layer: 0
   m_Name: CoreObject
   m_TagString: Untagged
@@ -71354,6 +71355,7 @@ MonoBehaviour:
     otherfood2: 
     steps: []
     triggerSteps: []
+    nfc: 
 --- !u!114 &1694735334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71384,6 +71386,23 @@ MonoBehaviour:
   bgmClips:
   - {fileID: 8300000, guid: 9e71748cb396b16448505cc2608f0f72, type: 3}
   - {fileID: 8300000, guid: 1832d7c0d36f9674b976cf69cd212f03, type: 3}
+--- !u!114 &1694735335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694735329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e864622f36a842443aba77ef78e4e3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portName: COM3
+  baudRate: 115200
+  stopThreadButton: {fileID: 0}
+  statusText: {fileID: 0}
+  command: R1
 --- !u!1 &1695409625
 GameObject:
   m_ObjectHideFlags: 0
