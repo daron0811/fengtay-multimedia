@@ -71,6 +71,14 @@ public class PN532Manager : MonoSingleton<PN532Manager>
         {
             ArduinoMessage data = JsonUtility.FromJson<ArduinoMessage>(message);
             Debug.Log($"🔍 狀態碼: {data.status}, 標籤: {data.nfc}, 目前Reader: {data.reader}");
+            if (data.reader == "0" && command != "R1")
+            {
+                SendCommand();
+            }
+            if (data.reader == "1" && command != "R2")
+            {
+                SendCommand();
+            }
             OnArduinoCallback(data);
         }
         catch (Exception ex)
@@ -104,7 +112,7 @@ public class PN532Manager : MonoSingleton<PN532Manager>
         }
     }
 
-    void SendCommand()
+    public void SendCommand()
     {
         if (serialPort != null && serialPort.IsOpen)
         {
@@ -116,6 +124,7 @@ public class PN532Manager : MonoSingleton<PN532Manager>
 
     public void StartSerialThread(string commandLine = "", Action<ArduinoMessage> successEvent = null)
     {
+        command = commandLine;
         if (isRunning) return;
         try
         {
@@ -130,8 +139,7 @@ public class PN532Manager : MonoSingleton<PN532Manager>
             if (statusText) statusText.text = "✅ Serial Running";
 
             onSuccessEvent = successEvent;
-            command = commandLine;
-            Invoke("SendCommand", 0.5f);
+            Invoke("SendCommand", 1.0f);
         }
         catch
         {

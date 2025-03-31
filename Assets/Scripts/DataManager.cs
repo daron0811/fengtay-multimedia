@@ -141,8 +141,20 @@ public class DataManager : MonoSingleton<DataManager>
             Debug.LogError("Not Find Food Info " + name);
             return null;
         }
-        return foodInfos.Find(x => x.name == name);
+        return item;
     }
+
+    public FoodInfo GetFoodInfoByNFC(string nfc)
+    {
+        var item = foodInfos.Find(x => x.nfc == nfc);
+        if (item == null)
+        {
+            Debug.LogError("Not Find Food Info " + name);
+            return null;
+        }
+        return item;
+    }
+
     #endregion
 
     #region 食譜資料
