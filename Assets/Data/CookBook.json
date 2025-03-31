@@ -19,14 +19,14 @@
 		"name": "燉豬肉蔬菜湯",
 		"season": 1,
 		"icon": "春-燉豬肉蔬菜湯-@完成圖",
-		"food1": "豬",
+		"food1": "豬肉",
 		"food2": "馬鈴薯",
 		"food3": "五彩胡蘿蔔",
 		"food4": "玉米",
 		"otherfood1": "蒜頭",
 		"otherfood2": "小番茄",
 		"step": "鍋中放入橄欖油，加入<color=#FFFF00>豬肉</color>  拌炒。\n豬肉半熟時，依序放入<color=#FFFF00>馬鈴薯</color>  、<color=#FFFF00>胡蘿蔔</color>  、<color=#FFFF00>玉米</color>  等食材一起拌炒。\n加入水燉煮20分鐘。\n打開鍋蓋，放入鹽、黑胡椒及蔥花。",
-		"triggerStep": "豬\n馬鈴薯,五彩胡蘿蔔,玉米\nnull\ntap",
+		"triggerStep": "豬肉\n馬鈴薯,五彩胡蘿蔔,玉米\nnull\ntap",
 		"nfc": ""
 	},
 	{
@@ -37,11 +37,11 @@
 		"food1": "米",
 		"food2": "台灣鯛",
 		"food3": "文蛤",
-		"food4": "豬",
+		"food4": "豬肉",
 		"otherfood1": "薑",
 		"otherfood2": "蔥",
 		"step": "將米洗淨加<color=#FFFF00>水</color> 煮成白粥。\n加入<color=#FFFF00>豬絞肉</color> 煮滾。\n依序放入<color=#FFFF00>台灣鯛</color> 、<color=#FFFF00>文蛤</color> 。\n最後放入薑絲及蔥花，並持續攪拌以避免粘鍋。",
-		"triggerStep": "米\n豬\n台灣鯛,文蛤\nnull",
+		"triggerStep": "米\n豬肉\n台灣鯛,文蛤\nnull",
 		"nfc": ""
 	},
 	{
@@ -80,13 +80,13 @@
 		"season": 3,
 		"icon": "秋-麻婆豆腐蓋飯-@完成圖",
 		"food1": "米",
-		"food2": "豬",
+		"food2": "豬肉",
 		"food3": "花生",
 		"food4": "蒜頭",
 		"otherfood1": "豆腐",
 		"otherfood2": "蔥",
 		"step": "<color=#FFFF00>米</color> 洗淨瀝乾，加水放入電鍋，蒸煮備用。\n開小火，鍋中放入橄欖油。\n依序加入<color=#FFFF00>豬肉</color> 及<color=#FFFF00>蒜頭</color> 炒至金黃色後，加入豆瓣醬。\n放入醬油及水，放入切塊的板豆腐小火燉煮3分鐘、撒上蔥花。\n將麻婆豆腐放至飯上，撒上<color=#FFFF00>花生米</color> 。",
-		"triggerStep": "米,tap\nnull\n豬,蒜頭\nnull,tap\n花生",
+		"triggerStep": "米,tap\nnull\n豬肉,蒜頭\nnull,tap\n花生",
 		"nfc": ""
 	},
 	{
@@ -94,14 +94,14 @@
 		"name": "甘蔗酸菜滷肉",
 		"season": 4,
 		"icon": "冬-甘蔗酸菜滷肉-@完成圖2有蔥段",
-		"food1": "豬",
+		"food1": "豬肉",
 		"food2": "甘蔗",
 		"food3": "酸菜",
 		"food4": "麻油",
 		"otherfood1": "蒜頭",
 		"otherfood2": "醬油",
 		"step": "鍋中放入橄欖油，加入切塊的<color=#FFFF00>豬肉</color> 拌炒。\n放入切段的<color=#FFFF00>甘蔗</color> 、<color=#FFFF00>酸菜</color> 、蒜頭及醬油稍微拌炒。\n加入<color=#FFFF00>麻油</color> 及水，水須蓋過肉。\n蓋上鍋蓋，小火燉煮1小時。起鍋前放入蔥段。",
-		"triggerStep": "豬\n甘蔗,酸菜\n麻油\ntap",
+		"triggerStep": "豬肉\n甘蔗,酸菜\n麻油\ntap",
 		"nfc": ""
 	},
 	{
@@ -110,13 +110,13 @@
 		"season": 4,
 		"icon": "冬-地瓜豬肉咖哩-@完成圖鍋子",
 		"food1": "番薯",
-		"food2": "豬",
+		"food2": "豬肉",
 		"food3": "鮮乳",
 		"food4": "咖啡",
 		"otherfood1": "洋蔥",
 		"otherfood2": "咖哩",
 		"step": "<color=#FFFF00>蕃薯</color> 去皮切塊，蒸熟備用。\n鍋中放入橄欖油、切塊的<color=#FFFF00>豬肉</color> 拌炒。\n加入切塊的胡蘿蔔、洋蔥、蒸熟的蕃薯。\n依序加入瑪莎曼咖哩、<color=#FFFF00>鮮乳</color> 、<color=#FFFF00>咖啡</color> 。\n小火燉煮50分鐘，打開鍋蓋即可完成。",
-		"triggerStep": "番薯\n豬\nnull\n鮮乳,咖啡\ntap\n",
+		"triggerStep": "番薯\n豬肉\nnull\n鮮乳,咖啡\ntap\n",
 		"nfc": ""
 	}
 ]

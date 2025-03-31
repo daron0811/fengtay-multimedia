@@ -56,10 +56,7 @@ public class Stage4Panel : MonoBehaviour
     public Button gotoEndBtn;
 
     public Image rateImage;
-    public TextMeshProUGUI rateText;
     public List<Sprite> rateSprites;
-
-    public List<string> rateTexts;
 
     public Image seasonImage;
     public List<Sprite> seasonSprites;
@@ -75,11 +72,13 @@ public class Stage4Panel : MonoBehaviour
     public List<Image> seasonImages;
 
     public TextMeshProUGUI commonText;
+    public TextMeshProUGUI commonDescText;
 
     public Button returnTitleBtn;
     public Button playAgainBtn;
 
     public List<string> rateCommonText;
+    public List<string> rateDescTexts;
 
     public GameObject contractImage;//契作圖片
     private bool isInit = false;
@@ -90,6 +89,9 @@ public class Stage4Panel : MonoBehaviour
     public Image sensorImage;
     public Sprite successSprite;
     public Sprite failSprite;
+
+    public Image qecodeImage;
+    public List<Sprite> foodbookQRCode;
     void Start()
     {
         Init();
@@ -106,7 +108,6 @@ public class Stage4Panel : MonoBehaviour
         otherFoodItems = detailPanel.transform.Find("Content/OtherFoods").GetComponentsInChildren<FoodItem>().ToList();
         finalFoodItems = resultPanel.transform.Find("FinalPanel/Food/FoodGroup").GetComponentsInChildren<FoodItem>().ToList();
         seasonImages = resultPanel.transform.Find("FinalPanel/Season/SeasonIcon").GetComponentsInChildren<Image>().ToList();
-
 
         gotoResultBtn.onClick.AddListener(() =>
         {
@@ -237,6 +238,7 @@ public class Stage4Panel : MonoBehaviour
         cookbookDetailImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
         finalCookbookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
         finalCookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
+        qecodeImage.sprite = foodbookQRCode[GameManager.Instance.currentCookBookIndex];
     }
 
     //設定食材類型
@@ -310,19 +312,48 @@ public class Stage4Panel : MonoBehaviour
         PopupPanel.Instance.PlayGo(
             () =>
             {
-                detailPanelTimer.StartTimer(15.0f); //先設10秒
+                detailPanelTimer.StartTimer(15.0f); //先設15秒,15秒後到下一段
             }
         );
-
 
         detailPanelTimer.onEnd += () =>
         {
             checkEndPanel.SetActive(true);
             isDotRunning = true;
             StartCoroutine(AnimateDots());
-            // SetFinalPanel();
+            PN532Manager.Instance.StopSerialThread();
         };
+
+        PN532Manager.Instance.StartSerialThread("R2", CheckArduinoData);
     }
+
+    #region Arduino設定
+    public void CheckArduinoData(ArduinoMessage msg)
+    {
+        if (msg == null)
+        {
+            AudioManager.Instance.PlayAudioOnce(3);
+            return;
+        }
+        if (string.IsNullOrEmpty(msg.nfc) || msg.nfc.Length < 20)
+        {
+            AudioManager.Instance.PlayAudioOnce(3);
+            return;
+        }
+        var foodInfo = DataManager.Instance.GetFoodInfoByNFC(msg.nfc);
+        if (foodInfo == null)
+        {
+            AudioManager.Instance.PlayAudioOnce(3);
+            return;
+        }
+
+        AudioManager.Instance.PlayAudioOnce(5);
+
+        detailPanelFood.gameObject.SetActive(true);
+        detailPanelFood.sprite = UIManager.Instance.GetFoodSprite(foodInfo.name);
+        SetDetialPanelInfo(foodInfo.name);
+    }
+    #endregion
 
     IEnumerator AnimateDots()
     {
@@ -355,6 +386,7 @@ public class Stage4Panel : MonoBehaviour
 
         FoodInfo foodInfo = DataManager.Instance.GetFoodInfo(foodName);
 
+        //判斷是不是有掃描過
         Dictionary<string, bool> pickedFoods = GameManager.Instance.pickedFoods;
         if (pickedFoods.ContainsKey(foodName) == true)
         {
@@ -403,6 +435,7 @@ public class Stage4Panel : MonoBehaviour
         rateImage.sprite = rateSprites[rate];
         seasonImage.sprite = seasonSprites[season];
         commonText.text = rateCommonText[rate];
+        commonDescText.text = rateDescTexts[rate];
 
         // cookbookImage.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookIndex);
     }

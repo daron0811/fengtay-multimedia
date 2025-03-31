@@ -387,6 +387,7 @@ public class IntroPanel : MonoBehaviour
     {
         if (msg == null)
         {
+            AudioManager.Instance.PlayAudioOnce(3);
             return;
         }
         if (string.IsNullOrEmpty(msg.nfc) || msg.nfc.Length < 20)

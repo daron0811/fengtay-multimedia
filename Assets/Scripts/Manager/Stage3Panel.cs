@@ -119,6 +119,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         PickItemToBucket();
         btnImage.sprite = normalSprite;
         fire.alpha = 0.0f;
+        currentStep = 0;
 
         HideSmoke();
         HideFire();
@@ -126,7 +127,11 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         HideTapSFX();
 
         //TODO : 改由一開始載入當時食譜的CookbookStepItem
-
+        //清除原本子物件
+        for (int i = foodAnimCtrl.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(foodAnimCtrl.transform.GetChild(i).gameObject);
+        }
         // foreach (var item in foodSpriteList)
         // {
         //     item.SetActive(false);
