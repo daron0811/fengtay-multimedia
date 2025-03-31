@@ -84,7 +84,7 @@ public class PN532Manager : MonoSingleton<PN532Manager>
         // ✅ 你可以在這裡依照狀態碼做不同邏輯
         // Debug.Log("✅ 處理 Callback 中的資料");
 
-        if (data.status == 200)
+        if (data.status == 202)
         {
             if (string.IsNullOrEmpty(data.nfc))
             {

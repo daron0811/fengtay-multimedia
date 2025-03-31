@@ -391,11 +391,13 @@ public class IntroPanel : MonoBehaviour
         }
         if (string.IsNullOrEmpty(msg.nfc) || msg.nfc.Length < 20)
         {
+            AudioManager.Instance.PlayAudioOnce(3);
             return;
         }
         var item = DataManager.Instance.GetCookBookInfoByNFC(msg.nfc);
         if (item == null)
         {
+            AudioManager.Instance.PlayAudioOnce(3);
             return;
         }
 
