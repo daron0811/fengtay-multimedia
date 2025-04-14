@@ -133,12 +133,20 @@ public class PopupPanel : MonoSingleton<PopupPanel>
 
         // 目標位置（移動到畫面右側並超出）
         float targetX = screenWidth / 2 + imageRect.rect.width;
-        imageRect.DOAnchorPos(new Vector2(targetX, 0), 2.0f)
-            .SetEase(Ease.Linear) // 設定線性移動
-            .OnComplete(() => Debug.Log("動畫完成")); // 可加入回呼事件
+        imageRect.DOAnchorPos(new Vector2(0, 0), 1.5f)
+            .SetEase(Ease.OutQuint) // 設定線性移動
+            .OnComplete(() =>
+            {
+                imageRect.DOAnchorPos(new Vector2(targetX, 0), 1.5f)
+           .SetEase(Ease.InQuint) // 設定線性移動
+           .OnComplete(() => { Debug.Log("動畫完成"); }).SetDelay(0.3f);
+
+
+                Debug.Log("動畫完成");
+            }); // 可加入回呼事件
         onGoCutScene += action;
-        
-        Invoke("StopCutSceneAction", 1.0f);
+
+        Invoke("StopCutSceneAction", 1.7f);
         return;
         float duration = 1.0f;
         Material targetMaterial = cutScenePanel.GetComponent<RawImage>().material;

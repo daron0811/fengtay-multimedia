@@ -20,7 +20,9 @@ public class CountdownTimer : MonoBehaviour
 
     private float timeLeft;
     private bool isRunning = false;
+    private bool isPaused = false; // 🔵 新增：暫停狀態
     public bool IsRunning { get { return isRunning; } }
+    public bool IsPaused { get { return isPaused; } }
 
     public float shakeThreshold = 5.0f; // 🟢 剩餘幾秒時開始晃動
     private bool isShaking = false;   // 是否正在晃動
@@ -32,7 +34,8 @@ public class CountdownTimer : MonoBehaviour
         duration = durationTime;
         timeLeft = isCountdown ? duration : 0f;
         isRunning = true;
-        isShaking = false; // 確保重啟時停止晃動
+        isPaused = false;
+        isShaking = false;
 
         onStart?.Invoke();
         StartCoroutine(TimerRoutine());
@@ -41,35 +44,56 @@ public class CountdownTimer : MonoBehaviour
     public void StopTimer()
     {
         isRunning = false;
+        isPaused = false;
         StopAllCoroutines();
-        StopShaking(); // 🛑 停止晃動
+        StopShaking();
+    }
+
+    public void PauseTimer() // 🔵 新增：暫停功能
+    {
+        isPaused = true;
+    }
+
+    public void ResumeTimer() // 🔵 新增：恢復功能
+    {
+        if (isRunning && isPaused)
+        {
+            isPaused = false;
+        }
     }
 
     private IEnumerator TimerRoutine()
     {
         while (isRunning)
         {
-            UpdateUI();
-            yield return new WaitForSeconds(1f);
-
-            if (isCountdown)
-                timeLeft--;
-            else
-                timeLeft++;
-
-            // 🔥 剩餘時間 <= shakeThreshold 開始晃動
-            if (isCountdown && timeLeft <= shakeThreshold && !isShaking)
+            if (!isPaused)
             {
-                StartShaking();
-            }
-
-            if ((isCountdown && timeLeft <= 0) || (!isCountdown && timeLeft >= duration))
-            {
-                isRunning = false;
-                onEnd?.Invoke();
                 UpdateUI();
-                StopShaking(); // 🛑 停止晃動
-                yield break;
+                yield return new WaitForSeconds(1f);
+
+                if (isCountdown)
+                    timeLeft--;
+                else
+                    timeLeft++;
+
+                if (isCountdown && timeLeft <= shakeThreshold && !isShaking)
+                {
+                    StartShaking();
+                }
+
+                if ((isCountdown && timeLeft <= 0) || (!isCountdown && timeLeft >= duration))
+                {
+                    isRunning = false;
+                    onEnd?.Invoke();
+                    UpdateUI();
+                    StopShaking();
+                    yield break;
+                }
+            }
+            else
+            {
+                // 若暫停中，每幀等待，避免過多 yield WaitForSeconds 呼叫
+                yield return null;
             }
         }
     }

@@ -74,6 +74,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         CurrentCookBookIndex = -1;
         Score = 5;
+        pickedFoods.Clear();
     }
 
     //用來判斷這個食材是否有被選擇

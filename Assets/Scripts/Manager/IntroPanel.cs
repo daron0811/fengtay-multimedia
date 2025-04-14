@@ -57,6 +57,7 @@ public class IntroPanel : MonoBehaviour
 
     public List<Sprite> seasonBackSprite;
 
+    public List<Sprite> cookbookSpriteList;
     public bool isInit = false;
 
 
@@ -443,9 +444,8 @@ public class IntroPanel : MonoBehaviour
         cookBookNameText.text = GameManager.Instance.CurrentCookBookInfo.name;
         cookbookNameText_2.text = GameManager.Instance.CurrentCookBookInfo.name;
         cookbookSeasonImage.sprite = seasonBackSprite[GameManager.Instance.CurrentCookBookInfo.season - 1];
-        cookbookIcon.sprite = UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
-        PopupPanel.Instance.SetCutScenBG(GameManager.Instance.CurrentCookBookInfo.season);
-        // cookbookIcon.sprite = UIManager.Instance.GetFoodSprite(GameManager.Instance.CurrentCookBookInfo.food1);
+        cookbookIcon.sprite = cookbookSpriteList[GameManager.Instance.CurrentCookBookInfo.id];// UIManager.Instance.GetCookBookSprite(GameManager.Instance.CurrentCookBookInfo.icon);
+        // PopupPanel.Instance.SetCutScenBG(GameManager.Instance.CurrentCookBookInfo.season);
     }
 
 

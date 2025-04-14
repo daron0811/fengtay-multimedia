@@ -28,6 +28,8 @@ public class Stage4Panel : MonoBehaviour
     public TextMeshProUGUI foodText;
     public TextMeshProUGUI seasonText;
     public TextMeshProUGUI nutritionTips;
+
+    public GameObject noPickUpTips;
     public Image detailPanelFood;
 
     public FoodItem scanFood;
@@ -127,17 +129,20 @@ public class Stage4Panel : MonoBehaviour
         returnTitleBtn.onClick.AddListener(() =>
         {
             UIManager.Instance.SetState(UIManager.UIState.Stage_1);
+            GameManager.Instance.ResetStatus();
         });
 
         playAgainBtn.onClick.AddListener(() =>
         {
             UIManager.Instance.SetState(UIManager.UIState.Stage_1);
+            GameManager.Instance.ResetStatus();
         });
 
         foreach (var item in foodItems)
         {
             item.GetComponent<Button>().onClick.AddListener(() =>
             {
+                item.GetComponent<FoodItem>().ShowCheckMark(true);
                 detailPanelFood.gameObject.SetActive(true);
                 detailPanelFood.sprite = item.foodSprite.sprite;
                 SetDetialPanelInfo(item.foodSprite.sprite.name);
@@ -172,18 +177,14 @@ public class Stage4Panel : MonoBehaviour
         scorePanel.gameObject.SetActive(true);
         finalPanel.gameObject.SetActive(false);
 
-        localText.text = "";
-        foodText.text = "";
-        seasonText.text = "";
-        nutritionTips.text = "";
+        localText.text = " --- ";
+        foodText.text = " --- ";
+        seasonText.text = " --- ";
+        nutritionTips.text = " --- ";
+        noPickUpTips.SetActive(false);
 
         detailPanelFood.gameObject.SetActive(false);
 
-
-        // foreach (var item in otherFoodItems)
-        // {
-        //     item.Hide();
-        // }
     }
 
     void OnEnable()
@@ -265,8 +266,9 @@ public class Stage4Panel : MonoBehaviour
                     isPicked = pickedFoods[foods[i]];
                 }
                 Sprite sprite = UIManager.Instance.GetFoodSprite(foods[i]);
-                foodItems[i].SetFoodItem(sprite, foods[i], "", isPicked);
+                foodItems[i].SetFoodItem(sprite, foods[i], "", isPicked, true);
                 foodItems[i].transform.Find("Background/Checkmark").GetComponent<Image>().sprite = isPicked ? marksprite : unmarksprite;
+                foodItems[i].ShowCheckMark(false);
                 foodItems[i].Show();
             }
             else
@@ -385,22 +387,33 @@ public class Stage4Panel : MonoBehaviour
         AudioManager.Instance.PlayAudioOnce(5);
 
         FoodInfo foodInfo = DataManager.Instance.GetFoodInfo(foodName);
+        if (foodInfo == null)
+        {
+            return;
+        }
 
         //判斷是不是有掃描過
         Dictionary<string, bool> pickedFoods = GameManager.Instance.pickedFoods;
         if (pickedFoods.ContainsKey(foodName) == true)
         {
             sensorImage.sprite = pickedFoods[foodName] ? successSprite : failSprite;
+            noPickUpTips.SetActive(!pickedFoods[foodName]); // 如果沒有撿到食材要做這個
         }
         else
         {
             sensorImage.sprite = successSprite;
         }
 
-        if (foodInfo == null)
+        foreach (var food in foodItems)
         {
-            return;
+            if (food.myFoodName == foodName)
+            {
+                food.ShowCheckMark(true);
+                food.SetBGGray(false);
+            }
         }
+
+        //
         localText.text = foodInfo.locate;
         foodText.text = foodInfo.name;
         seasonText.text = foodInfo.season_text;

@@ -1,12 +1,17 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class FoodItem : MonoBehaviour
 {
+    public String myFoodName = "";
     public Image foodSprite;
     public TextMeshProUGUI foodNameText;
     public TextMeshProUGUI foodLocalText;
     public Toggle toggle;
+
+    public Image background;
+    public Image imgCheckMark;
 
     private FoodInfo foodInfo;
 
@@ -32,7 +37,16 @@ public class FoodItem : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SetFoodItem(Sprite sprite, string name = "", string local = "", bool isGray = false)
+    public void ShowCheckMark(bool isShow)
+    {
+        if (imgCheckMark == null)
+        {
+            return;
+        }
+        imgCheckMark.gameObject.SetActive(isShow);
+    }
+
+    public void SetFoodItem(Sprite sprite, string name = "", string local = "", bool isGray = false, bool isBGGray = false)
     {
         if (foodSprite != null)
         {
@@ -51,7 +65,9 @@ public class FoodItem : MonoBehaviour
         {
             toggle.isOn = false;
         }
+        SetBGGray(isBGGray);
 
+        myFoodName = name;
         if (imageMat == null)
         {
             if (foodSprite.material != null)
@@ -71,6 +87,14 @@ public class FoodItem : MonoBehaviour
             {
                 imageMat.SetFloat("_Grayscale", 0);
             }
+        }
+    }
+
+    public void SetBGGray(bool isBGGray)
+    {
+        if (background != null)
+        {
+            background.color = isBGGray ? new Color32(192, 192, 192, 255) : new Color32(255, 255, 255, 255);
         }
     }
 

@@ -439,7 +439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 94, y: -224}
+  m_AnchoredPosition: {x: 94, y: -256}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3345461
@@ -780,6 +780,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1412309942}
   - {fileID: 1741630750}
   - {fileID: 877580290}
   - {fileID: 1145711867}
@@ -802,10 +803,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 877580292}
   foodNameText: {fileID: 1741630751}
   foodLocalText: {fileID: 1623260652}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
+--- !u!1 &14007384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 14007385}
+  - component: {fileID: 14007387}
+  - component: {fileID: 14007386}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &14007385
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14007384}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 451495991}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 125}
+  m_SizeDelta: {x: 138.78, y: 60.7181}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &14007386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14007384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5ee11f4ba2ec707469515af6903630fe, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &14007387
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14007384}
+  m_CullTransparentMesh: 1
 --- !u!1 &26435920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,15 +1442,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: "3-5\u6708"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
-  m_sharedMaterial: {fileID: 8305111213006774404, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
+  m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283457389
-  m_fontColor: {r: 0.42745098, g: 0.37254903, b: 0.3137255, a: 1}
+    rgba: 4284374622
+  m_fontColor: {r: 0.36862746, g: 0.36862746, b: 0.36862746, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1631,10 +1710,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1214905365}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 1713060786}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &44029197
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,7 +2355,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 366.86465, y: -46.478}
-  m_SizeDelta: {x: 733.723, y: 740.83}
+  m_SizeDelta: {x: 736.041, y: 789.217}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &63921414
 MonoBehaviour:
@@ -2295,7 +2377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -5852573231237969395, guid: 5f1916b8edfd6424fab3eace3e8a7f35, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2418,6 +2500,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 753576288}
   - {fileID: 411479011}
   - {fileID: 1784108756}
   - {fileID: 845596494}
@@ -2440,10 +2523,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1784108758}
   foodNameText: {fileID: 411479012}
   foodLocalText: {fileID: 331474442}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &75996512
 GameObject:
   m_ObjectHideFlags: 0
@@ -2503,15 +2589,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: "3-5\u6708"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
-  m_sharedMaterial: {fileID: 8305111213006774404, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
+  m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283457389
-  m_fontColor: {r: 0.42745098, g: 0.37254903, b: 0.3137255, a: 1}
+    rgba: 4284374622
+  m_fontColor: {r: 0.36862746, g: 0.36862746, b: 0.36862746, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2976,10 +3062,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1920357447}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 1429401981}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &89852415
 GameObject:
   m_ObjectHideFlags: 0
@@ -3230,10 +3319,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 696037168}
   foodNameText: {fileID: 221132380}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 93729524}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &93853799
 GameObject:
   m_ObjectHideFlags: 0
@@ -4846,10 +4938,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 426868632}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 1505988373}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &149580646
 GameObject:
   m_ObjectHideFlags: 0
@@ -4900,10 +4995,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 240629358}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 1804784201}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &158207972
 GameObject:
   m_ObjectHideFlags: 0
@@ -5083,6 +5181,7 @@ RectTransform:
   - {fileID: 625889304}
   - {fileID: 1753694933}
   - {fileID: 488871605}
+  - {fileID: 1251868588}
   - {fileID: 2117419594}
   m_Father: {fileID: 1638215214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5142,6 +5241,142 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &166642523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 166642524}
+  - component: {fileID: 166642526}
+  - component: {fileID: 166642525}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &166642524
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166642523}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1251868588}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -100, y: -13}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &166642525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166642523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "- \u98DF\u6750\u6536\u96C6\u672A\u5B8C\u6210 -"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
+  m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 40.06
+  m_fontSizeBase: 40.06
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: -211.5586, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &166642526
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166642523}
+  m_CullTransparentMesh: 1
 --- !u!1 &167557178
 GameObject:
   m_ObjectHideFlags: 0
@@ -5312,7 +5547,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 146.15901, y: -8.8}
+  m_AnchoredPosition: {x: 146.15901, y: -1}
   m_SizeDelta: {x: 167.8642, y: 69.9111}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &171636281
@@ -5335,7 +5570,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u8702\u871C"
+  m_text: ' --- '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
   m_sharedMaterial: {fileID: 8305111213006774404, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
@@ -6379,7 +6614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &195728007
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7472,6 +7707,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 430232074}
   - {fileID: 1819508963}
   - {fileID: 762391548}
   - {fileID: 70067047}
@@ -7494,10 +7730,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 762391550}
   foodNameText: {fileID: 1819508964}
   foodLocalText: {fileID: 1747002639}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &229072817
 GameObject:
   m_ObjectHideFlags: 0
@@ -7514,7 +7753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &229072818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8930,7 +9169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &280848432
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10116,6 +10355,7 @@ MonoBehaviour:
   foodText: {fileID: 0}
   seasonText: {fileID: 0}
   nutritionTips: {fileID: 0}
+  noPickUpTips: {fileID: 0}
   detailPanelFood: {fileID: 0}
   scanFood: {fileID: 0}
   checkEndPanel: {fileID: 0}
@@ -15699,13 +15939,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -16102,13 +16342,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -16258,15 +16498,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: "3-5\u6708"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
-  m_sharedMaterial: {fileID: 8305111213006774404, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
+  m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283457389
-  m_fontColor: {r: 0.42745098, g: 0.37254903, b: 0.3137255, a: 1}
+    rgba: 4284374622
+  m_fontColor: {r: 0.36862746, g: 0.36862746, b: 0.36862746, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -16960,10 +17200,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1566217319}
   foodNameText: {fileID: 803103}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &381541833
 GameObject:
   m_ObjectHideFlags: 0
@@ -17129,10 +17372,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 935966123}
   foodNameText: {fileID: 1598173980}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &391950486
 GameObject:
   m_ObjectHideFlags: 0
@@ -18671,7 +18917,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 135}
+  m_AnchoredPosition: {x: 0, y: 125}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &411479012
@@ -18694,7 +18940,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u897F\u74DC\n"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
@@ -18703,8 +18949,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283590520
-  m_fontColor: {r: 0.47058827, g: 0.4039216, b: 0.32156864, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -18724,12 +18970,12 @@ MonoBehaviour:
   m_fontSize: 37.5
   m_fontSizeBase: 37.5
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 26
+  m_fontSizeMax: 37.5
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 8192
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -18739,7 +18985,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 3
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
@@ -18753,7 +18999,7 @@ MonoBehaviour:
   m_isCullingEnabled: 0
   m_horizontalMapping: 0
   m_verticalMapping: 0
-  m_uvLineOffset: 0
+  m_uvLineOffset: 2.82
   m_geometrySortingOrder: 0
   m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
@@ -19559,6 +19805,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427772312}
   m_CullTransparentMesh: 1
+--- !u!1 &430232073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 430232074}
+  - component: {fileID: 430232076}
+  - component: {fileID: 430232075}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &430232074
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430232073}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 228317485}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 125}
+  m_SizeDelta: {x: 138.78, y: 60.7181}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &430232075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430232073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5ee11f4ba2ec707469515af6903630fe, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &430232076
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430232073}
+  m_CullTransparentMesh: 1
 --- !u!1 &431296052
 GameObject:
   m_ObjectHideFlags: 0
@@ -19685,10 +20006,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1081028032}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 1037888394}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &443107282
 GameObject:
   m_ObjectHideFlags: 0
@@ -20233,6 +20557,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 14007385}
   - {fileID: 1949120221}
   - {fileID: 1233788662}
   - {fileID: 1462990540}
@@ -20255,10 +20580,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1233788664}
   foodNameText: {fileID: 1949120222}
   foodLocalText: {fileID: 356479671}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &456069146
 GameObject:
   m_ObjectHideFlags: 0
@@ -21696,7 +22024,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 569, y: 190.1}
+  m_AnchoredPosition: {x: 569, y: 222}
   m_SizeDelta: {x: 577.0143, y: 128.6761}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &488871606
@@ -22233,17 +22561,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511607502}
-  m_LocalRotation: {x: -0, y: -0, z: 0.049434528, w: 0.9987774}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1963681026}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 5.667}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5291119, y: 0.5}
-  m_AnchoredPosition: {x: -11, y: -38.000015}
-  m_SizeDelta: {x: 358.2729, y: 376.281}
+  m_AnchorMax: {x: 0.5, y: 0.65800005}
+  m_AnchoredPosition: {x: 3, y: -36}
+  m_SizeDelta: {x: 709.2114, y: 477.4338}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &511607504
 MonoBehaviour:
@@ -22265,7 +22593,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4301977834058560273, guid: 0fc4b9c27f58d4c45a72e55107b09ff9, type: 3}
+  m_Sprite: {fileID: -3125332158021379457, guid: 5345a76ed5e43334eb08c538288872bd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -22470,10 +22798,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 578340550}
   foodNameText: {fileID: 1175164461}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &517075893
 GameObject:
   m_ObjectHideFlags: 0
@@ -23012,6 +23343,7 @@ MonoBehaviour:
   foodText: {fileID: 171636281}
   seasonText: {fileID: 844728080}
   nutritionTips: {fileID: 700348248}
+  noPickUpTips: {fileID: 1251868587}
   detailPanelFood: {fileID: 415600026}
   scanFood: {fileID: 379445896}
   checkEndPanel: {fileID: 409187229}
@@ -23057,7 +23389,7 @@ MonoBehaviour:
   returnTitleBtn: {fileID: 1586705717}
   playAgainBtn: {fileID: 1659992647}
   rateCommonText:
-  - "\u54CE\u5440\uFF5E\u9084\u6709\u5F88\u5927\u7684\u9032\u6B65\u7A7A\u9593\uFF01\u91CD\u65B0\u518D\u8A66\u4E00\u6B21\u5427\uFF01"
+  - "\u54CE\u5440~\u9084\u6709\u5F88\u5927\u7684\u9032\u6B65\u7A7A\u9593\uFF01\u91CD\u65B0\u518D\u8A66\u4E00\u6B21\u5427\uFF01"
   - "\u4E0D\u932F\u7684\u958B\u59CB\uFF01\u591A\u591A\u5617\u8A66\uFF0C\u6703\u6709\u66F4\u68D2\u7684\u6599\u7406\u8A95\u751F\u5594\uFF01"
   - "\u518D\u63A5\u518D\u53B2\uFF0C\u591A\u591A\u7DF4\u7FD2\uFF01\u6709\u5C0F\u795E\u5EDA\u7684\u6F5B\u529B\u5537\uFF01"
   - "\u597D\u68D2\uFF01\u5DF2\u7D93\u638C\u63E1\u4E86\u4E0D\u5C11\u70F9\u98EA\u6280\u5DE7\uFF0C\u7E7C\u7E8C\u6311\u6230\u66F4\u9AD8\u5883\u754C\u5427\uFF01 "
@@ -23346,7 +23678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89.07556, y: -210}
+  m_AnchoredPosition: {x: -155, y: -210}
   m_SizeDelta: {x: 313.9593, y: 155.5325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &568885738
@@ -29903,10 +30235,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1526724471}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 2022309228}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &625889303
 GameObject:
   m_ObjectHideFlags: 0
@@ -30329,10 +30664,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 807012118}
   foodNameText: {fileID: 1452235959}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 176290898}
+  imgCheckMark: {fileID: 875996505}
 --- !u!114 &642216772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30486,8 +30824,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 336.9, y: -50}
-  m_SizeDelta: {x: 90, y: 90}
+  m_AnchoredPosition: {x: 349.12, y: -50}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &649906830
 MonoBehaviour:
@@ -31192,10 +31530,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 375148111}
   foodNameText: {fileID: 75996514}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 535258707}
+  imgCheckMark: {fileID: 906418168}
 --- !u!114 &657687635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32141,10 +32482,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1159687931}
   foodNameText: {fileID: 651367931}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &692817434
 GameObject:
   m_ObjectHideFlags: 0
@@ -32352,8 +32696,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u8702\u871C\u4E3B\u8981\u6210\u5206\u662F\u679C\u7CD6\u548C\u8461\u8404\u7CD6\uFF0C\u4E26\u6709\u5C11\u91CF\u7DAD\u751F\u7D20
-    B    \u7FA4\u3001C\u3001E\u7B49\u3002\u679C\u7CD6\u3001\u8461\u8404\u7CD6\u5C6C\u65BC\u55AE\u91A3\u985E\uFF0C\u4EBA\u985E\u6613\u65BC\u5438\u6536\uFF0C\u53EF\u4EE5\u5FEB\u901F\u88DC\u5145\u80FD\u91CF"
+  m_text: ' --- '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
@@ -33785,10 +34128,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1802576499}
   foodNameText: {fileID: 1242544386}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 736664648}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!114 &736664648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34200,6 +34546,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753127990}
   m_CullTransparentMesh: 1
+--- !u!1 &753576287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 753576288}
+  - component: {fileID: 753576290}
+  - component: {fileID: 753576289}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &753576288
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753576287}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 74186589}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 125}
+  m_SizeDelta: {x: 138.78, y: 60.7181}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &753576289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753576287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5ee11f4ba2ec707469515af6903630fe, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &753576290
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753576287}
+  m_CullTransparentMesh: 1
 --- !u!1 &757015032
 GameObject:
   m_ObjectHideFlags: 0
@@ -34417,10 +34838,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1649168190}
   foodNameText: {fileID: 366270634}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &768013922
 GameObject:
   m_ObjectHideFlags: 0
@@ -36102,8 +36526,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45, y: -50}
-  m_SizeDelta: {x: 90, y: 90}
+  m_AnchoredPosition: {x: 40, y: -50}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &810456752
 MonoBehaviour:
@@ -36617,10 +37041,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1881230825}
   foodNameText: {fileID: 1134123000}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 817599624}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!114 &817599624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36869,10 +37296,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1978691179}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 1201913276}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &822984117
 GameObject:
   m_ObjectHideFlags: 0
@@ -37272,7 +37702,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "4\u6708"
+  m_text: ' --- '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
@@ -39979,10 +40409,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1201208242}
   foodNameText: {fileID: 1174794812}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 1606308380}
+  imgCheckMark: {fileID: 1115618417}
 --- !u!114 &910422008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40639,10 +41072,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 2080282970}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 813014683}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &950639143
 GameObject:
   m_ObjectHideFlags: 0
@@ -41926,7 +42362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 633, y: 188}
+  m_AnchoredPosition: {x: 566, y: 157}
   m_SizeDelta: {x: 173.7395, y: 173.7395}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1005373127
@@ -43292,8 +43728,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 239.6, y: -50}
-  m_SizeDelta: {x: 90, y: 90}
+  m_AnchoredPosition: {x: 246.08, y: -50}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1047922942
 MonoBehaviour:
@@ -43460,10 +43896,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 489721365}
   foodNameText: {fileID: 1789424539}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 1053611544}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!114 &1053611544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49871,10 +50310,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1300979090}
   foodNameText: {fileID: 2090714959}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 1397423198}
+  imgCheckMark: {fileID: 1273340612}
 --- !u!114 &1098903258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50045,10 +50487,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 171939844}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 308809254}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &1112739347
 GameObject:
   m_ObjectHideFlags: 0
@@ -51059,10 +51504,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1976476561}
   foodNameText: {fileID: 2137498265}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 1137395422}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!114 &1137395422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51670,7 +52118,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26, y: -60}
+  m_AnchoredPosition: {x: 26, y: -40}
   m_SizeDelta: {x: 563.8964, y: 185.2624}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1161518359
@@ -51831,15 +52279,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: "3-5\u6708"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
-  m_sharedMaterial: {fileID: 8305111213006774404, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
+  m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283457389
-  m_fontColor: {r: 0.42745098, g: 0.37254903, b: 0.3137255, a: 1}
+    rgba: 4284374622
+  m_fontColor: {r: 0.36862746, g: 0.36862746, b: 0.36862746, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -54431,10 +54879,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 611149381}
   foodNameText: {fileID: 2053221677}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &1242544384
 GameObject:
   m_ObjectHideFlags: 0
@@ -54901,6 +55352,51 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249813441}
+  m_CullTransparentMesh: 1
+--- !u!1 &1251868587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1251868588}
+  - component: {fileID: 1251868589}
+  m_Layer: 5
+  m_Name: PickFailTip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1251868588
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251868587}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 166642524}
+  m_Father: {fileID: 160606732}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 570.42, y: 0}
+  m_SizeDelta: {x: 577.0143, y: 52.38}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1251868589
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251868587}
   m_CullTransparentMesh: 1
 --- !u!224 &1257811080 stripped
 RectTransform:
@@ -55737,7 +56233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1321508916
 RectTransform:
   m_ObjectHideFlags: 0
@@ -56369,7 +56865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1350705961
 RectTransform:
   m_ObjectHideFlags: 0
@@ -58156,10 +58652,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1657051495}
   foodNameText: {fileID: 41167776}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &1405320921
 GameObject:
   m_ObjectHideFlags: 0
@@ -58427,10 +58926,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 224381646}
   foodNameText: {fileID: 391950488}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &1410857983
 GameObject:
   m_ObjectHideFlags: 0
@@ -58505,6 +59007,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410857983}
+  m_CullTransparentMesh: 1
+--- !u!1 &1412309941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1412309942}
+  - component: {fileID: 1412309944}
+  - component: {fileID: 1412309943}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1412309942
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412309941}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8889252}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 125}
+  m_SizeDelta: {x: 138.78, y: 60.7181}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1412309943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412309941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5ee11f4ba2ec707469515af6903630fe, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1412309944
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412309941}
   m_CullTransparentMesh: 1
 --- !u!1 &1414855148
 GameObject:
@@ -58584,7 +59161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1416969505
 RectTransform:
   m_ObjectHideFlags: 0
@@ -63909,7 +64486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -67.8, y: -8.8}
+  m_AnchoredPosition: {x: -67.8, y: -1}
   m_SizeDelta: {x: 199.224, y: 69.9111}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1437595377
@@ -63932,7 +64509,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u571F\u5EAB\u93AE"
+  m_text: ' --- '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
   m_sharedMaterial: {fileID: 8305111213006774404, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
@@ -64278,10 +64855,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 465086496}
   foodNameText: {fileID: 93853801}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &1444508874
 GameObject:
   m_ObjectHideFlags: 0
@@ -64552,15 +65132,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: "3-5\u6708"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
-  m_sharedMaterial: {fileID: 8305111213006774404, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
+  m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283457389
-  m_fontColor: {r: 0.42745098, g: 0.37254903, b: 0.3137255, a: 1}
+    rgba: 4284374622
+  m_fontColor: {r: 0.36862746, g: 0.36862746, b: 0.36862746, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -64681,10 +65261,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 405239691}
   foodNameText: {fileID: 655722443}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 1454486813}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!114 &1454486813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65436,10 +66019,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 209069420}
   foodNameText: {fileID: 51554542}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 1472745858}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!114 &1472745858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66343,10 +66929,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1732134238}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 860178406}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &1510043933
 GameObject:
   m_ObjectHideFlags: 0
@@ -67729,7 +68318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1556529484
 RectTransform:
   m_ObjectHideFlags: 0
@@ -69807,13 +70396,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -69987,10 +70576,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 122882600}
   foodNameText: {fileID: 200177400}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 1627031191}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!114 &1627031191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71170,7 +71762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1662824712
 RectTransform:
   m_ObjectHideFlags: 0
@@ -71188,7 +71780,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -2049, y: 0}
-  m_SizeDelta: {x: 2174.4585, y: 2174.4585}
+  m_SizeDelta: {x: 2048, y: 1152}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1662824713
 MonoBehaviour:
@@ -71202,7 +71794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 79f9b5f60099fd746a35e305560401a6, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -71210,7 +71802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 45da0d1bc4bdf224e928036a9aa7c741, type: 3}
+  m_Texture: {fileID: 2800000, guid: 35751bc82b7dd6042be9cda57ab1683d, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -71317,13 +71909,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContinueButton: {fileID: 2127664738}
   background: {fileID: 1677472479}
-  infoGroup: {fileID: 0}
   soysourceGroup: {fileID: 1416969506}
   riceGroup: {fileID: 229072819}
   contractInfoImage: {fileID: 1838992341}
   contractInfoImages:
-  - {fileID: 21300000, guid: c737168a183294340a7045481966b727, type: 3}
-  - {fileID: 21300000, guid: 20bb38b3a09d1a7449ec130837488581, type: 3}
+  - {fileID: 21300000, guid: cc4f2d541ef40824a8b36374d3bbdac1, type: 3}
+  - {fileID: 21300000, guid: 425b8328c48303e48b6d04b374eeeff9, type: 3}
 --- !u!225 &1677472479
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -71386,10 +71977,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1045618356}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 329794771}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &1690476027
 GameObject:
   m_ObjectHideFlags: 0
@@ -73028,7 +73622,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 135}
+  m_AnchoredPosition: {x: 0, y: 125}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1741630751
@@ -73051,7 +73645,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u897F\u74DC\n"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
@@ -73060,8 +73654,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283590520
-  m_fontColor: {r: 0.47058827, g: 0.4039216, b: 0.32156864, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -73081,12 +73675,12 @@ MonoBehaviour:
   m_fontSize: 37.5
   m_fontSizeBase: 37.5
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 26
+  m_fontSizeMax: 37.5
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 8192
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -73096,7 +73690,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 3
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
@@ -73110,7 +73704,7 @@ MonoBehaviour:
   m_isCullingEnabled: 0
   m_horizontalMapping: 0
   m_verticalMapping: 0
-  m_uvLineOffset: 0
+  m_uvLineOffset: 2.82
   m_geometrySortingOrder: 0
   m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
@@ -73353,13 +73947,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -73709,7 +74303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 569, y: 245}
+  m_AnchoredPosition: {x: 569, y: 276.90002}
   m_SizeDelta: {x: 577.0143, y: 128.6761}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1753694934
@@ -75845,7 +76439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 135}
+  m_AnchoredPosition: {x: 0, y: 125}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1819508964
@@ -75868,7 +76462,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u897F\u74DC\n"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
@@ -75877,8 +76471,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283590520
-  m_fontColor: {r: 0.47058827, g: 0.4039216, b: 0.32156864, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -75898,12 +76492,12 @@ MonoBehaviour:
   m_fontSize: 37.5
   m_fontSizeBase: 37.5
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 26
+  m_fontSizeMax: 37.5
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 8192
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -75913,7 +76507,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 3
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
@@ -75927,7 +76521,7 @@ MonoBehaviour:
   m_isCullingEnabled: 0
   m_horizontalMapping: 0
   m_verticalMapping: 0
-  m_uvLineOffset: 0
+  m_uvLineOffset: 2.82
   m_geometrySortingOrder: 0
   m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
@@ -76129,7 +76723,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 214, y: 83}
-  m_SizeDelta: {x: 956, y: 478}
+  m_SizeDelta: {x: 1003.6482, y: 442.0364}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1838992341
 MonoBehaviour:
@@ -76151,7 +76745,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c737168a183294340a7045481966b727, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 425b8328c48303e48b6d04b374eeeff9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -76834,7 +77428,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 233.02655, y: -210}
+  m_AnchoredPosition: {x: 167.10211, y: -210}
   m_SizeDelta: {x: 313.9593, y: 155.5325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1854375810
@@ -77450,7 +78044,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 85, y: 157}
+  m_AnchoredPosition: {x: 96, y: 176}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1885786755
@@ -77471,7 +78065,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
-  m_Spacing: 7.3
+  m_Spacing: 23.04
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -77984,6 +78578,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3053d0e4f9620044c8dd657d9699dad0, type: 3}
   - {fileID: 21300000, guid: 86508474a68979a4bbb511fb1662edd5, type: 3}
   - {fileID: 21300000, guid: d8e2e523c26a8ad4bbdebc46e47ac039, type: 3}
+  cookbookSpriteList:
+  - {fileID: -3125332158021379457, guid: 5345a76ed5e43334eb08c538288872bd, type: 3}
+  - {fileID: 4295616202345443118, guid: 2c644d8b1f5fb7a49a3bb4f45f024b92, type: 3}
+  - {fileID: 2434115809521151493, guid: e38b13e2c7848dd449782f421c0b3bc8, type: 3}
+  - {fileID: -2957347872548817658, guid: e300bd1136975c348b5b4895e435c79a, type: 3}
+  - {fileID: -2477336127722403892, guid: 83dc409930150e747891ae03f6e8d6bb, type: 3}
+  - {fileID: 1811730632201723204, guid: 7aab098a28650d74d9cd70381d41254b, type: 3}
+  - {fileID: 5668335385941770643, guid: 3def46af91709b0498a11ec133435645, type: 3}
+  - {fileID: 8899633684909059670, guid: 4b03fd84e98278247b74e1b94d2df01c, type: 3}
   isInit: 0
 --- !u!1 &1916611576
 GameObject:
@@ -79047,7 +79650,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 135}
+  m_AnchoredPosition: {x: 0, y: 125}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1949120222
@@ -79070,7 +79673,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u897F\u74DC\n"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
@@ -79079,8 +79682,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283590520
-  m_fontColor: {r: 0.47058827, g: 0.4039216, b: 0.32156864, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -79100,12 +79703,12 @@ MonoBehaviour:
   m_fontSize: 37.5
   m_fontSizeBase: 37.5
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 26
+  m_fontSizeMax: 37.5
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 8192
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -79115,7 +79718,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 3
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
@@ -79129,7 +79732,7 @@ MonoBehaviour:
   m_isCullingEnabled: 0
   m_horizontalMapping: 0
   m_verticalMapping: 0
-  m_uvLineOffset: 0
+  m_uvLineOffset: 2.82
   m_geometrySortingOrder: 0
   m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
@@ -80051,10 +80654,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 782977086}
   foodNameText: {fileID: 0}
   foodLocalText: {fileID: 1972867288}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &1976476559
 GameObject:
   m_ObjectHideFlags: 0
@@ -80762,10 +81368,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2784e133abe2cb47b8a5f457f0844dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFoodName: 
   foodSprite: {fileID: 1815598685}
   foodNameText: {fileID: 136621380}
   foodLocalText: {fileID: 0}
   toggle: {fileID: 0}
+  background: {fileID: 0}
+  imgCheckMark: {fileID: 0}
 --- !u!1 &2002402663
 GameObject:
   m_ObjectHideFlags: 0
@@ -82244,7 +82853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 284.27344, y: 30}
+  m_AnchoredPosition: {x: 286, y: 30}
   m_SizeDelta: {x: -1130.752, y: -840.86096}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2042661045
@@ -82332,7 +82941,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 49.744568, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -84024,15 +84633,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: "3-5\u6708"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
-  m_sharedMaterial: {fileID: 8305111213006774404, guid: 05a3068ade74411498adea395a4ae9d7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
+  m_sharedMaterial: {fileID: -8485821801657848648, guid: 727f29433d2c37947a75bf5f4ab418fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283457389
-  m_fontColor: {r: 0.42745098, g: 0.37254903, b: 0.3137255, a: 1}
+    rgba: 4284374622
+  m_fontColor: {r: 0.36862746, g: 0.36862746, b: 0.36862746, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -84555,7 +85164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2119767450
 RectTransform:
   m_ObjectHideFlags: 0
@@ -85054,8 +85663,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 405.9, y: 74.6}
-  m_SizeDelta: {x: 82.9331, y: 82.9331}
+  m_AnchoredPosition: {x: 424, y: 106.3}
+  m_SizeDelta: {x: 98.1199, y: 98.1199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2127664738
 MonoBehaviour:
@@ -85504,8 +86113,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 142.3, y: -50}
-  m_SizeDelta: {x: 90, y: 90}
+  m_AnchoredPosition: {x: 143.04001, y: -50}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2142037883
 MonoBehaviour:
@@ -87133,7 +87742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5581670568704243031, guid: 9621bfdfdb113584cab3556e21e69ae1, type: 3}
       propertyPath: m_Name
-      value: "\u9EA5\u5BEE\u9109-\u8C6C"
+      value: "\u9EA5\u5BEE\u9109-\u8C6C\u8089"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
