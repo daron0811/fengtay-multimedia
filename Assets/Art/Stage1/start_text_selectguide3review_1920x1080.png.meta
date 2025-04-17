@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      start_text_selectguide3review_1920x1080_0: -5991703472373870125
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -101,6 +101,10 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
+    /// <summary>
+    /// 取得這個食譜食材的總數量
+    /// </summary>
+    /// <returns></returns>
     public int MaxFoodsCount()
     {
         return DataManager.Instance.GetFoodbyCookbook(currentCookBookIndex).Count;

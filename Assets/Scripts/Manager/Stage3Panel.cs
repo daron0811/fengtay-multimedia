@@ -28,9 +28,9 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
     [Header("食譜步驟")]
     public int currentStep = 0;
-    List<string> stepConditions;
-    private string[] currentIngredients;
-    private int ingredientIndex = 0;
+    public List<string> stepConditions;
+    public string[] currentIngredients;
+    public int ingredientIndex = 0;
 
     //標題的步驟數字
     public Image stepTitleImage;
@@ -103,6 +103,8 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                 childTran.gameObject.SetActive(false);
             }
         }
+        
+        PickItemToBucket();
         isInit = true;
     }
 
@@ -116,10 +118,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         }
         descItem.First().SetActive(true);
         gameObj.SetActive(false);
-        PickItemToBucket();
         btnImage.sprite = normalSprite;
         fire.alpha = 0.0f;
         currentStep = 0;
+        pickCountForScore = 0;
 
         HideSmoke();
         HideFire();
@@ -139,6 +141,17 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
         isFinalStep = false;
         isMulitTrigger = false;
+
+        if (foodAnimCtrl != null)
+        {
+            foodAnimCtrl.onAnimationEnd = null;
+            foodAnimCtrl.onTapAnimation = null;
+
+            // Stage3Panel.cs 的 ResetStatus() 增加以下程式
+            foodAnimCtrl.enabled = false;
+            foodAnimCtrl.ResetStatus(); // 這非常重要
+        }
+
     }
 
     //TODO:可能會有重複進入問題
@@ -194,19 +207,21 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         ingredientIndex = 0;
         currentStep = 0;
         stepConditions = GameManager.Instance.CurrentCookBookInfo.triggerSteps;
-        cookbookStepText.rectTransform.anchoredPosition = new Vector2(26.0f, -40.0f);
+        cookbookStepText.rectTransform.anchoredPosition = new Vector2(-10.0f, -40.0f);
         cookbookStepText.text = " 步驟準備中 ...";
         stepTitleImage.sprite = stepTitleSprites[currentStep];
 
         descObj.SetActive(false);
         gameObj.SetActive(true);
 
-        countdownTimer.onEnd += () =>
-                {
-                    //TODO:原本是執行下一步，現在改成30秒
-                    isFinalStep = true;
-                    GoToFinalStep();
-                };
+        countdownTimer.onEnd -= OnTimerEnd;
+        countdownTimer.onEnd += OnTimerEnd;
+        // countdownTimer.onEnd += () =>
+        //         {
+        //             //TODO:原本是執行下一步，現在改成30秒
+        //             isFinalStep = true;
+        //             GoToFinalStep();
+        //         };
 
         PopupPanel.Instance.PlayReadyPanel(() =>
            {
@@ -214,6 +229,13 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                currentStep = 0;
                SetStepInfo(); // 開始遊戲後設置資訊
            });
+    }
+
+    // 將原本 lambda 抽出來變成獨立方法
+    private void OnTimerEnd()
+    {
+        isFinalStep = true;
+        GoToFinalStep();
     }
 
     #region UI相關 
@@ -241,6 +263,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                 Sprite sprite = UIManager.Instance.GetFoodSprite(foods[i]);
                 // Debug.LogError(sprite.name + foods[i]);
                 foodItems[i].SetFoodItem(sprite, foods[i], DataManager.Instance.GetFoodInfo(foods[i]).locate);
+                foodItems[i].ShowParticle(false);
                 foodItems[i].Show();
             }
             else
@@ -292,7 +315,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
         Debug.LogError("SetStepInfo!!!");
         cookbookStepText.color = new Color(1, 1, 1, 0);
-        cookbookStepText.rectTransform.anchoredPosition = new Vector2(26.0f, -60.0f);
+        cookbookStepText.rectTransform.anchoredPosition = new Vector2(-10.0f, -60.0f);
         cookbookStepText.text = GameManager.Instance.CurrentCookBookInfo.steps[currentStep];
 
         if (currentStep < stepTitleSprites.Count) // 顯示標題現在第幾步
@@ -300,7 +323,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             stepTitleImage.sprite = stepTitleSprites[currentStep];
         }
         cookbookStepText.DOFade(1.0f, 0.3f);
-        cookbookStepText.rectTransform.DOLocalMove(new Vector3(26.0f, -40.0f, 0.0f), 1.0f);
+        cookbookStepText.rectTransform.DOLocalMove(new Vector3(0.0f, -40.0f, 0.0f), 1.0f);
 
 
         //設定完文字後,檢查目前的狀態
@@ -339,6 +362,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     //檢查目前的條件是否吻合
     void CheckCondition(string input = "")
     {
+        Debug.LogError("CheckCondition " + currentStep + " , Input : " + input + " : " + stepConditions[currentStep]);
         if (stepConditions == null || stepConditions.Count == 0)
         {
             stepConditions = GameManager.Instance.CurrentCookBookInfo.triggerSteps;
@@ -351,6 +375,18 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                 currentIngredients = stepConditions[currentStep].Split(',');
                 ingredientIndex = 0;
                 isMulitTrigger = true;
+            }
+
+            foreach (var item in foodItems)
+            {
+                if (item.myFoodName == currentIngredients[ingredientIndex])
+                {
+                    item.ShowParticle(true);
+                }
+                else
+                {
+                    item.ShowParticle(false);
+                }
             }
 
             if (input == currentIngredients[ingredientIndex])
@@ -387,6 +423,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             currentIngredients = null;
             isMulitTrigger = false;
             ingredientIndex = 0;
+            pickCountForScore++;
         }
         else if (stepConditions[currentStep] == "null") // 如果是食材對應
         {
@@ -408,6 +445,18 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             currentIngredients = null;
             isMulitTrigger = false;
             ingredientIndex = 0;
+        }
+
+        foreach (var item in foodItems)
+        {
+            if (item.myFoodName == stepConditions[currentStep])
+            {
+                item.ShowParticle(true);
+            }
+            else
+            {
+                item.ShowParticle(false);
+            }
         }
     }
     public void SetSwipeStep()
@@ -439,7 +488,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         Debug.LogError("============Start [Tap]");
         if (foodAnimCtrl != null)
         {
-            countdownTimer.PauseTimer();
+            // countdownTimer.PauseTimer();
             ShowTapSFX();
             // currentStep++;
             foodAnimCtrl.animator = targetCookBookStep.animator;
@@ -460,6 +509,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         if (targetCookBookStep != null)
         {
             targetCookBookStep.PlayNextStep();
+            foreach (var foodItem in foodItems)
+            {
+                foodItem.ShowParticle(false);
+            }
         }
         if (countdownTimer != null)
         {
@@ -575,10 +628,11 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                    FlickerStar(star);
                }
                //計算成績
-               pickCountForScore++;
+               //    pickCountForScore++;
                int foodCount = DataManager.Instance.GetFoodbyCookbook(GameManager.Instance.CurrentCookBookIndex).Count;
+               pickCountForScore = Mathf.Clamp(pickCountForScore, 0, foodCount); // 限制在食材數量範圍內
                int score = foodCount - pickCountForScore; // 結算
-               GameManager.Instance.Score -= pickCountForScore;
+               GameManager.Instance.Score -= score;
                Debug.LogError("你的分數:" + GameManager.Instance.Score);
            });
     }

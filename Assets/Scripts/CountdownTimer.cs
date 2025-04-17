@@ -27,8 +27,24 @@ public class CountdownTimer : MonoBehaviour
     public float shakeThreshold = 5.0f; // 🟢 剩餘幾秒時開始晃動
     private bool isShaking = false;   // 是否正在晃動
 
+    private Vector2 originPos;
+
+    private void Awake()
+    {
+        originPos = this.GetComponent<RectTransform>().anchoredPosition;
+    }
+
+    private void OnEnable()
+    {
+        if (originPos == Vector2.zero)
+        {
+            GetComponent<RectTransform>().anchoredPosition = originPos;
+        }
+    }
+
     public void StartTimer(float durationTime = 10.0f)
     {
+        this.GetComponent<RectTransform>().anchoredPosition = originPos; //重製位置
         if (isRunning) return;
 
         duration = durationTime;

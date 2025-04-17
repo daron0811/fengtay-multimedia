@@ -17,6 +17,8 @@ public class FoodItem : MonoBehaviour
 
     private Material imageMat;
 
+    public GameObject particle;
+
     public void Awake()
     {
         if (foodSprite.material != null)
@@ -24,6 +26,15 @@ public class FoodItem : MonoBehaviour
             imageMat = new Material(foodSprite.material); // 產生材質的副本
             foodSprite.material = imageMat;
             // imageMat = foodSprite.material;
+        }
+        ShowParticle();
+    }
+
+    public void ShowParticle(bool isShow = false)
+    {
+        if (particle != null)
+        {
+            particle.gameObject.SetActive(isShow);
         }
     }
 
@@ -77,6 +88,21 @@ public class FoodItem : MonoBehaviour
             }
         }
 
+        if (imageMat != null)
+        {
+            if (isGray == false)
+            {
+                imageMat.SetFloat("_Grayscale", 1);
+            }
+            else
+            {
+                imageMat.SetFloat("_Grayscale", 0);
+            }
+        }
+    }
+
+    public void SetFoodGary(bool isGray = false)
+    {
         if (imageMat != null)
         {
             if (isGray == false)

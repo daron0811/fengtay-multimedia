@@ -22,6 +22,11 @@ public class PickItemToBucket : MonoBehaviour, IPointerDownHandler, IBeginDragHa
         _originalPosition = _rectTransform.position;
     }
 
+    public void ResetPick()
+    {
+        _rectTransform.position = _originalPosition;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         // // _tectTransform.position = eventData.position;

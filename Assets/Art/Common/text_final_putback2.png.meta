@@ -172,7 +172,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -1188,7 +1188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -1197,7 +1197,50 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      text_final_putback2_0: 7495354628021137323
+      text_final_putback2_1: 4373329490314810887
+      text_final_putback2_10: -1903414935958785946
+      text_final_putback2_11: 2326663918629144356
+      text_final_putback2_12: 3764344352484707237
+      text_final_putback2_13: -7100845843181603123
+      text_final_putback2_14: 3051036353844798178
+      text_final_putback2_15: -8940782124711975593
+      text_final_putback2_16: -19536028457682144
+      text_final_putback2_17: -6706837068925779726
+      text_final_putback2_18: -5268314636732668812
+      text_final_putback2_19: -7968453886457563203
+      text_final_putback2_2: 8921396276250687864
+      text_final_putback2_20: -4263317733417813177
+      text_final_putback2_21: -2598380198558755997
+      text_final_putback2_22: -6635362077450194241
+      text_final_putback2_23: -3792022071003918836
+      text_final_putback2_24: -2811161622491474637
+      text_final_putback2_25: -1724461042720541486
+      text_final_putback2_26: 2771485676745397875
+      text_final_putback2_27: -6294983079817137469
+      text_final_putback2_28: 4680125455119954619
+      text_final_putback2_29: -3974724929281677613
+      text_final_putback2_3: -2316034322000883807
+      text_final_putback2_30: 1779893657242548318
+      text_final_putback2_31: -176020483028941954
+      text_final_putback2_32: -2905447847203123692
+      text_final_putback2_33: -2228178264287638643
+      text_final_putback2_34: -675559028895727750
+      text_final_putback2_35: 6408087181358858600
+      text_final_putback2_36: 4647386450184692432
+      text_final_putback2_37: 6087752309483084362
+      text_final_putback2_38: -4306869794506737893
+      text_final_putback2_39: 2596369585045272983
+      text_final_putback2_4: -2007968939169677702
+      text_final_putback2_40: -964032154871884716
+      text_final_putback2_41: 652174755110098469
+      text_final_putback2_42: -5151578841420203701
+      text_final_putback2_5: 4020395272802255240
+      text_final_putback2_6: 4721555732035140368
+      text_final_putback2_7: 2379589182248452686
+      text_final_putback2_8: -847529702805722436
+      text_final_putback2_9: -4759741915212555669
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

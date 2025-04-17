@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      start_bg_start_intro1920x1080review_0: -6917027770533169030
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

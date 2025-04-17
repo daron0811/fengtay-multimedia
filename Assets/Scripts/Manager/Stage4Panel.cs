@@ -94,6 +94,14 @@ public class Stage4Panel : MonoBehaviour
 
     public Image qecodeImage;
     public List<Sprite> foodbookQRCode;
+
+    public List<string> scanedFoods;
+
+    public bool isReadyToEnd = false;
+
+    public GameObject returnItemPanel;
+
+    public Button returnPanelBtn;
     void Start()
     {
         Init();
@@ -138,6 +146,15 @@ public class Stage4Panel : MonoBehaviour
             GameManager.Instance.ResetStatus();
         });
 
+        returnPanelBtn.onClick.AddListener(() =>
+        {
+            returnItemPanel.SetActive(false);
+            //原本開檢查成績頁面
+            checkEndPanel.SetActive(true);
+            isDotRunning = true;
+            StartCoroutine(AnimateDots());
+        });
+
         foreach (var item in foodItems)
         {
             item.GetComponent<Button>().onClick.AddListener(() =>
@@ -156,6 +173,7 @@ public class Stage4Panel : MonoBehaviour
 
     public void ResetStatus()
     {
+        scanedFoods = new List<string>();
         checkEndPanel.SetActive(false);
         descObj.SetActive(true);
         foreach (var item in descItem)
@@ -177,6 +195,8 @@ public class Stage4Panel : MonoBehaviour
         scorePanel.gameObject.SetActive(true);
         finalPanel.gameObject.SetActive(false);
 
+        returnItemPanel.SetActive(false);
+
         localText.text = " --- ";
         foodText.text = " --- ";
         seasonText.text = " --- ";
@@ -184,6 +204,8 @@ public class Stage4Panel : MonoBehaviour
         noPickUpTips.SetActive(false);
 
         detailPanelFood.gameObject.SetActive(false);
+
+        isReadyToEnd = false;
 
     }
 
@@ -266,10 +288,11 @@ public class Stage4Panel : MonoBehaviour
                     isPicked = pickedFoods[foods[i]];
                 }
                 Sprite sprite = UIManager.Instance.GetFoodSprite(foods[i]);
-                foodItems[i].SetFoodItem(sprite, foods[i], "", isPicked, true);
+                foodItems[i].SetFoodItem(sprite, foods[i], "", true);
                 foodItems[i].transform.Find("Background/Checkmark").GetComponent<Image>().sprite = isPicked ? marksprite : unmarksprite;
                 foodItems[i].ShowCheckMark(false);
                 foodItems[i].Show();
+                foodItems[i].SetFoodGary(true);
             }
             else
             {
@@ -304,26 +327,30 @@ public class Stage4Panel : MonoBehaviour
                 otherFoodItems[i].Hide();
             }
         }
-
-
     }
 
     //設定詳細頁面
     void SetDetialPanel()
     {
-        PopupPanel.Instance.PlayGo(
-            () =>
-            {
-                detailPanelTimer.StartTimer(15.0f); //先設15秒,15秒後到下一段
-            }
-        );
+        //NOTE : 現在改在掃描後才顯示葉面
+        // PopupPanel.Instance.PlayGo(
+        //     () =>
+        //     {
+        //         detailPanelTimer.StartTimer(15.0f); //先設15秒,15秒後到下一段
+        //     }
+        // );
+
+
 
         detailPanelTimer.onEnd += () =>
         {
-            checkEndPanel.SetActive(true);
-            isDotRunning = true;
-            StartCoroutine(AnimateDots());
+            returnItemPanel.SetActive(true);
             PN532Manager.Instance.StopSerialThread();
+
+            //原本開檢查成績頁面
+            // checkEndPanel.SetActive(true);
+            // isDotRunning = true;
+            // StartCoroutine(AnimateDots());
         };
 
         PN532Manager.Instance.StartSerialThread("R2", CheckArduinoData);
@@ -398,6 +425,7 @@ public class Stage4Panel : MonoBehaviour
         {
             sensorImage.sprite = pickedFoods[foodName] ? successSprite : failSprite;
             noPickUpTips.SetActive(!pickedFoods[foodName]); // 如果沒有撿到食材要做這個
+            scanFood.transform.Find("Background/Checkmark").GetComponent<Image>().sprite = pickedFoods[foodName] ? marksprite : unmarksprite;
         }
         else
         {
@@ -409,7 +437,7 @@ public class Stage4Panel : MonoBehaviour
             if (food.myFoodName == foodName)
             {
                 food.ShowCheckMark(true);
-                food.SetBGGray(false);
+                food.SetFoodGary(false);
             }
         }
 
@@ -423,6 +451,18 @@ public class Stage4Panel : MonoBehaviour
 
         scanFood.gameObject.SetActive(true);
         scanFood.SetFoodItem(UIManager.Instance.GetFoodSprite(foodInfo.name), foodInfo.name);
+
+        if (scanedFoods.Contains(foodInfo.name) == false)
+        {
+            scanedFoods.Add(foodInfo.name);
+        }
+
+        //如果掃完就是準備進入結算
+        if (scanedFoods.Count >= GameManager.Instance.MaxFoodsCount() && isReadyToEnd == false)
+        {
+            isReadyToEnd = true;
+            detailPanelTimer.StartTimer(5.0f); //先設5秒,5秒後到進行下一段
+        }
     }
     #endregion
 

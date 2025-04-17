@@ -34,6 +34,9 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
     public int pickCountForScore = 0; //計算成績用，依照目前要選的是滿分，有成功選擇+1，如果沒選到就依照這個做扣分依據
 
     public bool isInit = false;
+
+    public float rotateAmount = 15f; // 旋轉角度
+    public float duration = 0.2f; // 旋轉時間
     void Start()
     {
         Init();
@@ -209,17 +212,17 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         }
         else
         {
+            countdownTimer.gameObject.SetActive(false);
             descObj.SetActive(false);
             PopupPanel.Instance.PlayReadyPanel(() =>
             {
+                countdownTimer.gameObject.SetActive(true);
                 countdownTimer.StartTimer(30.0f);
                 AudioManager.Instance.PlayBGM(1);
             });
         }
     }
 
-    public float rotateAmount = 15f; // 旋轉角度
-    public float duration = 0.2f; // 旋轉時間
     public void OnTriggerFoodItem(string foodName)
     {
         int foodIndex = -1;

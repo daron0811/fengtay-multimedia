@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      recipe_pic_recipe04_1024x1024_0: -2957347872548817658
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

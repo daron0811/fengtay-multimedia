@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      collect_all_pic_text_GO!512x512_0: -7316566930056200774
+      collect_all_pic_text_GO!512x512_1: 6759569148540196648
+      collect_all_pic_text_GO!512x512_2: 7976383875837165609
+      collect_all_pic_text_GO!512x512_3: -7038433975030043703
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

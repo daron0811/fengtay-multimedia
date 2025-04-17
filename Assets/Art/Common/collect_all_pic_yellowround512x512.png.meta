@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      collect_all_pic_yellowround512x512_0: -7912333218398241601
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
