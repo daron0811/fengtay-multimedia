@@ -116,7 +116,7 @@
 		"otherfood1": "洋蔥",
 		"otherfood2": "咖哩",
 		"step": "<color=#FFFF00>蕃薯</color>去皮切塊，蒸熟備用。\n鍋中放入橄欖油、切塊的<color=#FFFF00>豬肉</color>拌炒。\n加入切塊的胡蘿蔔、洋蔥、蒸熟的蕃薯。\n依序加入瑪莎曼咖哩、<color=#FFFF00>鮮乳</color> 、<color=#FFFF00>咖啡</color>。\n小火燉煮50分鐘，打開鍋蓋即可完成。",
-		"triggerStep": "番薯,null\n豬肉\nnull\nnull,鮮乳,咖啡\ntap",
+		"triggerStep": "番薯\nnull,豬肉\nnull\nnull,鮮乳,咖啡\ntap",
 		"nfc": ""
 	}
 ]

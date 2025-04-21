@@ -67,6 +67,7 @@ public class CountdownTimer : MonoBehaviour
 
     public void PauseTimer() // 🔵 新增：暫停功能
     {
+        // return; // 暫時關閉暫停功能
         isPaused = true;
     }
 

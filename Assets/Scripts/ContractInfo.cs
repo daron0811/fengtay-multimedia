@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections.Generic;
+using System;
 
 
 public class ContractInfo : MonoBehaviour
@@ -16,6 +17,8 @@ public class ContractInfo : MonoBehaviour
 
     public List<Sprite> contractInfoImages;
 
+    public event Action onClickContinue; // 計時結束事件
+
     private void Start()
     {
         // soysourceGroup.gameObject.SetActive(false);
@@ -23,6 +26,7 @@ public class ContractInfo : MonoBehaviour
 
         ContinueButton.onClick.AddListener(() =>
         {
+            onClickContinue?.Invoke();
             Hide();
         });
     }

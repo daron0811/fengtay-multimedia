@@ -481,7 +481,7 @@ public class Stage4Panel : MonoBehaviour
         SetFinalFoodInfo(GameManager.Instance.CurrentCookBookIndex);
         SetFinalFoodSeason();
 
-        int rate = GameManager.Instance.Score;
+        int rate = (GameManager.Instance.Score - 1);
         CookBookInfo cookBookInfo = GameManager.Instance.CurrentCookBookInfo;
         int season = cookBookInfo.season - 1;//GameManager.Instance.GetSeason();
         rate = math.clamp(rate, 0, rateSprites.Count - 1);

@@ -53,12 +53,13 @@ public class Stage2Panel : MonoSingleton<Stage2Panel>
         resultFoodItems = finishPanel.transform.Find("PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
         dragFoodsOnMap = transform.Find("FoodGroup").GetComponentsInChildren<PickItemToBucket>().ToList();
 
+
+        //當時間結束要做的事情
         countdownTimer.onEnd += () =>
         {
             PopupPanel.Instance.PlayTimeUp(() =>
             {
                 finishPanel.gameObject.SetActive(true);
-                // UIManager.Instance.SetState(UIManager.UIState.Stage_3);
             });
 
             //Todo : 計算成績

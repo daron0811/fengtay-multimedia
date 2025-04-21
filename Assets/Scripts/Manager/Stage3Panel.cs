@@ -103,7 +103,16 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                 childTran.gameObject.SetActive(false);
             }
         }
-        
+
+        contractInfo.onClickContinue += () =>
+        {
+            targetCookBookStep.animator.speed = 1;
+            if (countdownTimer != null)
+            {
+                countdownTimer.ResumeTimer();
+            }
+        };
+
         PickItemToBucket();
         isInit = true;
     }
@@ -222,9 +231,11 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         //             isFinalStep = true;
         //             GoToFinalStep();
         //         };
-
+        countdownTimer.gameObject.SetActive(false);
         PopupPanel.Instance.PlayReadyPanel(() =>
            {
+               AudioManager.Instance.PlayBGM(2);
+               countdownTimer.gameObject.SetActive(true);
                countdownTimer.StartTimer(60.0f);
                currentStep = 0;
                SetStepInfo(); // 開始遊戲後設置資訊
@@ -236,6 +247,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     {
         isFinalStep = true;
         GoToFinalStep();
+        countdownTimer.gameObject.SetActive(false);
     }
 
     #region UI相關 
@@ -314,6 +326,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         }
 
         Debug.LogError("SetStepInfo!!!");
+        AudioManager.Instance.PlayAudioOnce(12);
         cookbookStepText.color = new Color(1, 1, 1, 0);
         cookbookStepText.rectTransform.anchoredPosition = new Vector2(-10.0f, -60.0f);
         cookbookStepText.text = GameManager.Instance.CurrentCookBookInfo.steps[currentStep];
@@ -391,6 +404,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
 
             if (input == currentIngredients[ingredientIndex])
             {
+                AudioManager.Instance.PlayAudioOnce(2);
                 ingredientIndex++;
                 SetPlayNextStep();//播動畫哦！
                 //因為食材關係分數要記
@@ -411,6 +425,11 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                 ingredientIndex++;
                 SetSwipeStep();
             }
+            else if (string.IsNullOrEmpty(input) == false && (input != currentIngredients[ingredientIndex]))
+            {
+                AudioManager.Instance.PlayAudioOnce(3);
+                return;
+            }
             else
             {
                 return; // 按錯順序則直接跳出，保持當前進度
@@ -419,6 +438,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         }
         else if (stepConditions[currentStep] == input) // 如果是食材對應
         {
+            AudioManager.Instance.PlayAudioOnce(2);
             SetPlayNextStep();
             currentIngredients = null;
             isMulitTrigger = false;
@@ -445,6 +465,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
             currentIngredients = null;
             isMulitTrigger = false;
             ingredientIndex = 0;
+        }
+        else if (string.IsNullOrEmpty(input) == false && (stepConditions[currentStep] != input))
+        {
+            AudioManager.Instance.PlayAudioOnce(3);
         }
 
         foreach (var item in foodItems)
@@ -514,10 +538,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                 foodItem.ShowParticle(false);
             }
         }
-        if (countdownTimer != null)
-        {
-            countdownTimer.PauseTimer();
-        }
+        // if (countdownTimer != null)
+        // {
+        //     countdownTimer.PauseTimer();
+        // }
     }
 
     //執行下一步
@@ -547,10 +571,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
         }
         currentStep++; // 進入下一步
         Debug.LogError("進入下一步 " + currentStep + " " + GameManager.Instance.CurrentCookBookInfo.triggerStep[currentStep]);
-        if (countdownTimer.IsPaused)
-        {
-            countdownTimer.ResumeTimer();
-        }
+        // if (countdownTimer.IsPaused)
+        // {
+        //     countdownTimer.ResumeTimer();
+        // }
         SetStepInfo();
         return;
 
@@ -616,7 +640,8 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     public void GoToFinalStep()
     {
         countdownTimer.StopTimer();
-        countdownTimer.onEnd -= CheckNextStep;
+        countdownTimer.onEnd -= OnTimerEnd;
+        countdownTimer.gameObject.SetActive(false);
         // PopupPanel.Instance.goodJobPanel()
         PopupPanel.Instance.PlayGoodJob(() =>
            {
@@ -636,6 +661,7 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
                Debug.LogError("你的分數:" + GameManager.Instance.Score);
            });
     }
+
     void OnDisable()
     {
         foreach (Image star in starImages)
@@ -723,6 +749,10 @@ public class Stage3Panel : MonoSingleton<Stage3Panel>
     {
         targetCookBookStep.animator.speed = 0;
         contractInfo.Show(type);
+        if (countdownTimer != null)
+        {
+            countdownTimer.PauseTimer();
+        }
     }
     public void ShowSwipeSFX()
     {
