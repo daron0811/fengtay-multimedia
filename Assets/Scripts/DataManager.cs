@@ -30,12 +30,15 @@ public class DataManager : MonoSingleton<DataManager>
     // }
 
     #region 載入資料
-    // public GameObject 
+
     void Start()
     {
+        string foodAssetTextPath = System.IO.Path.Combine(Application.streamingAssetsPath, "Food.json");
+        string foodAssetText = System.IO.File.ReadAllText(foodAssetTextPath);
         if (foodAsset != null)
         {
-            foodInfos = JsonConvert.DeserializeObject<List<FoodInfo>>(foodAsset.text);
+            // foodInfos = JsonConvert.DeserializeObject<List<FoodInfo>>(foodAsset.text);
+            foodInfos = JsonConvert.DeserializeObject<List<FoodInfo>>(foodAssetText);
             foodBySeason = new Dictionary<int, List<FoodInfo>>();
 
             foreach (var foodInfo in foodInfos)
@@ -49,12 +52,23 @@ public class DataManager : MonoSingleton<DataManager>
                     }
                     foodBySeason[season].Add(foodInfo);
                 }
+                if (foodInfo.nfc == null || string.IsNullOrEmpty(foodInfo.nfc))
+                {
+                    Debug.LogWarning("foodInfo nfc is empty");
+                    continue;
+                }
+                foodInfo.nfcs = new List<string>();
+                foodInfo.nfcs.AddRange(foodInfo.nfc.Split(','));
             }
         }
 
+
+        string cookBookAssetTextPath = System.IO.Path.Combine(Application.streamingAssetsPath, "CookBook.json");
+        string cookBookAssetText = System.IO.File.ReadAllText(cookBookAssetTextPath);
         if (cookBookAsset != null)
         {
-            cookBookInfos = JsonConvert.DeserializeObject<List<CookBookInfo>>(cookBookAsset.text);
+            // cookBookInfos = JsonConvert.DeserializeObject<List<CookBookInfo>>(cookBookAsset.text);
+            cookBookInfos = JsonConvert.DeserializeObject<List<CookBookInfo>>(cookBookAssetText);
 
             foreach (var cookBookInfo in cookBookInfos)
             {
@@ -74,13 +88,23 @@ public class DataManager : MonoSingleton<DataManager>
                         cookBookInfo.triggerSteps[i] = cookBookInfo.triggerSteps[i].Replace("\n", "").Replace("\r", ""); //清除多餘的換行符號
                     }
                 }
+                if (cookBookInfo.nfc == null || string.IsNullOrEmpty(cookBookInfo.nfc))
+                {
+                    Debug.LogWarning("CookBookInfo nfc is empty");
+                    continue;
+                }
+                cookBookInfo.nfcs = new List<string>();
+                cookBookInfo.nfcs.AddRange(cookBookInfo.nfc.Split(','));
             }
         }
 
+        string configAssetTextPath = System.IO.Path.Combine(Application.streamingAssetsPath, "Config.json");
+        string configAssetText = System.IO.File.ReadAllText(configAssetTextPath);
         //設定檔
         if (configAsset != null)
         {
-            configDatas = JsonConvert.DeserializeObject<Dictionary<string, object>>(configAsset.text);
+            // configDatas = JsonConvert.DeserializeObject<Dictionary<string, object>>(configAsset.text);
+            configDatas = JsonConvert.DeserializeObject<Dictionary<string, object>>(configAssetText);
             Debug.LogWarning(configDatas.Count);
         }
     }
@@ -146,12 +170,24 @@ public class DataManager : MonoSingleton<DataManager>
 
     public FoodInfo GetFoodInfoByNFC(string nfc)
     {
-        var item = foodInfos.Find(x => x.nfc == nfc);
-        if (item == null)
+        if (string.IsNullOrEmpty(nfc))
         {
-            Debug.LogError("Not Find Food Info " + name);
+            Debug.LogError("NFC is null or empty");
             return null;
         }
+
+        var item = foodInfos.Find(x => x.nfcs.Contains(nfc));
+        if (item == null)
+        {
+            Debug.LogError("Not Find Food Info " + nfc);
+            return null;
+        }
+        // var item = foodInfos.Find(x => x.nfc == nfc);
+        // if (item == null)
+        // {
+        //     Debug.LogError("Not Find Food Info " + name);
+        //     return null;
+        // }
         return item;
     }
 
@@ -182,7 +218,8 @@ public class DataManager : MonoSingleton<DataManager>
         {
             return null;
         }
-        var item = cookBookInfos.Find(x => x.nfc == nfc);
+        var item = cookBookInfos.Find(x => x.nfcs.Contains(nfc));
+        // var item = cookBookInfos.Find(x => x.nfc == nfc);
         if (item == null)
         {
             return null;
@@ -286,6 +323,7 @@ public class FoodInfo
     public string nutritionTips; //{ get; set; }
     public string contract;//是否契作
     public string nfc;
+    public List<string> nfcs;
 }
 
 [System.Serializable]
@@ -306,4 +344,12 @@ public class CookBookInfo
     public List<string> steps;
     public List<string> triggerSteps;
     public string nfc;
+    public List<string> nfcs;
+}
+
+[System.Serializable]
+public class ConfigInfo
+{
+    public string ArduinoPortName { get; set; }
+    public int ArduinoBaudRate { get; set; }
 }

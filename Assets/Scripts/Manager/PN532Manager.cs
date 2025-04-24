@@ -35,6 +35,8 @@ public class PN532Manager : MonoSingleton<PN532Manager>
             stopThreadButton.onClick.AddListener(StopSerialThread);
 
         onSuccessEvent = null;
+
+        ReadConfig();
     }
 
     void Update()
@@ -121,11 +123,18 @@ public class PN532Manager : MonoSingleton<PN532Manager>
         }
     }
 
+    public void ReadConfig()
+    {
+        DataManager.Instance.GetConfigData("ArduinoPortName", out portName);
+        DataManager.Instance.GetConfigData("ArduinoBaudRate", out baudRate);
+    }
 
     public void StartSerialThread(string commandLine = "", Action<ArduinoMessage> successEvent = null)
     {
+
         command = commandLine;
         if (isRunning) return;
+        ReadConfig();
         try
         {
             serialPort = new SerialPort(portName, baudRate);
