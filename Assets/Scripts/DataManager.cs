@@ -352,4 +352,5 @@ public class ConfigInfo
 {
     public string ArduinoPortName { get; set; }
     public int ArduinoBaudRate { get; set; }
+    public bool MouseMode { get; set; } //將 sale 改為 MouseMode
 }

@@ -1,4 +1,5 @@
 {
 	"ArduinoPortName": "COM3",
-	"ArduinoBaudRate": 115200
+	"ArduinoBaudRate": 115200,
+	"MouseMode":true
 }

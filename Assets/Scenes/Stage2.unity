@@ -15452,6 +15452,7 @@ MonoBehaviour:
   isReadyToEnd: 0
   returnItemPanel: {fileID: 0}
   returnPanelBtn: {fileID: 0}
+  isMouseMode: 0
 --- !u!224 &324851109
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33477,6 +33478,7 @@ MonoBehaviour:
   isReadyToEnd: 0
   returnItemPanel: {fileID: 919111281}
   returnPanelBtn: {fileID: 634171706}
+  isMouseMode: 0
 --- !u!1 &564386921
 GameObject:
   m_ObjectHideFlags: 0

@@ -102,6 +102,8 @@ public class Stage4Panel : MonoBehaviour
     public GameObject returnItemPanel;
 
     public Button returnPanelBtn;
+
+    public bool isMouseMode = false;
     void Start()
     {
         Init();
@@ -113,6 +115,8 @@ public class Stage4Panel : MonoBehaviour
         {
             return;
         }
+
+        DataManager.Instance.GetConfigData("MouseMode", out isMouseMode);
 
         foodItems = detailPanel.transform.Find("Content/PickupFoods").GetComponentsInChildren<FoodItem>().ToList();
         otherFoodItems = detailPanel.transform.Find("Content/OtherFoods").GetComponentsInChildren<FoodItem>().ToList();
@@ -159,6 +163,11 @@ public class Stage4Panel : MonoBehaviour
         {
             item.GetComponent<Button>().onClick.AddListener(() =>
             {
+                if (isMouseMode)
+                {
+                    Debug.Log("Mouse Mode is enabled, skipping food item selection.");
+                    return;
+                }
                 item.GetComponent<FoodItem>().ShowCheckMark(true);
                 detailPanelFood.gameObject.SetActive(true);
                 detailPanelFood.sprite = item.foodSprite.sprite;
